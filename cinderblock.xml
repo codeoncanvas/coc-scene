@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<cinder>
+<block
+	name="CoC-Scene"
+	id=""
+	author=""
+	summary=""
+	license=""
+	url="https://github.com/codeoncanvas/coc-scene"
+	git="git@github.com:codeoncanvas/coc-scene.git"
+	version=""
+	library=""
+	>
+	
+	<headerPattern>src/*.h</headerPattern>
+	<sourcePattern>src/*.cpp</sourcePattern>
+
+</block>
+</cinder>
