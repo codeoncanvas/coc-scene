@@ -11,8 +11,3 @@
 //
 
 #include "cocScene.h"
-
-namespace coc {
-
-
-}

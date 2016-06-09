@@ -2,8 +2,6 @@
 #include "cinder/app/RendererGl.h"
 #include "cinder/gl/gl.h"
 
-#include "cocScene.h"
-
 using namespace ci;
 using namespace ci::app;
 using namespace std;
@@ -26,6 +24,7 @@ void SceneSampleApp::mouseDown( MouseEvent event )
 
 void SceneSampleApp::update()
 {
+    //
 }
 
 void SceneSampleApp::draw()
