@@ -28,8 +28,7 @@ public:
     ~RendererOF();
     
     void setup() override;
-    void update() override;
-    void draw(const coc::scene::Object & object) override;
+    void draw(const coc::scene::Object & object) const override;
     
 };
 };

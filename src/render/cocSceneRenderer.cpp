@@ -30,11 +30,7 @@ void Renderer::setup() {
 
 }
 
-void Renderer::update() {
-
-}
-
-void Renderer::draw(const coc::scene::Object & object) {
+void Renderer::draw(const coc::scene::Object & object) const {
 
     if(object.objectType == coc::scene::ObjectTypeBase) {
     

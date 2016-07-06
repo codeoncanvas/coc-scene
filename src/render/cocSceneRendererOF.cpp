@@ -30,11 +30,7 @@ void RendererOF::setup() {
     //
 }
 
-void RendererOF::update() {
-    //
-}
-
-void RendererOF::draw(const coc::scene::Object & object) {
+void RendererOF::draw(const coc::scene::Object & object) const {
     //
 }
 

@@ -28,15 +28,14 @@ public:
     ~Renderer();
     
     virtual void setup();
-    virtual void update();
-    virtual void draw(const coc::scene::Object & object);
+    virtual void draw(const coc::scene::Object & object) const;
     
 protected:
     
-    virtual void drawShape(const coc::scene::Shape & shape) {};
-    virtual void drawShapeRect(const coc::scene::Shape & shape) {};
-    virtual void drawShapeCircle(const coc::scene::Shape & shape) {};
-    virtual void drawTexture(const coc::scene::Texture & texture) {};
+    virtual void drawShape(const coc::scene::Shape & shape) const {};
+    virtual void drawShapeRect(const coc::scene::Shape & shape) const {};
+    virtual void drawShapeCircle(const coc::scene::Shape & shape) const {};
+    virtual void drawTexture(const coc::scene::Texture & texture) const {};
     
 };
 };

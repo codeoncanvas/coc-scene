@@ -28,12 +28,11 @@ public:
     ~RendererCI();
     
     void setup() override;
-    void update() override;
     
-    void drawShape(const coc::scene::Shape & shape) override;
-    void drawShapeRect(const coc::scene::Shape & shape) override;
-    void drawShapeCircle(const coc::scene::Shape & shape) override;
-    void drawTexture(const coc::scene::Texture & texture) override;
+    void drawShape(const coc::scene::Shape & shape) const override;
+    void drawShapeRect(const coc::scene::Shape & shape) const override;
+    void drawShapeCircle(const coc::scene::Shape & shape) const override;
+    void drawTexture(const coc::scene::Texture & texture) const override;
     
 };
 };

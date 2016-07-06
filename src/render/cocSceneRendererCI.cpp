@@ -33,32 +33,28 @@ void RendererCI::setup() {
     //
 }
 
-void RendererCI::update() {
-    //
+void RendererCI::drawShape(const coc::scene::Shape & shape) const {
+    drawShapeRect(shape);
 }
 
-void RendererCI::drawShape(const coc::scene::Shape & shape) {
-    //
-}
-
-void RendererCI::drawShapeRect(const coc::scene::Shape & shape) {
+void RendererCI::drawShapeRect(const coc::scene::Shape & shape) const {
     
-    Rectf rect(shape.x, shape.y, shape.x + shape.width, shape.y + shape.height);
+    ci::Rectf rect(shape.x, shape.y, shape.x + shape.width, shape.y + shape.height);
     
     if(shape.color.a > 0.0) {
-        gl::drawSolidRect(rect);
+        ci::gl::drawSolidRect(rect);
     }
     
     if(shape.colorStroke.a > 0.0) {
-        gl::drawStrokedRect(rect);
+        ci::gl::drawStrokedRect(rect);
     }
 }
 
-void RendererCI::drawShapeCircle(const coc::scene::Shape & shape) {
+void RendererCI::drawShapeCircle(const coc::scene::Shape & shape) const {
     //
 }
 
-void RendererCI::drawTexture(const coc::scene::Texture & texture) {
+void RendererCI::drawTexture(const coc::scene::Texture & texture) const {
     //
 }
 
