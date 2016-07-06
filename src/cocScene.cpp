@@ -12,6 +12,7 @@
  **/
 
 #include "cocScene.h"
+#include "cocSceneSolver.h"
 #include "cocSceneRendererCI.h"
 #include "cocSceneRendererOF.h"
 
@@ -19,7 +20,8 @@ namespace coc {
 namespace scene {
 
 //--------------------------------------------------------------
-Scene::Scene() {
+Scene::Scene() : coc::scene::Object() {
+    solver = NULL;
     renderer = NULL;
 }
 
@@ -31,10 +33,27 @@ Scene::~Scene() {
 void Scene::setup() {
     coc::scene::Object::setup();
 
+    initSolver();
     initRenderer();
-    renderer->setup();
 }
 
+//--------------------------------------------------------------
+void Scene::initSolver() {
+    killSolver();
+    
+    solver = new coc::scene::Solver();
+    solver->setup();
+}
+
+void Scene::killSolver() {
+    if(solver == NULL) {
+        return;
+    }
+    
+    delete solver;
+}
+
+//--------------------------------------------------------------
 void Scene::initRenderer() {
     killRenderer();
 
@@ -43,6 +62,8 @@ void Scene::initRenderer() {
 #elif defined( COC_CI )
     renderer = new coc::scene::RendererCI();
 #endif
+
+    renderer->setup();
 }
 
 void Scene::killRenderer() {

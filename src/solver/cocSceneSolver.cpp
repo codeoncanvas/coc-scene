@@ -11,38 +11,32 @@
  *
  **/
 
-#pragma once
-
+#include "cocSceneSolver.h"
 #include "cocSceneObject.h"
 
 namespace coc {
 namespace scene {
 
-class Renderer;
-class Solver;
+Solver::Solver() {
+    //
+}
 
-class Scene : public coc::scene::Object {
+Solver::~Solver() {
+    //
+}
 
-public:
+void Solver::setup() {
 
-    Scene();
-    ~Scene();
+}
+
+void Solver::update(const coc::scene::Object & object) {
+
+    //
     
-    void setup();
-    void update();
-    void draw();
-    
-private:
-
-    void initSolver();
-    void killSolver();
-
-    void initRenderer();
-    void killRenderer();
-    
-    coc::scene::Solver * solver;
-    coc::scene::Renderer * renderer;
-};
+    for(int i=0; i<object.children.size(); i++) {
+        update(*object.children[i]);
+    }
+}
 
 };
 };

@@ -13,36 +13,25 @@
 
 #pragma once
 
-#include "cocSceneObject.h"
-
 namespace coc {
 namespace scene {
 
-class Renderer;
-class Solver;
+class Object;
 
-class Scene : public coc::scene::Object {
+class Solver {
 
 public:
 
-    Scene();
-    ~Scene();
+    Solver();
+    ~Solver();
     
-    void setup();
-    void update();
-    void draw();
+    virtual void setup();
+    virtual void update(const coc::scene::Object & object);
     
-private:
-
-    void initSolver();
-    void killSolver();
-
-    void initRenderer();
-    void killRenderer();
+protected:
     
-    coc::scene::Solver * solver;
-    coc::scene::Renderer * renderer;
+    //
+    
 };
-
 };
 };
