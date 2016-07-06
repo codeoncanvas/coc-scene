@@ -13,10 +13,12 @@
 
 #pragma once
 
-#include "cocSceneRenderer.h"
+#include "cocSceneObject.h"
 
 namespace coc {
 namespace scene {
+
+class Renderer;
 
 class Scene : public coc::scene::Object {
 

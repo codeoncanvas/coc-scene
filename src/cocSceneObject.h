@@ -18,6 +18,12 @@
 namespace coc {
 namespace scene {
 
+enum ObjectType {
+    ObjectTypeBase = 0,
+    ObjectTypeShape = 1,
+    ObjectTypeTexture = 2
+};
+
 class Object {
 
 public:
@@ -37,7 +43,13 @@ public:
     std::string objectID;
     unsigned int objectType;
     
-    coc::Rect rect;
+    coc::Value<float> x;
+    coc::Value<float> y;
+    coc::Value<float> width;
+    coc::Value<float> height;
+    coc::Value<float> scale;
+    coc::Value<float> rotation;
+    
     glm::mat4 modelMatrix;
     glm::vec4 color;
     

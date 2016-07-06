@@ -25,6 +25,7 @@ public:
     Shape();
     ~Shape();
     
+    glm::vec4 colorStroke;
 };
 };
 };

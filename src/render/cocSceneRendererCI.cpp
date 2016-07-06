@@ -12,6 +12,9 @@
  **/
 
 #include "cocSceneRendererCI.h"
+#include "cocSceneShape.h"
+#include "cocSceneTexture.h"
+#include "cinder/gl/gl.h"
 
 #if defined( COC_CI )
 
@@ -34,7 +37,28 @@ void RendererCI::update() {
     //
 }
 
-void RendererCI::draw(const coc::scene::Object & object) {
+void RendererCI::drawShape(const coc::scene::Shape & shape) {
+    //
+}
+
+void RendererCI::drawShapeRect(const coc::scene::Shape & shape) {
+    
+    Rectf rect(shape.x, shape.y, shape.x + shape.width, shape.y + shape.height);
+    
+    if(shape.color.a > 0.0) {
+        gl::drawSolidRect(rect);
+    }
+    
+    if(shape.colorStroke.a > 0.0) {
+        gl::drawStrokedRect(rect);
+    }
+}
+
+void RendererCI::drawShapeCircle(const coc::scene::Shape & shape) {
+    //
+}
+
+void RendererCI::drawTexture(const coc::scene::Texture & texture) {
     //
 }
 

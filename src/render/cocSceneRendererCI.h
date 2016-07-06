@@ -29,7 +29,11 @@ public:
     
     void setup() override;
     void update() override;
-    void draw(const coc::scene::Object & object) override;
+    
+    void drawShape(const coc::scene::Shape & shape) override;
+    void drawShapeRect(const coc::scene::Shape & shape) override;
+    void drawShapeCircle(const coc::scene::Shape & shape) override;
+    void drawTexture(const coc::scene::Texture & texture) override;
     
 };
 };

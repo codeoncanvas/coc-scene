@@ -11,31 +11,21 @@
  *
  **/
 
+#pragma once
+
 #include "cocSceneObject.h"
 
 namespace coc {
-
 namespace scene {
 
-Object::Object() :
-    objectID(""),
-    objectType(coc::scene::ObjectTypeBase),
-    x(0.0f),
-    y(0.0f),
-    width(0.0f),
-    height(0.0f),
-    scale(1.0f),
-    rotation(0.0f),
-    color(1.0f, 1.0f, 1.0f, 1.0f),
-    parent(NULL) {
+class Texture : public coc::scene::Object {
+
+public:
+
+    Texture();
+    ~Texture();
     
-    //
-}
-
-Object::~Object() {
-    //
-}
-
+    std::string assetID;
 };
-
+};
 };
