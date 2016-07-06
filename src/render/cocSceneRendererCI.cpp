@@ -18,7 +18,7 @@
 namespace coc {
 namespace scene {
 
-RendererCI::RendererCI() {
+RendererCI::RendererCI() : coc::scene::Renderer() {
     //
 }
 
@@ -34,7 +34,7 @@ void RendererCI::update() {
     //
 }
 
-void RendererCI::draw() {
+void RendererCI::draw(const coc::scene::Object & object) {
     //
 }
 

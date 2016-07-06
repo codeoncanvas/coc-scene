@@ -20,16 +20,16 @@
 namespace coc {
 namespace scene {
 
-class RendererCI {
+class RendererCI : public coc::scene::Renderer {
 
 public:
 
     RendererCI();
     ~RendererCI();
     
-    void setup();
-    void update();
-    void draw();
+    void setup() override;
+    void update() override;
+    void draw(const coc::scene::Object & object) override;
     
 };
 };

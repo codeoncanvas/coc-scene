@@ -20,16 +20,16 @@
 namespace coc {
 namespace scene {
 
-class RendererOF {
+class RendererOF : public coc::scene::Renderer {
 
 public:
 
     RendererOF();
     ~RendererOF();
     
-    void setup();
-    void update();
-    void draw();
+    void setup() override;
+    void update() override;
+    void draw(const coc::scene::Object & object) override;
     
 };
 };

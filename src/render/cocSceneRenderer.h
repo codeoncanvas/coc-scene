@@ -13,7 +13,7 @@
 
 #pragma once
 
-#include "cocSceneGlobals.h"
+#include "cocSceneObject.h"
 
 namespace coc {
 namespace scene {
@@ -27,7 +27,7 @@ public:
     
     virtual void setup() {};
     virtual void update() {};
-    virtual void draw() {};
+    virtual void draw(const coc::scene::Object & object) {};
     
 };
 };
