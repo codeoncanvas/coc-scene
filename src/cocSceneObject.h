@@ -24,7 +24,14 @@ enum ObjectType {
     ObjectTypeTexture = 2
 };
 
+//class Solver;
+
 class Object {
+
+friend class Solver;
+friend class Renderer;
+friend class RendererCI;
+friend class RendererOF;
 
 public:
 
@@ -39,16 +46,32 @@ public:
 	virtual void pointDragged(int x, int y, int mouseID) {};
 	virtual void pointPressed(int x, int y, int mouseID) {};
 	virtual void pointReleased(int x, int y, int mouseID) {};
-
-    std::string objectID;
-    unsigned int objectType;
     
+    Object * addChild(Object * child);
+    Object * addChildAt(Object * child, int index);
+    bool contains(Object * child);
+    Object * getChildAt(int index);
+    Object * getChildByID(std::string objectID);
+    int getChildIndex(Object * child);
+    Object * removeChild(Object * child);
+    Object * removeChildAt(int index);
+    void removeAllChildren();
+    void setChildIndex(Object * child, int index);
+    int numChildren();
+
     coc::Value<float> x;
     coc::Value<float> y;
     coc::Value<float> width;
     coc::Value<float> height;
     coc::Value<float> scale;
     coc::Value<float> rotation;
+    coc::Value<float> alpha;
+    coc::Value<bool> visible;
+    
+protected:
+
+    std::string objectID;
+    unsigned int objectType;
     
     glm::mat4 modelMatrix;
     glm::vec4 color;

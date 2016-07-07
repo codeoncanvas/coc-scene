@@ -51,6 +51,7 @@ void Scene::killSolver() {
     }
     
     delete solver;
+    solver = NULL;
 }
 
 //--------------------------------------------------------------
@@ -76,11 +77,12 @@ void Scene::killRenderer() {
 #elif defined( COC_CI )
     delete (coc::scene::RendererCI *)renderer;
 #endif
+    renderer = NULL;
 }
 
 //--------------------------------------------------------------
 void Scene::update() {
-    coc::scene::Object::update();
+    solver->update(*this);
 }
 
 //--------------------------------------------------------------
