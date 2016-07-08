@@ -47,9 +47,15 @@ void Solver::update(coc::scene::Object & object) {
     bModelMatrixChanged = bModelMatrixChanged || object.rotation.hasChanged();
     if(bModelMatrixChanged == true) {
     
-        object.modelMatrix = glm::translate(glm::vec3(object.x, object.y, 0.0));
-        object.modelMatrix *= glm::rotate((float)object.rotation, glm::vec3(0, 0, 1));
-        object.modelMatrix *= glm::scale(glm::vec3(object.scale, object.scale, 1.0));
+        glm::vec3 position(object.x, object.y, 0.0);
+        glm::vec3 transformationPoint(object.transformationPointX, object.transformationPointY, 0.0);
+        glm::vec3 rotationAxis(0, 0, 1);
+        glm::vec3 scale(object.scale, object.scale, 1.0);
+    
+        object.modelMatrix = glm::translate(position);
+        object.modelMatrix = object.modelMatrix * glm::rotate((float)object.rotation, rotationAxis);
+        object.modelMatrix = object.modelMatrix * glm::scale(scale);
+        object.modelMatrix = object.modelMatrix * glm::translate(-transformationPoint);
     }
     
     for(int i=0; i<object.children.size(); i++) {

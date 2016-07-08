@@ -22,7 +22,7 @@ class Texture : public coc::scene::Object {
 
 public:
 
-    Texture();
+    Texture(std::string objID="");
     ~Texture();
     
     std::string assetID;

@@ -17,7 +17,7 @@ namespace coc {
 
 namespace scene {
 
-Texture::Texture() : coc::scene::Object() {
+Texture::Texture(std::string objID) : coc::scene::Object(objID) {
     objectType = coc::scene::ObjectTypeTexture;
     assetID = "";
 }

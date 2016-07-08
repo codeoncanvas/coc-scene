@@ -22,7 +22,7 @@ class Shape : public coc::scene::Object {
 
 public:
 
-    Shape();
+    Shape(std::string objID="");
     ~Shape();
     
     glm::vec4 colorStroke;

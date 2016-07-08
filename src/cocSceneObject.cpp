@@ -18,8 +18,8 @@ namespace scene {
 
 static Object emptyObject;
 
-Object::Object() :
-    objectID(""),
+Object::Object(std::string objID) :
+    objectID(objID),
     objectType(coc::scene::ObjectTypeBase),
     x(0.0f),
     y(0.0f),
@@ -27,6 +27,8 @@ Object::Object() :
     height(0.0f),
     scale(1.0f),
     rotation(0.0f),
+    transformationPointX(0.0f),
+    transformationPointY(0.0f),
     alpha(1.0f),
     visible(true),
     color(1.0f, 1.0f, 1.0f, 1.0f),

@@ -33,7 +33,7 @@ friend class RendererOF;
 
 public:
 
-    Object();
+    Object(std::string objID="");
     ~Object();
     
     virtual void setup() {};
@@ -63,8 +63,12 @@ public:
     coc::Value<float> height;
     coc::Value<float> scale;
     coc::Value<float> rotation;
+    coc::Value<float> transformationPointX;
+    coc::Value<float> transformationPointY;
     coc::Value<float> alpha;
     coc::Value<bool> visible;
+    
+    glm::vec4 color;
     
 protected:
 
@@ -72,7 +76,6 @@ protected:
     unsigned int objectType;
     
     glm::mat4 modelMatrix;
-    glm::vec4 color;
     
     coc::scene::Object * parent;
     std::vector<coc::scene::Object *> children;

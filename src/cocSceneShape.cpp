@@ -17,7 +17,7 @@ namespace coc {
 
 namespace scene {
 
-Shape::Shape() : coc::scene::Object() {
+Shape::Shape(std::string objID) : coc::scene::Object(objID) {
     objectType = coc::scene::ObjectTypeShape;
     colorStroke.r = colorStroke.g = colorStroke.b = 1.0;
     colorStroke.a = 0.0; // stroke is turned off by default.
