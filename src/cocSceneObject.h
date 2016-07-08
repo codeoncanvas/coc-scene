@@ -50,12 +50,12 @@ public:
     bool removeChild(Object & child);
     bool removeChildAt(int index);
     void removeAllChildren();
-    bool contains(const Object & child);
-    Object & getChildAt(int index);
-    Object & getChildByID(std::string objectID);
+    bool contains(const Object & child) const;
+    Object & getChildAt(int index) const;
+    Object & getChildByID(std::string objectID) const;
     void setChildIndex(Object & child, int index);
-    int getChildIndex(const Object & child);
-    int numChildren();
+    int getChildIndex(const Object & child) const;
+    int numChildren() const;
 
     coc::Value<float> x;
     coc::Value<float> y;

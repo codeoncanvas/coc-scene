@@ -90,7 +90,7 @@ void Object::removeAllChildren() {
     }
 }
 
-bool Object::contains(const Object & child) {
+bool Object::contains(const Object & child) const {
 	for(int i=0; i<children.size(); i++) {
 		if(children[i] == &child) {
 			return true;
@@ -99,14 +99,14 @@ bool Object::contains(const Object & child) {
 	return false;
 }
 
-Object & Object::getChildAt(int index) {
+Object & Object::getChildAt(int index) const {
 	if(index < 0 || index > children.size() - 1) {
 		return emptyObject;
     }
 	return *children[index];
 }
 
-Object & Object::getChildByID(std::string objectID) {
+Object & Object::getChildByID(std::string objectID) const {
 	for(int i=0; i<children.size(); i++) {
 		if(children[i]->objectID == objectID) {
 			return *children[i];
@@ -129,7 +129,7 @@ void Object::setChildIndex(Object & child, int index) {
 	}
 }
 
-int Object::getChildIndex(const Object & child) {
+int Object::getChildIndex(const Object & child) const {
 	for(int i=0; i<children.size(); i++) {
 		if(children[i] == &child) {
 			return i;
@@ -138,7 +138,7 @@ int Object::getChildIndex(const Object & child) {
 	return -1;
 }
 
-int Object::numChildren() {
+int Object::numChildren() const {
 	return children.size();
 }
 
