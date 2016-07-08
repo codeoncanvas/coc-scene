@@ -32,6 +32,9 @@ void Renderer::setup() {
 
 void Renderer::draw(const coc::scene::Object & object) const {
 
+    ci::gl::ScopedModelMatrix modelMatrix;
+    ci::gl::multModelMatrix(object.modelMatrix);
+
     if(object.objectType == coc::scene::ObjectTypeBase) {
     
         //

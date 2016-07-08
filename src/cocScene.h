@@ -14,6 +14,8 @@
 #pragma once
 
 #include "cocSceneObject.h"
+#include "cocSceneShape.h"
+#include "cocSceneTexture.h"
 
 namespace coc {
 namespace scene {

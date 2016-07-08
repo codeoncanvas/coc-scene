@@ -14,14 +14,25 @@ class SceneSampleApp : public App {
 	void draw() override;
     
     coc::scene::Scene scene;
+    coc::scene::Shape rect0;
 };
 
 void SceneSampleApp::setup() {
     
     scene.setup();
+    
+    rect0.x = 100;
+    rect0.y = 100;
+    rect0.width = 100;
+    rect0.height = 100;
+    rect0.colorStroke = glm::vec4(1.0, 0.0, 0.0, 1.0);
+    
+    scene.addChild(rect0);
 }
 
 void SceneSampleApp::update() {
+    
+    rect0.rotation = rect0.rotation + 0.01;
     
     scene.update();
 }

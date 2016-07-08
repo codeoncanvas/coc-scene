@@ -24,8 +24,6 @@ enum ObjectType {
     ObjectTypeTexture = 2
 };
 
-//class Solver;
-
 class Object {
 
 friend class Solver;
@@ -47,16 +45,16 @@ public:
 	virtual void pointPressed(int x, int y, int mouseID) {};
 	virtual void pointReleased(int x, int y, int mouseID) {};
     
-    Object * addChild(Object * child);
-    Object * addChildAt(Object * child, int index);
-    bool contains(Object * child);
-    Object * getChildAt(int index);
-    Object * getChildByID(std::string objectID);
-    int getChildIndex(Object * child);
-    Object * removeChild(Object * child);
-    Object * removeChildAt(int index);
+    void addChild(Object & child);
+    void addChildAt(Object & child, int index);
+    bool removeChild(Object & child);
+    bool removeChildAt(int index);
     void removeAllChildren();
-    void setChildIndex(Object * child, int index);
+    bool contains(const Object & child);
+    Object & getChildAt(int index);
+    Object & getChildByID(std::string objectID);
+    void setChildIndex(Object & child, int index);
+    int getChildIndex(const Object & child);
     int numChildren();
 
     coc::Value<float> x;

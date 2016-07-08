@@ -39,13 +39,15 @@ void RendererCI::drawShape(const coc::scene::Shape & shape) const {
 
 void RendererCI::drawShapeRect(const coc::scene::Shape & shape) const {
     
-    ci::Rectf rect(shape.x, shape.y, shape.x + shape.width, shape.y + shape.height);
+    ci::Rectf rect(0.0, 0.0, shape.width, shape.height);
     
     if(shape.color.a > 0.0) {
+        ci::gl::ScopedColor color(shape.color);
         ci::gl::drawSolidRect(rect);
     }
     
     if(shape.colorStroke.a > 0.0) {
+        ci::gl::ScopedColor color(shape.colorStroke);
         ci::gl::drawStrokedRect(rect);
     }
 }
