@@ -31,6 +31,8 @@ void Solver::setup() {
 
 void Solver::update(coc::scene::Object & object) {
 
+    object.update();
+
     object.x.update();
     object.y.update();
     object.width.update();

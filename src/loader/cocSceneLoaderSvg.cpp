@@ -12,7 +12,7 @@
  **/
 
 #include "cocSceneLoaderSvg.h"
-#include "cocScene.h"
+#include "cocSceneObject.h"
 
 namespace coc {
 namespace scene {
@@ -25,7 +25,7 @@ LoaderSvg::~LoaderSvg() {
     //
 }
 
-void LoaderSvg::load(Scene & scene, std::string svgPath) {
+void LoaderSvg::load(Object & object, std::string svgPath) {
     // override.
 }
 

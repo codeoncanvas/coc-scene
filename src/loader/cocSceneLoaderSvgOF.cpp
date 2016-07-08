@@ -12,7 +12,7 @@
  **/
 
 #include "cocSceneLoaderSvgOF.h"
-#include "cocScene.h"
+#include "cocSceneObject.h"
 
 #if defined( COC_OF )
 
@@ -27,7 +27,7 @@ LoaderSvgOF::~LoaderSvgOF() {
     //
 }
 
-void LoaderSvgOF::load(Scene & scene, std::string svgPath) {
+void LoaderSvgOF::load(Object & object, std::string svgPath) {
 
     //
 }

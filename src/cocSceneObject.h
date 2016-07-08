@@ -24,6 +24,17 @@ enum ObjectType {
     ObjectTypeTexture = 2
 };
 
+//--------------------------------------------------------------
+class Object;
+
+class ObjectDelegate {
+public:
+    virtual void setup(Object & object) {};
+    virtual void update(Object & object) {};
+    virtual void draw(const Object & object) const {};
+};
+
+//--------------------------------------------------------------
 class Object {
 
 friend class Solver;
@@ -36,9 +47,9 @@ public:
     Object(std::string objID="");
     ~Object();
     
-    virtual void setup() {};
-    virtual void update() {};
-    virtual void draw() const {};
+    virtual void setup();
+    virtual void update();
+    virtual void draw() const;
 
 	virtual void pointMoved(int x, int y, int mouseID) {};
 	virtual void pointDragged(int x, int y, int mouseID) {};
@@ -69,6 +80,8 @@ public:
     coc::Value<bool> visible;
     
     glm::vec4 color;
+    
+    ObjectDelegate * delegate;
     
 protected:
 

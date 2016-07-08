@@ -1,12 +1,15 @@
 #include "cinder/app/App.h"
 #include "cinder/app/RendererGl.h"
 #include "cinder/gl/gl.h"
-#include "cocScene.h"
+#include "cocSceneRunner.h"
+#include "cocSceneShape.h"
 #include "SceneCustomObject.h"
+#include "SceneDelegateObject.h"
 
 using namespace ci;
 using namespace ci::app;
 using namespace std;
+using namespace coc::scene;
 
 class SceneSampleApp : public App {
   public:
@@ -14,16 +17,16 @@ class SceneSampleApp : public App {
 	void update() override;
 	void draw() override;
     
-    coc::scene::Scene scene;
-    coc::scene::Shape rect0 = coc::scene::Shape("r0");
-    coc::scene::Shape rect1 = coc::scene::Shape("r1");
+    Object sceneRoot;
+    Shape rect0 = Shape("r0");
+    Shape rect1 = Shape("r1");
     SceneCustomObject circle = SceneCustomObject("circle");
+    SceneDelegateObject rect1Delegate;
+    SceneRunner sceneRunner;
 };
 
 void SceneSampleApp::setup() {
-    
-    scene.setup();
-    
+
     rect0.x = getWindowWidth() * 0.5;
     rect0.y = getWindowHeight() * 0.5;
     rect0.width = 100;
@@ -38,28 +41,30 @@ void SceneSampleApp::setup() {
     rect1.width = 50;
     rect1.height = 50;
     rect1.color = glm::vec4(1.0, 0.0, 0.0, 1.0);
+    rect1.delegate = &rect1Delegate;
     
     circle.x = getWindowWidth() * 0.5;
     circle.y = getWindowHeight() * 0.5;
     
-    scene.addChild(rect0);
-    scene.addChild(circle);
+    sceneRoot.addChild(rect0);
+    sceneRoot.addChild(circle);
     rect0.addChild(rect1);
+    
+    sceneRunner.setup(sceneRoot);
 }
 
 void SceneSampleApp::update() {
     
     rect0.rotation = rect0.rotation + 0.01;
-    rect1.rotation = rect1.rotation + 0.01;
     
-    scene.update();
+    sceneRunner.update();
 }
 
 void SceneSampleApp::draw() {
 
     gl::clear(Color(0, 0, 0));
     
-    scene.draw();
+    sceneRunner.draw();
 }
 
 CINDER_APP( SceneSampleApp, RendererGl )

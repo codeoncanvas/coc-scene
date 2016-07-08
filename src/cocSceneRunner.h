@@ -13,26 +13,23 @@
 
 #pragma once
 
-#include "cocSceneObject.h"
-#include "cocSceneShape.h"
-#include "cocSceneTexture.h"
-
 namespace coc {
 namespace scene {
 
+class Object;
 class Renderer;
 class Solver;
 
-class Scene : public coc::scene::Object {
+class SceneRunner {
 
 public:
 
-    Scene();
-    ~Scene();
+    SceneRunner();
+    ~SceneRunner();
     
-    void setup();
+    void setup(Object & obj);
     void update();
-    void draw();
+    void draw() const;
     
 private:
 
@@ -42,6 +39,7 @@ private:
     void initRenderer();
     void killRenderer();
     
+    coc::scene::Object * object;
     coc::scene::Solver * solver;
     coc::scene::Renderer * renderer;
 };

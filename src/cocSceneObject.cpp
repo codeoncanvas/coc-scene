@@ -18,6 +18,7 @@ namespace scene {
 
 static Object emptyObject;
 
+//--------------------------------------------------------------
 Object::Object(std::string objID) :
     objectID(objID),
     objectType(coc::scene::ObjectTypeBase),
@@ -32,6 +33,7 @@ Object::Object(std::string objID) :
     alpha(1.0f),
     visible(true),
     color(1.0f, 1.0f, 1.0f, 1.0f),
+    delegate(NULL),
     parent(NULL) {
     
     //
@@ -41,6 +43,26 @@ Object::~Object() {
     //
 }
 
+//--------------------------------------------------------------
+void Object::setup() {
+    if(delegate != NULL) {
+        delegate->setup(*this);
+    }
+}
+
+void Object::update() {
+    if(delegate != NULL) {
+        delegate->update(*this);
+    }
+}
+
+void Object::draw() const {
+    if(delegate != NULL) {
+        delegate->draw(*this);
+    }
+}
+
+//--------------------------------------------------------------
 void Object::addChild(Object & child) {
     if(child.parent != NULL) {
         child.parent->removeChild(child);

@@ -12,7 +12,7 @@
  **/
 
 #include "cocSceneLoaderSvgCI.h"
-#include "cocScene.h"
+#include "cocSceneObject.h"
 
 #if defined( COC_CI )
 
@@ -27,7 +27,7 @@ LoaderSvgCI::~LoaderSvgCI() {
     //
 }
 
-void LoaderSvgCI::load(Scene & scene, std::string svgPath) {
+void LoaderSvgCI::load(Object & object, std::string svgPath) {
 
     //
 }

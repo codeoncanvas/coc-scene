@@ -18,11 +18,7 @@
 namespace coc {
 namespace scene {
 
-void pushModelMatrix(glm::mat4 mat);
-void popModelMatrix();
-
-void pushColor(glm::vec4 color);
-void popColor();
+//
 
 };
 };

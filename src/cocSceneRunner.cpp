@@ -11,7 +11,8 @@
  *
  **/
 
-#include "cocScene.h"
+#include "cocSceneRunner.h"
+#include "cocSceneObject.h"
 #include "cocSceneSolver.h"
 #include "cocSceneRendererCI.h"
 #include "cocSceneRendererOF.h"
@@ -20,32 +21,33 @@ namespace coc {
 namespace scene {
 
 //--------------------------------------------------------------
-Scene::Scene() : coc::scene::Object() {
+SceneRunner::SceneRunner() {
+    object = NULL;
     solver = NULL;
     renderer = NULL;
 }
 
-Scene::~Scene() {
+SceneRunner::~SceneRunner() {
     //
 }
 
 //--------------------------------------------------------------
-void Scene::setup() {
-    coc::scene::Object::setup();
+void SceneRunner::setup(Object & obj) {
+    object = &obj;
 
     initSolver();
     initRenderer();
 }
 
 //--------------------------------------------------------------
-void Scene::initSolver() {
+void SceneRunner::initSolver() {
     killSolver();
     
     solver = new coc::scene::Solver();
     solver->setup();
 }
 
-void Scene::killSolver() {
+void SceneRunner::killSolver() {
     if(solver == NULL) {
         return;
     }
@@ -55,7 +57,7 @@ void Scene::killSolver() {
 }
 
 //--------------------------------------------------------------
-void Scene::initRenderer() {
+void SceneRunner::initRenderer() {
     killRenderer();
 
 #if defined( COC_OF )
@@ -67,7 +69,7 @@ void Scene::initRenderer() {
     renderer->setup();
 }
 
-void Scene::killRenderer() {
+void SceneRunner::killRenderer() {
     if(renderer == NULL) {
         return;
     }
@@ -81,13 +83,13 @@ void Scene::killRenderer() {
 }
 
 //--------------------------------------------------------------
-void Scene::update() {
-    solver->update(*this);
+void SceneRunner::update() {
+    solver->update(*object);
 }
 
 //--------------------------------------------------------------
-void Scene::draw() {
-    renderer->draw(*this);
+void SceneRunner::draw() const {
+    renderer->draw(*object);
 }
 
 };

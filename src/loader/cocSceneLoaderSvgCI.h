@@ -29,7 +29,7 @@ public:
     LoaderSvgCI();
     ~LoaderSvgCI();
     
-    void load(Scene & scene, std::string svgPath) override;
+    void load(Object & object, std::string svgPath) override;
     
 };
 };

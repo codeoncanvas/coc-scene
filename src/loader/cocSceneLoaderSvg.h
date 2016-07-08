@@ -16,7 +16,7 @@
 namespace coc {
 namespace scene {
 
-class Scene;
+class Object;
 
 class LoaderSvg {
 
@@ -25,7 +25,7 @@ public:
     LoaderSvg();
     ~LoaderSvg();
     
-    virtual void load(Scene & scene, std::string svgPath);
+    virtual void load(Object & object, std::string svgPath);
     
 };
 };
