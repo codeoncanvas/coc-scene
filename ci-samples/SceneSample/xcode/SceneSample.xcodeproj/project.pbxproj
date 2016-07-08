@@ -81,6 +81,7 @@
 		675C76E71D2FF3A1004D5AC5 /* cocSceneTexture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cocSceneTexture.h; sourceTree = "<group>"; };
 		675C76EC1D2FF409004D5AC5 /* cocSceneRunner.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = cocSceneRunner.cpp; sourceTree = "<group>"; };
 		675C76ED1D2FF409004D5AC5 /* cocSceneRunner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cocSceneRunner.h; sourceTree = "<group>"; };
+		675C76EF1D2FF45C004D5AC5 /* cocScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = cocScene.h; sourceTree = "<group>"; };
 		6768FB951D0946E10032B3A8 /* cocConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cocConstants.h; sourceTree = "<group>"; };
 		6768FB961D0946E10032B3A8 /* cocCore.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = cocCore.cpp; sourceTree = "<group>"; };
 		6768FB971D0946E10032B3A8 /* cocCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cocCore.h; sourceTree = "<group>"; };
@@ -323,6 +324,7 @@
 		98BAEB09C6734A5980CC5F07 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				675C76EF1D2FF45C004D5AC5 /* cocScene.h */,
 				679A3BB41D2CCC8800DC9EB7 /* cocSceneGlobals.h */,
 				679A3BB31D2CCC8800DC9EB7 /* cocSceneGlobals.cpp */,
 				675C76E11D2FF3A1004D5AC5 /* graph */,
