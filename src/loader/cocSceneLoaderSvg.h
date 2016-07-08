@@ -27,11 +27,6 @@ public:
     
     virtual void load(Scene & scene, std::string svgPath);
     
-protected:
-    
-    void loadCI(Scene & scene, std::string svgPath);
-    void loadOF(Scene & scene, std::string svgPath);
-    
 };
 };
 };
