@@ -27,5 +27,6 @@ public:
     
     std::string assetID;
 };
+
 };
 };

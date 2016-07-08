@@ -14,7 +14,6 @@
 #include "cocSceneTexture.h"
 
 namespace coc {
-
 namespace scene {
 
 Texture::Texture(std::string objID) : coc::scene::Object(objID) {
@@ -27,5 +26,4 @@ Texture::~Texture() {
 }
 
 };
-
 };

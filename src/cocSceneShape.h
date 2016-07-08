@@ -27,5 +27,6 @@ public:
     
     glm::vec4 colorStroke;
 };
+
 };
 };

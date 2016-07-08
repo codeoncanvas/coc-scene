@@ -2,6 +2,7 @@
 #include "cinder/app/RendererGl.h"
 #include "cinder/gl/gl.h"
 #include "cocScene.h"
+#include "SceneCustomObject.h"
 
 using namespace ci;
 using namespace ci::app;
@@ -16,6 +17,7 @@ class SceneSampleApp : public App {
     coc::scene::Scene scene;
     coc::scene::Shape rect0 = coc::scene::Shape("r0");
     coc::scene::Shape rect1 = coc::scene::Shape("r1");
+    SceneCustomObject circle = SceneCustomObject("circle");
 };
 
 void SceneSampleApp::setup() {
@@ -37,7 +39,11 @@ void SceneSampleApp::setup() {
     rect1.height = 50;
     rect1.color = glm::vec4(1.0, 0.0, 0.0, 1.0);
     
+    circle.x = getWindowWidth() * 0.5;
+    circle.y = getWindowHeight() * 0.5;
+    
     scene.addChild(rect0);
+    scene.addChild(circle);
     rect0.addChild(rect1);
 }
 
@@ -54,9 +60,6 @@ void SceneSampleApp::draw() {
     gl::clear(Color(0, 0, 0));
     
     scene.draw();
-    
-    gl::ScopedColor color(Color(1.0, 0.0, 0.0));
-    gl::drawSolidCircle(glm::vec2(getWindowWidth() * 0.5, getWindowHeight() * 0.5), 5);
 }
 
 CINDER_APP( SceneSampleApp, RendererGl )

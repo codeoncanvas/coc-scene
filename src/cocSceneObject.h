@@ -38,7 +38,7 @@ public:
     
     virtual void setup() {};
     virtual void update() {};
-    virtual void draw() {};
+    virtual void draw() const {};
 
 	virtual void pointMoved(int x, int y, int mouseID) {};
 	virtual void pointDragged(int x, int y, int mouseID) {};

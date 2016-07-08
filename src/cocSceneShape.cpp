@@ -14,7 +14,6 @@
 #include "cocSceneShape.h"
 
 namespace coc {
-
 namespace scene {
 
 Shape::Shape(std::string objID) : coc::scene::Object(objID) {
@@ -30,5 +29,4 @@ Shape::~Shape() {
 }
 
 };
-
 };
