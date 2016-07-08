@@ -11,18 +11,28 @@
  *
  **/
 
-#include "cocSceneLoaderSVG.h"
+#include "cocSceneLoaderSvgOF.h"
+#include "cocScene.h"
+
+#if defined( COC_OF )
 
 namespace coc {
 namespace scene {
 
-LoaderSVG::LoaderSVG() {
+LoaderSvgOF::LoaderSvgOF() {
     //
 }
 
-LoaderSVG::~LoaderSVG() {
+LoaderSvgOF::~LoaderSvgOF() {
+    //
+}
+
+void LoaderSvgOF::load(Scene & scene, std::string svgPath) {
+
     //
 }
 
 };
 };
+
+#endif

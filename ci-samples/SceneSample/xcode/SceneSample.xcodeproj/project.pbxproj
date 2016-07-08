@@ -20,7 +20,10 @@
 		672351501D2F4D6B00BC2BCA /* cocSceneAssets.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6723514E1D2F4D6B00BC2BCA /* cocSceneAssets.cpp */; };
 		672351531D2F4F4300BC2BCA /* cocSceneAssetsCI.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 672351511D2F4F4300BC2BCA /* cocSceneAssetsCI.cpp */; };
 		672351561D2F4FEA00BC2BCA /* cocSceneAssetsOF.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 672351541D2F4FEA00BC2BCA /* cocSceneAssetsOF.cpp */; };
-		6723515A1D2F50C100BC2BCA /* cocSceneLoaderSVG.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 672351581D2F50C100BC2BCA /* cocSceneLoaderSVG.cpp */; };
+		6723515A1D2F50C100BC2BCA /* cocSceneLoaderSvg.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 672351581D2F50C100BC2BCA /* cocSceneLoaderSvg.cpp */; };
+		6723515D1D2F56AD00BC2BCA /* SceneCustomObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6723515B1D2F56AD00BC2BCA /* SceneCustomObject.cpp */; };
+		672351601D2F7C1C00BC2BCA /* cocSceneLoaderSvgCI.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6723515E1D2F7C1C00BC2BCA /* cocSceneLoaderSvgCI.cpp */; };
+		672351631D2F7CDF00BC2BCA /* cocSceneLoaderSvgOF.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 672351611D2F7CDF00BC2BCA /* cocSceneLoaderSvgOF.cpp */; };
 		6768FBA01D0946E10032B3A8 /* cocCore.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6768FB961D0946E10032B3A8 /* cocCore.cpp */; };
 		6768FBA11D0946E10032B3A8 /* cocMath.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6768FB981D0946E10032B3A8 /* cocMath.cpp */; };
 		6768FBA21D0946E10032B3A8 /* cocRandom.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6768FB9A1D0946E10032B3A8 /* cocRandom.cpp */; };
@@ -63,8 +66,14 @@
 		672351521D2F4F4300BC2BCA /* cocSceneAssetsCI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cocSceneAssetsCI.h; sourceTree = "<group>"; };
 		672351541D2F4FEA00BC2BCA /* cocSceneAssetsOF.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = cocSceneAssetsOF.cpp; sourceTree = "<group>"; };
 		672351551D2F4FEA00BC2BCA /* cocSceneAssetsOF.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cocSceneAssetsOF.h; sourceTree = "<group>"; };
-		672351581D2F50C100BC2BCA /* cocSceneLoaderSVG.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = cocSceneLoaderSVG.cpp; sourceTree = "<group>"; };
-		672351591D2F50C100BC2BCA /* cocSceneLoaderSVG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cocSceneLoaderSVG.h; sourceTree = "<group>"; };
+		672351581D2F50C100BC2BCA /* cocSceneLoaderSvg.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = cocSceneLoaderSvg.cpp; sourceTree = "<group>"; };
+		672351591D2F50C100BC2BCA /* cocSceneLoaderSvg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cocSceneLoaderSvg.h; sourceTree = "<group>"; };
+		6723515B1D2F56AD00BC2BCA /* SceneCustomObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SceneCustomObject.cpp; path = ../src/SceneCustomObject.cpp; sourceTree = "<group>"; };
+		6723515C1D2F56AD00BC2BCA /* SceneCustomObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SceneCustomObject.h; path = ../src/SceneCustomObject.h; sourceTree = "<group>"; };
+		6723515E1D2F7C1C00BC2BCA /* cocSceneLoaderSvgCI.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = cocSceneLoaderSvgCI.cpp; sourceTree = "<group>"; };
+		6723515F1D2F7C1C00BC2BCA /* cocSceneLoaderSvgCI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cocSceneLoaderSvgCI.h; sourceTree = "<group>"; };
+		672351611D2F7CDF00BC2BCA /* cocSceneLoaderSvgOF.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = cocSceneLoaderSvgOF.cpp; sourceTree = "<group>"; };
+		672351621D2F7CDF00BC2BCA /* cocSceneLoaderSvgOF.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cocSceneLoaderSvgOF.h; sourceTree = "<group>"; };
 		6768FB951D0946E10032B3A8 /* cocConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cocConstants.h; sourceTree = "<group>"; };
 		6768FB961D0946E10032B3A8 /* cocCore.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = cocCore.cpp; sourceTree = "<group>"; };
 		6768FB971D0946E10032B3A8 /* cocCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cocCore.h; sourceTree = "<group>"; };
@@ -134,6 +143,8 @@
 			isa = PBXGroup;
 			children = (
 				5134E4955FB74FDF950B311C /* SceneSampleApp.cpp */,
+				6723515C1D2F56AD00BC2BCA /* SceneCustomObject.h */,
+				6723515B1D2F56AD00BC2BCA /* SceneCustomObject.cpp */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -229,8 +240,12 @@
 		672351571D2F508800BC2BCA /* loader */ = {
 			isa = PBXGroup;
 			children = (
-				672351591D2F50C100BC2BCA /* cocSceneLoaderSVG.h */,
-				672351581D2F50C100BC2BCA /* cocSceneLoaderSVG.cpp */,
+				672351591D2F50C100BC2BCA /* cocSceneLoaderSvg.h */,
+				672351581D2F50C100BC2BCA /* cocSceneLoaderSvg.cpp */,
+				6723515F1D2F7C1C00BC2BCA /* cocSceneLoaderSvgCI.h */,
+				6723515E1D2F7C1C00BC2BCA /* cocSceneLoaderSvgCI.cpp */,
+				672351621D2F7CDF00BC2BCA /* cocSceneLoaderSvgOF.h */,
+				672351611D2F7CDF00BC2BCA /* cocSceneLoaderSvgOF.cpp */,
 			);
 			path = loader;
 			sourceTree = "<group>";
@@ -382,12 +397,15 @@
 				6768FBA01D0946E10032B3A8 /* cocCore.cpp in Sources */,
 				679A3BC41D2CCFF700DC9EB7 /* cocSceneRendererCI.cpp in Sources */,
 				6768FBA31D0946E10032B3A8 /* cocRect.cpp in Sources */,
+				672351631D2F7CDF00BC2BCA /* cocSceneLoaderSvgOF.cpp in Sources */,
 				6768FBA41D0946E10032B3A8 /* cocValue.cpp in Sources */,
+				672351601D2F7C1C00BC2BCA /* cocSceneLoaderSvgCI.cpp in Sources */,
+				6723515D1D2F56AD00BC2BCA /* SceneCustomObject.cpp in Sources */,
 				679A3BC11D2CCF5800DC9EB7 /* cocSceneRenderer.cpp in Sources */,
 				679A3BBA1D2CCC8800DC9EB7 /* cocSceneGlobals.cpp in Sources */,
 				F6D353C4CCC7460BA4E9F31D /* SceneSampleApp.cpp in Sources */,
 				679A3BB91D2CCC8800DC9EB7 /* cocScene.cpp in Sources */,
-				6723515A1D2F50C100BC2BCA /* cocSceneLoaderSVG.cpp in Sources */,
+				6723515A1D2F50C100BC2BCA /* cocSceneLoaderSvg.cpp in Sources */,
 				6768FBA21D0946E10032B3A8 /* cocRandom.cpp in Sources */,
 				672351501D2F4D6B00BC2BCA /* cocSceneAssets.cpp in Sources */,
 				679A3BBC1D2CCC8800DC9EB7 /* cocSceneObject.cpp in Sources */,

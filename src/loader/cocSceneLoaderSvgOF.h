@@ -13,22 +13,26 @@
 
 #pragma once
 
+#include "cocSceneLoaderSvg.h"
+
+#if defined( COC_OF )
+
 namespace coc {
 namespace scene {
 
-class LoaderSVG {
+class Scene;
+
+class LoaderSvgOF : public LoaderSvg {
 
 public:
 
-    LoaderSVG();
-    ~LoaderSVG();
+    LoaderSvgOF();
+    ~LoaderSvgOF();
     
-    //
-    
-protected:
-    
-    //
+    void load(Scene & scene, std::string svgPath) override;
     
 };
 };
 };
+
+#endif
