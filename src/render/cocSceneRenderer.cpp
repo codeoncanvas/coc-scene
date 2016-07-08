@@ -35,11 +35,9 @@ void Renderer::draw(const coc::scene::Object & object) const {
     ci::gl::ScopedModelMatrix modelMatrix;
     ci::gl::multModelMatrix(object.modelMatrix);
 
-    object.draw();
-
     if(object.objectType == coc::scene::ObjectTypeBase) {
     
-        //
+        // base object has nothing to draw.
     
     } else if(object.objectType == coc::scene::ObjectTypeShape) {
     
@@ -49,6 +47,8 @@ void Renderer::draw(const coc::scene::Object & object) const {
     
         drawTexture((const coc::scene::Texture &)object);
     }
+    
+    object.draw(); // custom drawing by either a custom subclass or object delegate.
     
     for(int i=0; i<object.children.size(); i++) {
         draw(*object.children[i]);
