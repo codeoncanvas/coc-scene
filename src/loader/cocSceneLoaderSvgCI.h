@@ -21,6 +21,7 @@
 namespace coc {
 namespace scene {
 
+//--------------------------------------------------------------
 class LoaderSvgCI : public LoaderSvg {
 
 public:
@@ -28,10 +29,12 @@ public:
     LoaderSvgCI();
     ~LoaderSvgCI();
     
-    void load(Object & object, std::string svgPath) override;
-    void load(Object & object, ci::svg::Group * group);
+    void load(Object * object, std::string svgPath) override;
+    void load(Object * parent, ci::svg::Group * group);
     
+    ci::svg::DocRef docRef;
 };
+
 };
 };
 

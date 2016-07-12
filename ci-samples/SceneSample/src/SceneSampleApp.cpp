@@ -23,9 +23,12 @@ class SceneSampleApp : public App {
     SceneCustomObject circle = SceneCustomObject("circle");
     SceneDelegateObject rect1Delegate;
     SceneRunner sceneRunner;
+    LoaderSvgCI loaderSvg;
 };
 
 void SceneSampleApp::setup() {
+
+    loaderSvg.load(&sceneRoot, "svg/coc_scene_svg_02.svg");
 
     rect0.x = getWindowWidth() * 0.5;
     rect0.y = getWindowHeight() * 0.5;

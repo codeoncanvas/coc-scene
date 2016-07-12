@@ -25,7 +25,7 @@ public:
     LoaderSvg();
     ~LoaderSvg();
     
-    virtual void load(Object & object, std::string svgPath);
+    virtual void load(Object * object, std::string svgPath);
     
 };
 };

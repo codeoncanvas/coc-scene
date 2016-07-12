@@ -85,6 +85,7 @@ public:
     glm::vec4 color;
     
     ObjectDelegate * delegate;
+    void * svgNode;
     
 protected:
 

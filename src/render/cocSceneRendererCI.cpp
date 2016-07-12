@@ -34,6 +34,14 @@ void RendererCI::setup() {
 }
 
 void RendererCI::drawShape(const coc::scene::Shape & shape) const {
+
+    if(shape.svgNode != NULL) {
+        
+        //
+        
+        return;
+    }
+
     drawShapeRect(shape);
 }
 
