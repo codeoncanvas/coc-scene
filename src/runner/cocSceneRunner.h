@@ -27,7 +27,7 @@ public:
     SceneRunner();
     ~SceneRunner();
     
-    void setup(Object & obj);
+    void setup(Object * obj);
     void update();
     void draw() const;
     

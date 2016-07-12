@@ -32,8 +32,8 @@ SceneRunner::~SceneRunner() {
 }
 
 //--------------------------------------------------------------
-void SceneRunner::setup(Object & obj) {
-    object = &obj;
+void SceneRunner::setup(Object * obj) {
+    object = obj;
 
     initSolver();
     initRenderer();

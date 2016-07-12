@@ -17,9 +17,9 @@ class SceneSampleApp : public App {
 	void update() override;
 	void draw() override;
     
-    Object sceneRoot;
-    Shape rect0 = Shape("r0");
-    Shape rect1 = Shape("r1");
+    Object sceneRoot = Object("root");
+    Shape rect0 = Shape("rect0");
+    Shape rect1 = Shape("rect1");
     SceneCustomObject circle = SceneCustomObject("circle");
     SceneDelegateObject rect1Delegate;
     SceneRunner sceneRunner;
@@ -46,11 +46,11 @@ void SceneSampleApp::setup() {
     circle.x = getWindowWidth() * 0.5;
     circle.y = getWindowHeight() * 0.5;
     
-    sceneRoot.addChild(rect0);
-    sceneRoot.addChild(circle);
-    rect0.addChild(rect1);
+    sceneRoot.addChild(&rect0);
+    sceneRoot.addChild(&circle);
+    rect0.addChild(&rect1);
     
-    sceneRunner.setup(sceneRoot);
+    sceneRunner.setup(&sceneRoot);
 }
 
 void SceneSampleApp::update() {

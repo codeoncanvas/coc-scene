@@ -16,12 +16,11 @@
 namespace coc {
 namespace scene {
 
-static Object emptyObject;
-
 //--------------------------------------------------------------
 Object::Object(std::string objID) :
     objectID(objID),
     objectType(coc::scene::ObjectTypeBase),
+    bDeleteOnExit(false),
     x(0.0f),
     y(0.0f),
     width(0.0f),
@@ -40,7 +39,14 @@ Object::Object(std::string objID) :
 }
 
 Object::~Object() {
-    //
+    
+    parent = NULL;
+    for(int i=0; i<children.size(); i++) {
+        if(children[i]->bDeleteOnExit == true) {
+            delete children[i];
+        }
+    }
+    children.clear();
 }
 
 //--------------------------------------------------------------
@@ -63,29 +69,29 @@ void Object::draw() const {
 }
 
 //--------------------------------------------------------------
-void Object::addChild(Object & child) {
-    if(child.parent != NULL) {
-        child.parent->removeChild(child);
+void Object::addChild(Object * child) {
+    if(child->parent != NULL) {
+        child->parent->removeChild(child);
     }
-    children.push_back(&child);
-	child.parent = this;
+    children.push_back(child);
+	child->parent = this;
 }
 
-void Object::addChildAt(Object & child, int index) {
+void Object::addChildAt(Object * child, int index) {
 	if(index < 0 || index > children.size() - 1) {
 		return;
     }
-    if(child.parent != NULL) {
-        child.parent->removeChild(child);
+    if(child->parent != NULL) {
+        child->parent->removeChild(child);
     }
-	children.insert(children.begin() + index, &child);
-	child.parent = this;
+	children.insert(children.begin() + index, child);
+	child->parent = this;
 }
 
-bool Object::removeChild(Object & child) {
+bool Object::removeChild(Object * child) {
 	for(int i=0; i<children.size(); i++) {
-		if(children[i] == &child) {
-			child.parent = NULL;
+		if(children[i] == child) {
+			child->parent = NULL;
 			children.erase(children.begin() + i);
 			return true;
 		}
@@ -98,10 +104,9 @@ bool Object::removeChildAt(int index) {
 		return false;
     }
 	
-	Object * child = children[index];
-	child->parent = NULL;
+	children[index]->parent = NULL;
 	children.erase(children.begin() + index);
-	return child;
+	return true;
 }
 
 void Object::removeAllChildren() {
@@ -112,48 +117,48 @@ void Object::removeAllChildren() {
     }
 }
 
-bool Object::contains(const Object & child) const {
+bool Object::contains(const Object * child) const {
 	for(int i=0; i<children.size(); i++) {
-		if(children[i] == &child) {
+		if(children[i] == child) {
 			return true;
 		}
 	}
 	return false;
 }
 
-Object & Object::getChildAt(int index) const {
+Object * Object::getChildAt(int index) const {
 	if(index < 0 || index > children.size() - 1) {
-		return emptyObject;
+		return NULL;
     }
-	return *children[index];
+	return children[index];
 }
 
-Object & Object::getChildByID(std::string objectID) const {
+Object * Object::getChildByID(std::string objectID) const {
 	for(int i=0; i<children.size(); i++) {
 		if(children[i]->objectID == objectID) {
-			return *children[i];
+			return children[i];
 		}
 	}
-	return emptyObject;
+	return NULL;
 }
 
-void Object::setChildIndex(Object & child, int index) {
+void Object::setChildIndex(Object * child, int index) {
 	if(index < 0 || index > children.size() - 1) {
 		return;
     }
 
 	for(int i=0; i<children.size(); i++) {
-		if(children[i] == &child) {
+		if(children[i] == child) {
 			children.erase(children.begin() + i);
-			children.insert(children.begin() + index, &child);
+			children.insert(children.begin() + index, child);
 			return;
 		}
 	}
 }
 
-int Object::getChildIndex(const Object & child) const {
+int Object::getChildIndex(const Object * child) const {
 	for(int i=0; i<children.size(); i++) {
-		if(children[i] == &child) {
+		if(children[i] == child) {
 			return i;
 		}
 	}

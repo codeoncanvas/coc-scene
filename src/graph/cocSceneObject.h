@@ -37,6 +37,9 @@ public:
 //--------------------------------------------------------------
 class Object {
 
+friend class LoaderSvg;
+friend class LoaderSvgCI;
+friend class LoaderSvgOF;
 friend class Solver;
 friend class Renderer;
 friend class RendererCI;
@@ -56,16 +59,16 @@ public:
 	virtual void pointPressed(int x, int y, int mouseID) {};
 	virtual void pointReleased(int x, int y, int mouseID) {};
     
-    void addChild(Object & child);
-    void addChildAt(Object & child, int index);
-    bool removeChild(Object & child);
+    void addChild(Object * child);
+    void addChildAt(Object * child, int index);
+    bool removeChild(Object * child);
     bool removeChildAt(int index);
     void removeAllChildren();
-    bool contains(const Object & child) const;
-    Object & getChildAt(int index) const;
-    Object & getChildByID(std::string objectID) const;
-    void setChildIndex(Object & child, int index);
-    int getChildIndex(const Object & child) const;
+    bool contains(const Object * child) const;
+    Object * getChildAt(int index) const;
+    Object * getChildByID(std::string objectID) const;
+    void setChildIndex(Object * child, int index);
+    int getChildIndex(const Object * child) const;
     int numChildren() const;
 
     coc::Value<float> x;
@@ -87,6 +90,7 @@ protected:
 
     std::string objectID;
     unsigned int objectType;
+    bool bDeleteOnExit;
     
     glm::mat4 modelMatrix;
     
