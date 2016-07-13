@@ -20,8 +20,9 @@ namespace scene {
 
 enum ObjectType {
     ObjectTypeBase = 0,
-    ObjectTypeShape = 1,
-    ObjectTypeTexture = 2
+    ObjectTypeShape,
+    ObjectTypeShapeSvg,
+    ObjectTypeTexture
 };
 
 //--------------------------------------------------------------
@@ -85,7 +86,6 @@ public:
     glm::vec4 color;
     
     ObjectDelegate * delegate;
-    void * svgNode;
     
 protected:
 

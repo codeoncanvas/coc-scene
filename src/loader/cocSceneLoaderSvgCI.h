@@ -16,7 +16,13 @@
 #if defined( COC_CI )
 
 #include "cocSceneLoaderSvg.h"
-#include "cinder/svg/Svg.h"
+
+namespace cinder {
+namespace svg {
+    class Doc;
+    class Group;
+}
+}
 
 namespace coc {
 namespace scene {
@@ -32,7 +38,7 @@ public:
     void load(Object * object, std::string svgPath) override;
     void load(Object * parent, ci::svg::Group * group);
     
-    ci::svg::DocRef docRef;
+    ci::svg::Doc * doc;
 };
 
 };

@@ -17,6 +17,10 @@
 
 #if defined( COC_CI )
 
+namespace cinder {
+    class SvgRendererGl;
+}
+
 namespace coc {
 namespace scene {
 
@@ -32,8 +36,10 @@ public:
     void drawShape(const coc::scene::Shape & shape) const override;
     void drawShapeRect(const coc::scene::Shape & shape) const override;
     void drawShapeCircle(const coc::scene::Shape & shape) const override;
+    void drawShapeSvg(const coc::scene::ShapeSvg & shape) const override;
     void drawTexture(const coc::scene::Texture & texture) const override;
     
+    ci::SvgRendererGl * svgGL;
 };
 };
 };

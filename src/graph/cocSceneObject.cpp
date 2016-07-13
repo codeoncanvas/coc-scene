@@ -33,7 +33,6 @@ Object::Object(std::string objID) :
     visible(true),
     color(1.0f, 1.0f, 1.0f, 1.0f),
     delegate(NULL),
-    svgNode(NULL),
     parent(NULL) {
     
     //
