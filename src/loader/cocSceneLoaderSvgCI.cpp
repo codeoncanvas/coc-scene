@@ -80,6 +80,24 @@ void LoaderSvgCI::parseGroupItem(Object * object, const ci::XmlTree & xml) {
         parseGroup(object, xml);
         bDefs = false;
         
+    } else if(tag == "use") {
+    
+        parseUse(object, xml);
+        
+    } else if(tag == "rect") {
+    
+        if(bDefs == true) {
+        
+            defs.insert(std::pair<std::string, const ci::XmlTree &>(defID, xml));
+        
+        } else {
+
+            Shape * child = new Shape();
+            object->addChild(child);
+            parseNode(child, xml);
+            parseRect(child, xml);
+        }
+        
     } else if(tag == "path") {
     
         parsePath(object, xml);
@@ -96,20 +114,6 @@ void LoaderSvgCI::parseGroupItem(Object * object, const ci::XmlTree & xml) {
     
         parseLine(object, xml);
         
-    } else if(tag == "rect") {
-    
-        if(bDefs == true) {
-        
-            defs.insert(std::pair<std::string, const ci::XmlTree &>(defID, xml));
-        
-        } else {
-
-            Shape * child = new Shape();
-            object->addChild(child);
-            parseNode(child, xml);
-            parseRect(child, xml);
-        }
-        
     } else if(tag == "circle") {
     
         parseCircle(object, xml);
@@ -117,10 +121,6 @@ void LoaderSvgCI::parseGroupItem(Object * object, const ci::XmlTree & xml) {
     } else if(tag == "ellipse") {
     
         parseEllipse(object, xml);
-        
-    } else if(tag == "use") {
-    
-        parseUse(object, xml);
         
     } else if(tag == "image") {
     
@@ -172,20 +172,27 @@ void LoaderSvgCI::parseNode(Object * object, const ci::XmlTree & xml) {
     object->y = translation.y;
 }
 
-void LoaderSvgCI::parsePath(Object * object, const ci::XmlTree & xml) {
-
+void LoaderSvgCI::parseDefs(Object * object, const ci::XmlTree & xml) {
+    //
 }
 
-void LoaderSvgCI::parsePolygon(Object * object, const ci::XmlTree & xml) {
+void LoaderSvgCI::parseUse(Object * object, const ci::XmlTree & xml) {
 
-}
-
-void LoaderSvgCI::parsePolyline(Object * object, const ci::XmlTree & xml) {
-
-}
-
-void LoaderSvgCI::parseLine(Object * object, const ci::XmlTree & xml) {
-
+	if(xml.hasAttribute( "xlink:href") == false) {
+        return;
+    }
+    std::string ref = xml.getAttributeValue<std::string>( "xlink:href" );
+    
+    if(ref.size() <= 1) {
+        return;
+    }
+    if(ref[0] != '#') {
+        return;
+    }
+    
+    std::string defID = ref.substr(1, std::string::npos);
+    const ci::XmlTree & xmlDef = defs.find(defID)->second;
+    parseGroupItem(object, xmlDef);
 }
 
 void LoaderSvgCI::parseRect(Object * object, const ci::XmlTree & xml) {
@@ -214,51 +221,44 @@ void LoaderSvgCI::parseRect(Object * object, const ci::XmlTree & xml) {
     object->height = height;
 }
 
-void LoaderSvgCI::parseCircle(Object * object, const ci::XmlTree & xml) {
+void LoaderSvgCI::parsePath(Object * object, const ci::XmlTree & xml) {
+    //
+}
 
+void LoaderSvgCI::parsePolygon(Object * object, const ci::XmlTree & xml) {
+    //
+}
+
+void LoaderSvgCI::parsePolyline(Object * object, const ci::XmlTree & xml) {
+    //
+}
+
+void LoaderSvgCI::parseLine(Object * object, const ci::XmlTree & xml) {
+    //
+}
+
+void LoaderSvgCI::parseCircle(Object * object, const ci::XmlTree & xml) {
+    //
 }
 
 void LoaderSvgCI::parseEllipse(Object * object, const ci::XmlTree & xml) {
-
-}
-
-void LoaderSvgCI::parseUse(Object * object, const ci::XmlTree & xml) {
-
-	if(xml.hasAttribute( "xlink:href") == false) {
-        return;
-    }
-    std::string ref = xml.getAttributeValue<std::string>( "xlink:href" );
-    
-    if(ref.size() <= 1) {
-        return;
-    }
-    if(ref[0] != '#') {
-        return;
-    }
-    
-    std::string defID = ref.substr(1, std::string::npos);
-    const ci::XmlTree & xmlDef = defs.find(defID)->second;
-    parseGroupItem(object, xmlDef);
-}
-
-void LoaderSvgCI::parseDefs(Object * object, const ci::XmlTree & xml) {
-
+    //
 }
 
 void LoaderSvgCI::parseImage(Object * object, const ci::XmlTree & xml) {
-
+    //
 }
 
 void LoaderSvgCI::parseLinearGradient(Object * object, const ci::XmlTree & xml) {
-
+    //
 }
 
 void LoaderSvgCI::parseRadialGradient(Object * object, const ci::XmlTree & xml) {
-
+    //
 }
 
 void LoaderSvgCI::parseText(Object * object, const ci::XmlTree & xml) {
-
+    //
 }
 
 //--------------------------------------------------------------

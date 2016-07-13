@@ -37,15 +37,15 @@ public:
     void parseGroup(Object * object, const ci::XmlTree & xml);
     void parseGroupItem(Object * object, const ci::XmlTree & xml);
     void parseNode(Object * object, const ci::XmlTree & xml);
+    void parseDefs(Object * object, const ci::XmlTree & xml);
+    void parseUse(Object * object, const ci::XmlTree & xml);
+    void parseRect(Object * object, const ci::XmlTree & xml);
     void parsePath(Object * object, const ci::XmlTree & xml);
     void parsePolygon(Object * object, const ci::XmlTree & xml);
     void parsePolyline(Object * object, const ci::XmlTree & xml);
     void parseLine(Object * object, const ci::XmlTree & xml);
-    void parseRect(Object * object, const ci::XmlTree & xml);
     void parseCircle(Object * object, const ci::XmlTree & xml);
     void parseEllipse(Object * object, const ci::XmlTree & xml);
-    void parseUse(Object * object, const ci::XmlTree & xml);
-    void parseDefs(Object * object, const ci::XmlTree & xml);
     void parseImage(Object * object, const ci::XmlTree & xml);
     void parseLinearGradient(Object * object, const ci::XmlTree & xml);
     void parseRadialGradient(Object * object, const ci::XmlTree & xml);
