@@ -25,6 +25,7 @@ public:
     Shape(std::string objID="");
     ~Shape();
     
+    glm::vec4 colorFill;
     glm::vec4 colorStroke;
 };
 

@@ -88,8 +88,8 @@ void RendererCI::drawShapeRect(const coc::scene::Shape & shape) const {
     
     ci::Rectf rect(0.0, 0.0, shape.width, shape.height);
     
-    if(shape.color.a > 0.0) {
-        ci::gl::ScopedColor color(shape.color);
+    if(shape.colorFill.a > 0.0) {
+        ci::gl::ScopedColor color(shape.colorFill);
         ci::gl::drawSolidRect(rect);
     }
     

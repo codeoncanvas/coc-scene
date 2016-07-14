@@ -51,16 +51,21 @@ public:
     void parseRadialGradient(Object * object, const ci::XmlTree & xml);
     void parseText(Object * object, const ci::XmlTree & xml);
     
+    void parseStyleAttribute(const std::string & stylePropertyString, LoaderSvgStyle & style);
+    void parseProperty(const std::string & key, const std::string & value, LoaderSvgStyle & style);
+    glm::vec4 * parseColor(const char * value);
+    
     glm::mat3 parseTransform(const std::string & value);
     bool parseTransformComponent(const char **c, glm::mat3 * result);
-    std::vector<float> parseFloatList(const char **c);
-    float parseFloat(const char **sInOut);
-    bool isNumeric(char c);
+    
+    void pushStyle();
+    void popStyle();
     
 //    void load(Object * parent, const ci::XmlTree & xml);
   
     bool bDefs;
     std::map<std::string, const ci::XmlTree &> defs;
+    std::vector<LoaderSvgStyle *> styleStack;
 };
 
 };

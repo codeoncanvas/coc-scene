@@ -43,7 +43,7 @@ void SceneSampleApp::setup() {
     rect1.y = 50;
     rect1.width = 50;
     rect1.height = 50;
-    rect1.color = glm::vec4(1.0, 0.0, 0.0, 1.0);
+    rect1.colorFill = glm::vec4(1.0, 0.0, 0.0, 1.0);
     rect1.delegate = &rect1Delegate;
     
     circle.x = getWindowWidth() * 0.5;
