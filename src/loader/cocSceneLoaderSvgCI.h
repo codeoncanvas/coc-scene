@@ -24,6 +24,8 @@ namespace cinder {
 namespace coc {
 namespace scene {
 
+class Texture;
+
 //--------------------------------------------------------------
 class LoaderSvgCI : public LoaderSvg {
 
@@ -32,24 +34,24 @@ public:
     LoaderSvgCI();
     ~LoaderSvgCI();
     
-    void load(Object * object, std::string svgPath) override;
+    void load(coc::scene::Object * object, std::string svgPath) override;
 
-    void parseGroup(Object * object, const ci::XmlTree & xml);
-    void parseGroupItem(Object * object, const ci::XmlTree & xml);
-    void parseNode(Object * object, const ci::XmlTree & xml);
-    void parseDefs(Object * object, const ci::XmlTree & xml);
-    void parseUse(Object * object, const ci::XmlTree & xml);
-    void parseRect(Object * object, const ci::XmlTree & xml);
-    void parsePath(Object * object, const ci::XmlTree & xml);
-    void parsePolygon(Object * object, const ci::XmlTree & xml);
-    void parsePolyline(Object * object, const ci::XmlTree & xml);
-    void parseLine(Object * object, const ci::XmlTree & xml);
-    void parseCircle(Object * object, const ci::XmlTree & xml);
-    void parseEllipse(Object * object, const ci::XmlTree & xml);
-    void parseImage(Object * object, const ci::XmlTree & xml);
-    void parseLinearGradient(Object * object, const ci::XmlTree & xml);
-    void parseRadialGradient(Object * object, const ci::XmlTree & xml);
-    void parseText(Object * object, const ci::XmlTree & xml);
+    void parseGroup(coc::scene::Object * object, const ci::XmlTree & xml);
+    void parseGroupItem(coc::scene::Object * object, const ci::XmlTree & xml);
+    void parseNode(coc::scene::Object * object, const ci::XmlTree & xml);
+    void parseDefs(coc::scene::Object * object, const ci::XmlTree & xml);
+    void parseUse(coc::scene::Object * object, const ci::XmlTree & xml);
+    void parseRect(coc::scene::Object * object, const ci::XmlTree & xml);
+    void parsePath(coc::scene::Object * object, const ci::XmlTree & xml);
+    void parsePolygon(coc::scene::Object * object, const ci::XmlTree & xml);
+    void parsePolyline(coc::scene::Object * object, const ci::XmlTree & xml);
+    void parseLine(coc::scene::Object * object, const ci::XmlTree & xml);
+    void parseCircle(coc::scene::Object * object, const ci::XmlTree & xml);
+    void parseEllipse(coc::scene::Object * object, const ci::XmlTree & xml);
+    void parseImage(coc::scene::Texture * object, const ci::XmlTree & xml);
+    void parseLinearGradient(coc::scene::Object * object, const ci::XmlTree & xml);
+    void parseRadialGradient(coc::scene::Object * object, const ci::XmlTree & xml);
+    void parseText(coc::scene::Object * object, const ci::XmlTree & xml);
     
     void parseStyleAttribute(const std::string & stylePropertyString, LoaderSvgStyle & style);
     void parseProperty(const std::string & key, const std::string & value, LoaderSvgStyle & style);

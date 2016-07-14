@@ -22,7 +22,7 @@ class SceneSampleApp : public App {
     Shape rect1 = Shape("rect1");
     SceneCustomObject circle = SceneCustomObject("circle");
     SceneDelegateObject rect1Delegate;
-    SceneRunner sceneRunner;
+    Runner sceneRunner;
     LoaderSvgCI loaderSvg;
 };
 

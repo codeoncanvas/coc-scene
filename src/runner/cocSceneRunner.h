@@ -20,12 +20,12 @@ class Object;
 class Renderer;
 class Solver;
 
-class SceneRunner {
+class Runner {
 
 public:
 
-    SceneRunner();
-    ~SceneRunner();
+    Runner();
+    ~Runner();
     
     void setup(Object * obj);
     void update();
@@ -33,12 +33,6 @@ public:
     
 private:
 
-    void initSolver();
-    void killSolver();
-
-    void initRenderer();
-    void killRenderer();
-    
     coc::scene::Object * object;
     coc::scene::Solver * solver;
     coc::scene::Renderer * renderer;

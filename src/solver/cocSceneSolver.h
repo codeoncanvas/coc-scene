@@ -25,7 +25,6 @@ public:
     Solver();
     ~Solver();
     
-    virtual void setup();
     virtual void update(coc::scene::Object & object);
     
 protected:

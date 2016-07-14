@@ -21,74 +21,30 @@ namespace coc {
 namespace scene {
 
 //--------------------------------------------------------------
-SceneRunner::SceneRunner() {
+Runner::Runner() {
     object = NULL;
     solver = NULL;
     renderer = NULL;
 }
 
-SceneRunner::~SceneRunner() {
+Runner::~Runner() {
     //
 }
 
 //--------------------------------------------------------------
-void SceneRunner::setup(Object * obj) {
+void Runner::setup(Object * obj) {
     object = obj;
-
-    initSolver();
-    initRenderer();
+    solver = getSolver();
+    renderer = getRenderer();
 }
 
 //--------------------------------------------------------------
-void SceneRunner::initSolver() {
-    killSolver();
-    
-    solver = new coc::scene::Solver();
-    solver->setup();
-}
-
-void SceneRunner::killSolver() {
-    if(solver == NULL) {
-        return;
-    }
-    
-    delete solver;
-    solver = NULL;
-}
-
-//--------------------------------------------------------------
-void SceneRunner::initRenderer() {
-    killRenderer();
-
-#if defined( COC_OF )
-    renderer = new coc::scene::RendererOF();
-#elif defined( COC_CI )
-    renderer = new coc::scene::RendererCI();
-#endif
-
-    renderer->setup();
-}
-
-void SceneRunner::killRenderer() {
-    if(renderer == NULL) {
-        return;
-    }
-    
-#if defined( COC_OF )
-    delete (coc::scene::RendererOF *)renderer;
-#elif defined( COC_CI )
-    delete (coc::scene::RendererCI *)renderer;
-#endif
-    renderer = NULL;
-}
-
-//--------------------------------------------------------------
-void SceneRunner::update() {
+void Runner::update() {
     solver->update(*object);
 }
 
 //--------------------------------------------------------------
-void SceneRunner::draw() const {
+void Runner::draw() const {
     renderer->draw(*object);
 }
 

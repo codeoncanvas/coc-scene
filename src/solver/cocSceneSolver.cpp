@@ -25,10 +25,6 @@ Solver::~Solver() {
     //
 }
 
-void Solver::setup() {
-
-}
-
 void Solver::update(coc::scene::Object & object) {
 
     object.update();

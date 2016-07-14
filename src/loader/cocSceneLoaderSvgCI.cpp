@@ -241,7 +241,22 @@ void LoaderSvgCI::parseGroupItem(Object * object, const ci::XmlTree & xml) {
         
     } else if(tag == "image") {
     
-        parseImage(object, xml);
+        if(bDefs == true) {
+        
+            defs.insert(std::pair<std::string, const ci::XmlTree &>(defID, xml));
+        
+        } else {
+
+            Texture * child = new Texture();
+            object->addChild(child);
+            
+            pushStyle();
+            
+            parseNode(child, xml);
+            parseImage(child, xml);
+    
+            popStyle();
+        }
         
     } else if(tag == "linearGradient") {
     
@@ -344,23 +359,10 @@ void LoaderSvgCI::parseUse(Object * object, const ci::XmlTree & xml) {
 
 void LoaderSvgCI::parseRect(Object * object, const ci::XmlTree & xml) {
 
-    float x = 0;
-    float y = 0;
-	float width = 0;
-    float height = 0;
-	
-	if(xml.hasAttribute("x")) {
-		x = ci::svg::Value::parse(xml["x"] ).asUser();
-    }
-	if(xml.hasAttribute("y")) {
-		y = ci::svg::Value::parse(xml["y"]).asUser();
-    }
-	if(xml.hasAttribute("width")) {
-		width = ci::svg::Value::parse(xml["width"]).asUser();
-    }
-	if(xml.hasAttribute("height")) {
-		height = ci::svg::Value::parse(xml["height"]).asUser();
-    }
+    float x = xml.getAttributeValue<float>("x", 0);
+    float y = xml.getAttributeValue<float>("y", 0);
+	float width = xml.getAttributeValue<float>("width", 0);
+    float height = xml.getAttributeValue<float>("height", 0);
     
     object->x = x;
     object->y = y;
@@ -392,8 +394,31 @@ void LoaderSvgCI::parseEllipse(Object * object, const ci::XmlTree & xml) {
     //
 }
 
-void LoaderSvgCI::parseImage(Object * object, const ci::XmlTree & xml) {
-    //
+void LoaderSvgCI::parseImage(Texture * object, const ci::XmlTree & xml) {
+
+    float x = xml.getAttributeValue<float>("x", 0);
+    float y = xml.getAttributeValue<float>("y", 0);
+	float width = xml.getAttributeValue<float>("width", 0);
+    float height = xml.getAttributeValue<float>("height", 0);
+    
+    object->x = x;
+    object->y = y;
+    object->width = width;
+    object->height = height;
+    
+	if(xml.hasAttribute( "xlink:href" ) == false) {
+        return;
+    }
+    std::string s = xml.getAttributeValue<std::string>( "xlink:href" );
+    if( s.find( "data:" ) == 0 ) {
+        // TODO: load data directly.
+        return;
+    }
+    
+    std::string filePath = s;
+    object->assetID = filePath;
+    
+    //TODO: add to asset loader.
 }
 
 void LoaderSvgCI::parseLinearGradient(Object * object, const ci::XmlTree & xml) {
