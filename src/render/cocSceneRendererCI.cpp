@@ -12,6 +12,7 @@
  **/
 
 #include "cocSceneRendererCI.h"
+#include "cocSceneAssetsCI.h"
 #include "cocSceneShape.h"
 #include "cocSceneShapeSvg.h"
 #include "cocSceneTexture.h"
@@ -104,7 +105,13 @@ void RendererCI::drawShapeCircle(const coc::scene::Shape & shape) const {
 }
 
 void RendererCI::drawTexture(const coc::scene::Texture & texture) const {
-    //
+    
+    AssetsCI * assets = (AssetsCI *)getAssets();
+    ci::gl::TextureRef textureRef = assets->getTexture(texture.assetID);
+    if(textureRef == NULL) {
+        return;
+    }
+    ci::gl::draw(textureRef, ci::Rectf(0, 0, texture.width, texture.height));
 }
 
 };

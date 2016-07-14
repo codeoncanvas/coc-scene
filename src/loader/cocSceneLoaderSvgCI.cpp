@@ -14,6 +14,7 @@
 #if defined( COC_CI )
 
 #include "cocSceneLoaderSvgCI.h"
+#include "cocSceneAssets.h"
 #include "cocSceneShapeSvg.h"
 #include "cocSceneShape.h"
 #include "cocSceneTexture.h"
@@ -138,6 +139,7 @@ ci::svg::Value readValue( const std::string &s )
 //--------------------------------------------------------------
 LoaderSvgCI::LoaderSvgCI() {
     bDefs = false;
+    svgFolder = "";
 }
 
 LoaderSvgCI::~LoaderSvgCI() {
@@ -146,7 +148,10 @@ LoaderSvgCI::~LoaderSvgCI() {
 
 void LoaderSvgCI::load(Object * object, std::string svgPath) {
 
-    DataSourceRef source = loadFile(getAssetPath(svgPath));
+    fs::path path(svgPath);
+    svgFolder = path.remove_filename().string();
+    
+    DataSourceRef source = loadFile(svgPath);
     XmlTree xml( source, XmlTree::ParseOptions().ignoreDataChildren( false ) );
     const XmlTree & xmlRoot( xml.getChild( "svg" ) );
     
@@ -154,6 +159,12 @@ void LoaderSvgCI::load(Object * object, std::string svgPath) {
 		parseGroup(object, xmlRoot.getChild("switch"));
     } else {
 		parseGroup(object, xmlRoot);
+    }
+    
+    for(int i=0; i<assetPaths.size(); i++) {
+        const std::string & assetPath = assetPaths[i];
+        getAssets()->addAsset(assetPath);
+        getAssets()->load(assetPath);
     }
 }
 
@@ -415,10 +426,11 @@ void LoaderSvgCI::parseImage(Texture * object, const ci::XmlTree & xml) {
         return;
     }
     
-    std::string filePath = s;
-    object->assetID = filePath;
+    fs::path assetPath(svgFolder);
+    assetPath.append("/" + s); // TODO: is there a better way of appending which handles extra slashes or lack of?
+    object->assetID = assetPath.string();
     
-    //TODO: add to asset loader.
+    assetPaths.push_back(assetPath.string());
 }
 
 void LoaderSvgCI::parseLinearGradient(Object * object, const ci::XmlTree & xml) {

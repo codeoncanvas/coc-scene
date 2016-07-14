@@ -30,14 +30,12 @@ public:
         assetPath = "";
         assetID = "";
         bLoaded = false;
-        assetPtr = NULL;
     }
     
     AssetType type;
     std::string assetPath;
     std::string assetID;
     bool bLoaded;
-    void * assetPtr;
 };
 
 //--------------------------------------------------------------

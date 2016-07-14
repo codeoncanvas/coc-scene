@@ -55,7 +55,7 @@ void AssetsCI::update(float timeDelta) {
 }
 
 //--------------------------------------------------------------
-const ci::gl::Texture * AssetsCI::getTexture(std::string assetID) {
+ci::gl::TextureRef AssetsCI::getTexture(std::string assetID) {
     AssetTextureCI * asset = (AssetTextureCI *)getAssetPtr(assetID);
     if(asset == NULL) {
         return NULL;
@@ -65,7 +65,7 @@ const ci::gl::Texture * AssetsCI::getTexture(std::string assetID) {
         return NULL;
     }
     
-    return asset->textureRef.get();
+    return asset->textureRef;
 }
 
 //--------------------------------------------------------------

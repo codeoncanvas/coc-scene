@@ -43,7 +43,7 @@ public:
     
     void update(float timeDelta=0) override;
     
-    const ci::gl::Texture * getTexture(std::string assetID);
+    ci::gl::TextureRef getTexture(std::string assetID);
     
 protected:
 

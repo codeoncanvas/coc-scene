@@ -11,9 +11,10 @@
     </defs>
     <g id="Sample" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
         <g id="coc_scene_svg_02">
-            <g id="Group" transform="translate(100.000000, 100.000000)">
-                <rect id="Rect1" fill="#D0011B" x="50" y="50" width="100" height="100"></rect>
-                <g id="Rect0" stroke="#979797" stroke-width="2" fill="#D8D8D8">
+            <g id="Group" transform="translate(50.000000, 50.000000)">
+                <image id="coc_logo" x="0" y="0" width="256" height="256" xlink:href="images/coc_logo_256.png"></image>
+                <rect id="rect_red" fill="#D0011B" x="100" y="100" width="100" height="100"></rect>
+                <g transform="translate(50.000000, 50.000000)" id="rect_grey" stroke="#979797" stroke-width="2" fill="#D8D8D8">
                     <use mask="url(#mask-2)" xlink:href="#path-1"></use>
                 </g>
             </g>

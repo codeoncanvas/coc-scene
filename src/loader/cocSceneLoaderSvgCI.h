@@ -68,6 +68,9 @@ public:
     bool bDefs;
     std::map<std::string, const ci::XmlTree &> defs;
     std::vector<LoaderSvgStyle *> styleStack;
+    
+    std::string svgFolder;
+    std::vector<std::string> assetPaths;
 };
 
 };
