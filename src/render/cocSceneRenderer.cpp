@@ -13,7 +13,6 @@
 
 #include "cocSceneRenderer.h"
 #include "cocSceneShape.h"
-#include "cocSceneShapeSvg.h"
 #include "cocSceneTexture.h"
 
 namespace coc {
@@ -43,10 +42,6 @@ void Renderer::draw(const coc::scene::Object & object) const {
     } else if(object.objectType == coc::scene::ObjectTypeShape) {
     
         drawShape((const coc::scene::Shape &)object);
-        
-    } else if(object.objectType == coc::scene::ObjectTypeShapeSvg) {
-    
-        drawShapeSvg((const coc::scene::ShapeSvg &)object);
     
     } else if(object.objectType == coc::scene::ObjectTypeTexture) {
     

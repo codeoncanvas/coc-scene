@@ -21,7 +21,6 @@ namespace scene {
 enum ObjectType {
     ObjectTypeBase = 0,
     ObjectTypeShape,
-    ObjectTypeShapeSvg,
     ObjectTypeTexture
 };
 

@@ -18,7 +18,6 @@ namespace scene {
 
 class Object;
 class Shape;
-class ShapeSvg;
 class Texture;
 
 class Renderer {
@@ -36,7 +35,6 @@ protected:
     virtual void drawShape(const coc::scene::Shape & shape) const {};
     virtual void drawShapeRect(const coc::scene::Shape & shape) const {};
     virtual void drawShapeCircle(const coc::scene::Shape & shape) const {};
-    virtual void drawShapeSvg(const coc::scene::ShapeSvg & shape) const {};
     virtual void drawTexture(const coc::scene::Texture & texture) const {};
     
 };

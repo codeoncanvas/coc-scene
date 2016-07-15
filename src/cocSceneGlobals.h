@@ -15,14 +15,17 @@
 
 #include "cocCore.h"
 
+namespace  coc {
+class Assets;
+}
+
 namespace coc {
 namespace scene {
 
-class Assets;
 class Solver;
 class Renderer;
 
-coc::scene::Assets * getAssets();
+coc::Assets * getAssets();
 coc::scene::Solver * getSolver();
 coc::scene::Renderer * getRenderer();
 

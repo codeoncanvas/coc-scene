@@ -12,22 +12,22 @@
  **/
 
 #include "cocSceneGlobals.h"
-#include "cocSceneAssetsCI.h"
-#include "cocSceneAssetsOF.h"
 #include "cocSceneSolver.h"
 #include "cocSceneRendererCI.h"
 #include "cocSceneRendererOF.h"
+#include "cocAssetsCI.h" // coc-assets >> https://github.com/codeoncanvas/coc-assets
+#include "cocAssetsOF.h" // coc-assets >> https://github.com/codeoncanvas/coc-assets
 
 namespace coc {
 namespace scene {
 
-coc::scene::Assets * assets = NULL;
-coc::scene::Assets * getAssets() {
+coc::Assets * assets = NULL;
+coc::Assets * getAssets() {
     if(assets == NULL) {
 #if defined( COC_OF )
-        assets = new coc::scene::AssetsOF();
+        assets = new coc::AssetsOF();
 #elif defined( COC_CI )
-        assets = new coc::scene::AssetsCI();
+        assets = new coc::AssetsCI();
 #endif
     }
     return assets;
