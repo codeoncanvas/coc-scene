@@ -162,7 +162,7 @@ void LoaderSvgCI::load(Object * object, std::string svgPath) {
     
     for(int i=0; i<assetPaths.size(); i++) {
         const std::string & assetPath = assetPaths[i];
-        getAssets()->addAsset(assetPath);
+        getAssets()->addAsset(assetPath, AssetTypeTexture);
         getAssets()->load(assetPath);
     }
 }
