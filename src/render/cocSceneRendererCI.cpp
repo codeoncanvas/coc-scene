@@ -62,7 +62,7 @@ void RendererCI::drawShapeCircle(const coc::scene::Shape & shape) const {
 void RendererCI::drawTexture(const coc::scene::Texture & texture) const {
     
     AssetsCI * assets = (AssetsCI *)getAssets();
-    ci::gl::TextureRef textureRef = assets->getTexture(texture.assetID);
+    ci::gl::TextureRef textureRef = assets->getTextureRef(texture.assetID);
     if(textureRef == NULL) {
         return;
     }
