@@ -27,7 +27,6 @@ namespace coc {
 namespace scene {
 
 using namespace ci;
-using namespace ci::app;
 
 //--------------------------------------------------------------
 bool isNumeric(char c) {

@@ -13,6 +13,8 @@
 
 #pragma once
 
+#include "cocSceneGlobals.h"
+
 namespace coc {
 namespace scene {
 

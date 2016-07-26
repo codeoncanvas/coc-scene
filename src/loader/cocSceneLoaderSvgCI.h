@@ -16,6 +16,7 @@
 #if defined( COC_CI )
 
 #include "cocSceneLoaderSvg.h"
+#include <map>
 
 namespace cinder {
     class XmlTree;
