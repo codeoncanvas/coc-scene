@@ -35,6 +35,15 @@ void RendererCI::setup() {
     //
 }
 
+void RendererCI::pushModelMatrix(const glm::mat4 & matrix) const {
+    ci::gl::pushModelMatrix();
+    ci::gl::multModelMatrix(matrix);
+}
+
+void RendererCI::popModelMatrix() const {
+    ci::gl::popModelMatrix();
+}
+
 void RendererCI::drawShape(const coc::scene::Shape & shape) const {
 
     drawShapeRect(shape);

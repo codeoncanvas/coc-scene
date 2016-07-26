@@ -29,6 +29,9 @@ public:
     
     void setup() override;
     
+    void pushModelMatrix(const glm::mat4 & matrix) const override;
+    void popModelMatrix() const override;
+    
     void drawShape(const coc::scene::Shape & shape) const override;
     void drawShapeRect(const coc::scene::Shape & shape) const override;
     void drawShapeCircle(const coc::scene::Shape & shape) const override;

@@ -30,10 +30,17 @@ void Renderer::setup() {
 
 }
 
+void Renderer::pushModelMatrix(const glm::mat4 & matrix) const {
+    // override.
+}
+
+void Renderer::popModelMatrix() const {
+    // override.
+}
+
 void Renderer::draw(const coc::scene::Object & object) const {
 
-    ci::gl::ScopedModelMatrix modelMatrix;
-    ci::gl::multModelMatrix(object.modelMatrix);
+    pushModelMatrix(object.modelMatrix);
 
     if(object.objectType == coc::scene::ObjectTypeBase) {
     
@@ -53,6 +60,8 @@ void Renderer::draw(const coc::scene::Object & object) const {
     for(int i=0; i<object.children.size(); i++) {
         draw(*object.children[i]);
     }
+    
+    popModelMatrix();
 }
 
 };
