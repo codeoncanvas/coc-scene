@@ -43,6 +43,10 @@ Object::~Object() {
     parent = NULL;
     for(int i=0; i<children.size(); i++) {
         if(children[i]->bManaged == true) {
+            
+            // only delete objects which the scenegraph is responsible for creating.
+            // objects created manually outside of the screngraph will not be deleted.
+            
             delete children[i];
         }
     }

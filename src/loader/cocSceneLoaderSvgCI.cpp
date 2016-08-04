@@ -186,6 +186,7 @@ void LoaderSvgCI::parseGroupItem(Object * object, const ci::XmlTree & xml) {
     if(tag == "g") {
 
         Object * child = new Object();
+        child->bManaged = true;
         object->addChild(child);
 
         pushStyle();
@@ -214,6 +215,7 @@ void LoaderSvgCI::parseGroupItem(Object * object, const ci::XmlTree & xml) {
         } else {
 
             Shape * child = new Shape();
+            child->bManaged = true;
             object->addChild(child);
             
             pushStyle();
@@ -257,6 +259,7 @@ void LoaderSvgCI::parseGroupItem(Object * object, const ci::XmlTree & xml) {
         } else {
 
             Texture * child = new Texture();
+            child->bManaged = true;
             object->addChild(child);
             
             pushStyle();
