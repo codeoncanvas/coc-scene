@@ -40,6 +40,13 @@ void Renderer::popModelMatrix() const {
 
 void Renderer::draw(const coc::scene::Object & object) const {
 
+    bool bDraw = true;
+    bDraw = bDraw && (object.visible);
+    bDraw = bDraw && (object.alpha > 0.0);
+    if(!bDraw) {
+        return;
+    }
+
     pushModelMatrix(object.modelMatrix);
 
     if(object.objectType == coc::scene::ObjectTypeBase) {
