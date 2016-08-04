@@ -47,7 +47,7 @@ void Renderer::draw(const coc::scene::Object & object) const {
         return;
     }
 
-    pushModelMatrix(object.modelMatrix);
+    pushModelMatrix(object.modelMatrixConcatenated);
 
     if(object.objectType == coc::scene::ObjectTypeBase) {
     
@@ -64,11 +64,11 @@ void Renderer::draw(const coc::scene::Object & object) const {
     
     object.draw(); // custom drawing by either a custom subclass or object delegate.
     
+    popModelMatrix();
+    
     for(int i=0; i<object.children.size(); i++) {
         draw(*object.children[i]);
     }
-    
-    popModelMatrix();
 }
 
 };

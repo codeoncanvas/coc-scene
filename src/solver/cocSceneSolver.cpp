@@ -18,7 +18,7 @@ namespace coc {
 namespace scene {
 
 Solver::Solver() {
-    //
+    bModelMatrixConcatenatedChanged = false;
 }
 
 Solver::~Solver() {
@@ -26,6 +26,13 @@ Solver::~Solver() {
 }
 
 void Solver::update(coc::scene::Object & object) {
+
+    bModelMatrixConcatenatedChanged = false;
+    
+    updateObject(object);
+}
+
+void Solver::updateObject(coc::scene::Object & object) {
 
     object.update();
 
@@ -56,8 +63,18 @@ void Solver::update(coc::scene::Object & object) {
         object.modelMatrix = object.modelMatrix * glm::translate(-transformationPoint);
     }
     
+    bModelMatrixConcatenatedChanged = bModelMatrixConcatenatedChanged || bModelMatrixChanged;
+    if(bModelMatrixConcatenatedChanged) {
+    
+        if(object.parent == NULL) {
+            object.modelMatrixConcatenated = object.modelMatrix;
+        } else {
+            object.modelMatrixConcatenated = object.parent->modelMatrixConcatenated * object.modelMatrix;
+        }
+    }
+    
     for(int i=0; i<object.children.size(); i++) {
-        update(*object.children[i]);
+        updateObject(*object.children[i]);
     }
 }
 

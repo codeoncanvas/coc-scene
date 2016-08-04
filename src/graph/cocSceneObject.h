@@ -106,6 +106,7 @@ protected:
     bool bManaged;
     
     glm::mat4 modelMatrix;
+    glm::mat4 modelMatrixConcatenated;
     
     coc::scene::Object * parent;
     std::vector<coc::scene::Object *> children;

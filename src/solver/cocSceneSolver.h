@@ -29,7 +29,9 @@ public:
     
 protected:
     
-    //
+    void updateObject(coc::scene::Object & object);
+    
+    bool bModelMatrixConcatenatedChanged;
     
 };
 };
