@@ -185,6 +185,10 @@ Object * Object::getChildByID(std::string objectID) const {
 	return NULL;
 }
 
+Object * Object::getParent() {
+    return parent;
+}
+
 void Object::setChildIndex(Object * child, int index) {
 	if(index < 0 || index > children.size() - 1) {
 		return;
