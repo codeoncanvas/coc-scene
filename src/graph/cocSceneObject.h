@@ -21,7 +21,8 @@ namespace scene {
 enum ObjectType {
     ObjectTypeBase = 0,
     ObjectTypeShape,
-    ObjectTypeTexture
+    ObjectTypeTexture,
+    ObjectTypeCustom
 };
 
 //--------------------------------------------------------------
@@ -59,17 +60,28 @@ public:
 	virtual void pointPressed(int x, int y, int mouseID) {};
 	virtual void pointReleased(int x, int y, int mouseID) {};
     
+    virtual void copyTo(Object * object) const;
+    virtual void copyFrom(const Object * object);
+    
     void addChild(Object * child);
     void addChildAt(Object * child, int index);
     bool removeChild(Object * child);
     bool removeChildAt(int index);
+    bool removeSelf();
     void removeAllChildren();
+    bool replaceChild(Object * childOld, Object * childNew);
+    bool replaceChild(std::string childID, Object * childNew);
+    bool replaceChildAt(int index, Object * childNew);
     bool contains(const Object * child) const;
     Object * getChildAt(int index) const;
     Object * getChildByID(std::string objectID) const;
     void setChildIndex(Object * child, int index);
     int getChildIndex(const Object * child) const;
     int numChildren() const;
+    
+    std::string getObjectID() const { return objectID; }
+    unsigned int getObjectType() const { return objectType; }
+    bool isMananged() const { return bManaged; }
 
     coc::Value<float> x;
     coc::Value<float> y;
@@ -90,7 +102,7 @@ protected:
 
     std::string objectID;
     unsigned int objectType;
-    bool bDeleteOnExit;
+    bool bManaged;
     
     glm::mat4 modelMatrix;
     

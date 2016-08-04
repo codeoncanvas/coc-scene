@@ -20,7 +20,7 @@ namespace scene {
 Object::Object(std::string objID) :
     objectID(objID),
     objectType(coc::scene::ObjectTypeBase),
-    bDeleteOnExit(false),
+    bManaged(false),
     x(0.0f),
     y(0.0f),
     width(0.0f),
@@ -42,7 +42,7 @@ Object::~Object() {
     
     parent = NULL;
     for(int i=0; i<children.size(); i++) {
-        if(children[i]->bDeleteOnExit == true) {
+        if(children[i]->bManaged == true) {
             delete children[i];
         }
     }
@@ -66,6 +66,15 @@ void Object::draw() const {
     if(delegate != NULL) {
         delegate->draw(*this);
     }
+}
+
+//--------------------------------------------------------------
+void Object::copyTo(Object * object) const {
+    *object = *this;
+}
+
+void Object::copyFrom(const Object * object) {
+    *this = *object;
 }
 
 //--------------------------------------------------------------
@@ -109,12 +118,42 @@ bool Object::removeChildAt(int index) {
 	return true;
 }
 
+bool Object::removeSelf() {
+    if(parent == NULL) {
+        return false;
+    }
+    return parent->removeChild(this);
+}
+
 void Object::removeAllChildren() {
     for(int i=0; i<children.size(); i++) {
         Object * child= children[ i ];
         child->parent = NULL;
         children.erase(children.begin() + i--);
     }
+}
+
+bool Object::replaceChild(Object * childOld, Object * childNew) {
+    if(childOld == NULL || childNew == NULL) {
+        return false;
+    }
+    for(int i=0; i<children.size(); i++) {
+        if(children[i] == childOld) {
+            children[i] = childNew;
+            return true;
+        }
+    }
+    return false;
+}
+
+bool Object::replaceChild(std::string childID, Object * childNew) {
+    Object * childOld = getChildByID(childID);
+    return replaceChild(childOld, childNew);
+}
+
+bool Object::replaceChildAt(int index, Object * childNew) {
+    Object * childOld = getChildAt(index);
+    return replaceChild(childOld, childNew);
 }
 
 bool Object::contains(const Object * child) const {
