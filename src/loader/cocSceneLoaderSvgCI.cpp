@@ -161,8 +161,8 @@ void LoaderSvgCI::load(Object * object, std::string svgPath) {
     
     for(int i=0; i<assetPaths.size(); i++) {
         const std::string & assetPath = assetPaths[i];
-        getAssets()->addAsset(assetPath, AssetTypeTexture);
-        getAssets()->load(assetPath);
+        std::string assetPathAbs = svgFolder + "/" + assetPath;
+        coc::scene::getAssets()->addAssetAndLoad(assetPathAbs, AssetTypeTexture, assetPath);
     }
 }
 
@@ -418,17 +418,15 @@ void LoaderSvgCI::parseImage(Texture * object, const ci::XmlTree & xml) {
 	if(xml.hasAttribute( "xlink:href" ) == false) {
         return;
     }
-    std::string s = xml.getAttributeValue<std::string>( "xlink:href" );
-    if( s.find( "data:" ) == 0 ) {
+    std::string assetPath = xml.getAttributeValue<std::string>( "xlink:href" );
+    if( assetPath.find( "data:" ) == 0 ) {
         // TODO: load data directly.
         return;
     }
     
-    fs::path assetPath(svgFolder);
-    assetPath.append("/" + s); // TODO: is there a better way of appending which handles extra slashes or lack of?
-    object->assetID = assetPath.string();
+    object->assetID = assetPath;
     
-    assetPaths.push_back(assetPath.string());
+    assetPaths.push_back(assetPath);
 }
 
 void LoaderSvgCI::parseLinearGradient(Object * object, const ci::XmlTree & xml) {
