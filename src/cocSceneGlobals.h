@@ -25,6 +25,7 @@ namespace scene {
 class Solver;
 class Renderer;
 
+void setAssets(coc::Assets * assets);
 coc::Assets * getAssets();
 coc::scene::Solver * getSolver();
 coc::scene::Renderer * getRenderer();

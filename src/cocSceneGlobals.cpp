@@ -22,6 +22,9 @@ namespace coc {
 namespace scene {
 
 coc::Assets * assets = NULL;
+void setAssets(coc::Assets * value) {
+    assets = value;
+}
 coc::Assets * getAssets() {
     if(assets == NULL) {
 #if defined( COC_OF )
