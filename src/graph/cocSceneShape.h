@@ -13,22 +13,21 @@
 
 #pragma once
 
-#include "cocCore.h"
-
-namespace  coc {
-class Assets;
-}
+#include "cocSceneObject.h"
 
 namespace coc {
 namespace scene {
 
-class Solver;
-class Renderer;
+class Shape : public coc::scene::Object {
 
-void setAssets(coc::Assets * assets);
-coc::Assets * getAssets();
-coc::scene::Solver * getSolver();
-coc::scene::Renderer * getRenderer();
+public:
+
+    Shape(std::string objID="");
+    ~Shape();
+    
+    glm::vec4 colorFill;
+    glm::vec4 colorStroke;
+};
 
 };
 };

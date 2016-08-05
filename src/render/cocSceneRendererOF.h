@@ -13,22 +13,25 @@
 
 #pragma once
 
-#include "cocCore.h"
+#include "cocSceneRenderer.h"
 
-namespace  coc {
-class Assets;
-}
+#if defined( COC_OF )
 
 namespace coc {
 namespace scene {
 
-class Solver;
-class Renderer;
+class RendererOF : public coc::scene::Renderer {
 
-void setAssets(coc::Assets * assets);
-coc::Assets * getAssets();
-coc::scene::Solver * getSolver();
-coc::scene::Renderer * getRenderer();
+public:
 
+    RendererOF();
+    ~RendererOF();
+    
+    void setup() override;
+    void draw(const coc::scene::Object & object) const override;
+    
 };
 };
+};
+
+#endif

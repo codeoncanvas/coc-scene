@@ -11,24 +11,23 @@
  *
  **/
 
-#pragma once
-
-#include "cocCore.h"
-
-namespace  coc {
-class Assets;
-}
+#include "cocSceneLoaderSvg.h"
+#include "cocSceneObject.h"
 
 namespace coc {
 namespace scene {
 
-class Solver;
-class Renderer;
+LoaderSvg::LoaderSvg() {
+    //
+}
 
-void setAssets(coc::Assets * assets);
-coc::Assets * getAssets();
-coc::scene::Solver * getSolver();
-coc::scene::Renderer * getRenderer();
+LoaderSvg::~LoaderSvg() {
+    //
+}
+
+void LoaderSvg::load(Object * object, std::string svgPath) {
+    // override.
+}
 
 };
 };

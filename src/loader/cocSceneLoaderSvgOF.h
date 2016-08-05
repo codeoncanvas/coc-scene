@@ -13,22 +13,26 @@
 
 #pragma once
 
-#include "cocCore.h"
+#include "cocSceneLoaderSvg.h"
 
-namespace  coc {
-class Assets;
-}
+#if defined( COC_OF )
 
 namespace coc {
 namespace scene {
 
-class Solver;
-class Renderer;
+class Scene;
 
-void setAssets(coc::Assets * assets);
-coc::Assets * getAssets();
-coc::scene::Solver * getSolver();
-coc::scene::Renderer * getRenderer();
+class LoaderSvgOF : public LoaderSvg {
 
+public:
+
+    LoaderSvgOF();
+    ~LoaderSvgOF();
+    
+    void load(Object * object, std::string svgPath) override;
+    
 };
 };
+};
+
+#endif

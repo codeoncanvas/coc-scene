@@ -11,24 +11,30 @@
  *
  **/
 
-#pragma once
+#include "cocSceneRendererOF.h"
 
-#include "cocCore.h"
-
-namespace  coc {
-class Assets;
-}
+#if defined( COC_OF )
 
 namespace coc {
 namespace scene {
 
-class Solver;
-class Renderer;
+RendererOF::RendererOF() : coc::scene::Renderer() {
+    //
+}
 
-void setAssets(coc::Assets * assets);
-coc::Assets * getAssets();
-coc::scene::Solver * getSolver();
-coc::scene::Renderer * getRenderer();
+RendererOF::~RendererOF() {
+    //
+}
+
+void RendererOF::setup() {
+    //
+}
+
+void RendererOF::draw(const coc::scene::Object & object) const {
+    //
+}
 
 };
 };
+
+#endif

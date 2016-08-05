@@ -11,24 +11,28 @@
  *
  **/
 
-#pragma once
+#include "cocSceneLoaderSvgOF.h"
+#include "cocSceneObject.h"
 
-#include "cocCore.h"
-
-namespace  coc {
-class Assets;
-}
+#if defined( COC_OF )
 
 namespace coc {
 namespace scene {
 
-class Solver;
-class Renderer;
+LoaderSvgOF::LoaderSvgOF() {
+    //
+}
 
-void setAssets(coc::Assets * assets);
-coc::Assets * getAssets();
-coc::scene::Solver * getSolver();
-coc::scene::Renderer * getRenderer();
+LoaderSvgOF::~LoaderSvgOF() {
+    //
+}
+
+void LoaderSvgOF::load(Object * object, std::string svgPath) {
+
+    //
+}
 
 };
 };
+
+#endif

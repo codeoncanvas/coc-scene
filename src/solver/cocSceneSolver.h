@@ -13,22 +13,26 @@
 
 #pragma once
 
-#include "cocCore.h"
-
-namespace  coc {
-class Assets;
-}
-
 namespace coc {
 namespace scene {
 
-class Solver;
-class Renderer;
+class Object;
 
-void setAssets(coc::Assets * assets);
-coc::Assets * getAssets();
-coc::scene::Solver * getSolver();
-coc::scene::Renderer * getRenderer();
+class Solver {
 
+public:
+
+    Solver();
+    ~Solver();
+    
+    virtual void update(coc::scene::Object & object);
+    
+protected:
+    
+    void updateObject(coc::scene::Object & object);
+    
+    bool bModelMatrixConcatenatedChanged;
+    
+};
 };
 };
