@@ -326,6 +326,8 @@ void LoaderSvgCI::parseNode(Object * object, const ci::XmlTree & xml) {
     if(object->objectType == ObjectTypeShape) {
 
         Shape * shape = (Shape *)object;
+        shape->colorFill = glm::vec4(1.0, 1.0, 1.0, 0.0); // alpha 0 by default.
+        shape->colorStroke = glm::vec4(1.0, 1.0, 1.0, 0.0); // alpha 0 by default.
 
         bool bFillFound = false;
         bool bStrokeFound = false;
