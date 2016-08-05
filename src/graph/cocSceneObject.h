@@ -75,10 +75,12 @@ public:
     bool contains(const Object * child) const;
     Object * getChildAt(int index) const;
     Object * getChildByID(std::string objectID) const;
-    Object * getParent();
+    Object * getParent() const;
     void setChildIndex(Object * child, int index);
     int getChildIndex(const Object * child) const;
     int numChildren() const;
+    
+    static Object * findObjectByID(std::string objectID, Object * object);
     
     std::string getObjectID() const { return objectID; }
     unsigned int getObjectType() const { return objectType; }

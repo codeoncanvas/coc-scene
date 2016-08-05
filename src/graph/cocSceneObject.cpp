@@ -185,7 +185,7 @@ Object * Object::getChildByID(std::string objectID) const {
 	return NULL;
 }
 
-Object * Object::getParent() {
+Object * Object::getParent() const {
     return parent;
 }
 
@@ -215,6 +215,21 @@ int Object::getChildIndex(const Object * child) const {
 int Object::numChildren() const {
 	return children.size();
 }
+
+Object * Object::findObjectByID(std::string objectID, Object * object) {
+    for(int i=0; i<object->children.size(); i++) {
+        Object * child = object->children[i];
+        if(child->getObjectID() == objectID) {
+            return child;
+        }
+        child = findObjectByID(objectID, child);
+        if(child != NULL) {
+            return child;
+        }
+    }
+    return NULL;
+}
+
 
 };
 };
