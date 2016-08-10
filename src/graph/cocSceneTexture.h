@@ -18,6 +18,9 @@
 namespace coc {
 namespace scene {
 
+class Texture;
+typedef std::shared_ptr<Texture> TextureRef;
+
 class Texture : public coc::scene::Object {
 
 public:
@@ -25,7 +28,7 @@ public:
     Texture(std::string objID="");
     ~Texture();
     
-    static ObjectRef create(std::string objID="");
+    static TextureRef create(std::string objID="");
     
     std::string assetID;
 };

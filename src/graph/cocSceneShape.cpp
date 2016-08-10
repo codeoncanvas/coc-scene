@@ -30,8 +30,8 @@ Shape::~Shape() {
 }
 
 //--------------------------------------------------------------
-ObjectRef Shape::create(std::string objID) {
-    return ObjectRef(new Shape(objID));
+ShapeRef Shape::create(std::string objID) {
+    return ShapeRef(new Shape(objID));
 }
 
 };

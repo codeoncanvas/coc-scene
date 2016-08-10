@@ -18,6 +18,9 @@
 namespace coc {
 namespace scene {
 
+class Shape;
+typedef std::shared_ptr<Shape> ShapeRef;
+
 class Shape : public coc::scene::Object {
 
 public:
@@ -25,7 +28,7 @@ public:
     Shape(std::string objID="");
     ~Shape();
     
-    static ObjectRef create(std::string objID="");
+    static ShapeRef create(std::string objID="");
     
     glm::vec4 colorFill;
     glm::vec4 colorStroke;

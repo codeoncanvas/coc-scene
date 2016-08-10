@@ -17,8 +17,8 @@ public:
     }
     
     void draw() const override {
-        ci::gl::ScopedColor color(ci::Color(0.0, 0.0, 1.0));
-        ci::gl::drawSolidCircle(glm::vec2(0, 0), 5);
+        ci::gl::ScopedColor color(ci::Color(0.5, 0.5, 1.0));
+        ci::gl::drawSolidCircle(glm::vec2(0, 0), 10);
     }
 
 };

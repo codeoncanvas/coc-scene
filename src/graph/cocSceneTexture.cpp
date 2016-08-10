@@ -26,8 +26,8 @@ Texture::~Texture() {
 }
 
 //--------------------------------------------------------------
-ObjectRef Texture::create(std::string objID) {
-    return ObjectRef(new Texture(objID));
+TextureRef Texture::create(std::string objID) {
+    return TextureRef(new Texture(objID));
 }
 
 };
