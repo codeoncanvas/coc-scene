@@ -14,6 +14,7 @@
 #pragma once
 
 #include "cocSceneGlobals.h"
+#include "cocSceneObject.h"
 
 namespace coc {
 namespace scene {
@@ -28,7 +29,7 @@ public:
     LoaderSvg();
     ~LoaderSvg();
     
-    virtual void load(Object * object, std::string svgPath);
+    virtual ObjectRef load(std::string svgPath) {} // override.
     
 };
 

@@ -16,12 +16,18 @@
 namespace coc {
 namespace scene {
 
+//--------------------------------------------------------------
 Texture::Texture(std::string objID) : coc::scene::Object(objID), assetID("") {
     objectType = coc::scene::ObjectTypeTexture;
 }
 
 Texture::~Texture() {
     //
+}
+
+//--------------------------------------------------------------
+ObjectRef Texture::create(std::string objID) {
+    return ObjectRef(new Texture(objID));
 }
 
 };

@@ -36,6 +36,8 @@ public:
 };
 
 //--------------------------------------------------------------
+typedef std::shared_ptr<Object> ObjectRef;
+
 class Object {
 
 friend class LoaderSvg;
@@ -51,6 +53,8 @@ public:
     Object(std::string objID="");
     ~Object();
     
+    static ObjectRef create(std::string objID="");
+    
     virtual void setup();
     virtual void update();
     virtual void draw() const;
@@ -60,31 +64,31 @@ public:
 	virtual void pointDragged(int pointX, int pointY, int pointID=0);
 	virtual void pointReleased(int pointX, int pointY, int pointID=0);
     
-    virtual void copyTo(Object * object) const;
-    virtual void copyFrom(const Object * object);
+    virtual void copyTo(ObjectRef object) const;
+    virtual void copyFrom(const ObjectRef & object);
     
-    void addChild(Object * child);
-    void addChildAt(Object * child, int index);
-    bool removeChild(Object * child);
+    void addChild(const ObjectRef & child);
+    void addChildAt(const ObjectRef & child, int index);
+    void setChildIndex(const ObjectRef & child, int index);
+    bool removeChild(const ObjectRef & child);
     bool removeChildAt(int index);
     bool removeSelf();
     void removeAllChildren();
-    bool replaceChild(Object * childOld, Object * childNew);
-    bool replaceChild(std::string childID, Object * childNew);
-    bool replaceChildAt(int index, Object * childNew);
-    bool contains(const Object * child) const;
-    Object * getChildAt(int index) const;
-    Object * getChildByID(std::string objectID) const;
-    Object * getParent() const;
-    void setChildIndex(Object * child, int index);
-    int getChildIndex(const Object * child) const;
+    bool replaceChild(const ObjectRef & childOld, const ObjectRef & childNew);
+    bool replaceChild(std::string childID, const ObjectRef & childNew);
+    bool replaceChildAt(int index, const ObjectRef & childNew);
+    
+    ObjectRef getChildAt(int index);
+    ObjectRef getChildByID(std::string objectID);
+    Object * getParent();
+    bool contains(const ObjectRef & child) const;
+    int getChildIndex(const ObjectRef & child) const;
     int numChildren() const;
     
-    static Object * findObjectByID(std::string objectID, Object * object);
+    static ObjectRef findObjectByID(std::string objectID, const ObjectRef & object);
     
     std::string getObjectID() const { return objectID; }
     unsigned int getObjectType() const { return objectType; }
-    bool isMananged() const { return bManaged; }
 
     coc::Value<float> x;
     coc::Value<float> y;
@@ -105,13 +109,12 @@ protected:
 
     std::string objectID;
     unsigned int objectType;
-    bool bManaged;
     
     glm::mat4 modelMatrix;
     glm::mat4 modelMatrixConcatenated;
     
-    coc::scene::Object * parent;
-    std::vector<coc::scene::Object *> children;
+    Object * parent;
+    std::vector<ObjectRef> children;
     
 };
 };

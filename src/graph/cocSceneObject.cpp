@@ -20,7 +20,6 @@ namespace scene {
 Object::Object(std::string objID) :
     objectID(objID),
     objectType(coc::scene::ObjectTypeBase),
-    bManaged(false),
     x(0.0f),
     y(0.0f),
     width(0.0f),
@@ -39,18 +38,13 @@ Object::Object(std::string objID) :
 }
 
 Object::~Object() {
-    
     parent = NULL;
-    for(int i=0; i<children.size(); i++) {
-        if(children[i]->bManaged == true) {
-            
-            // only delete objects which the scenegraph is responsible for creating.
-            // objects created manually outside of the screngraph will not be deleted.
-            
-            delete children[i];
-        }
-    }
     children.clear();
+}
+
+//--------------------------------------------------------------
+ObjectRef Object::create(std::string objID) {
+    return ObjectRef(new Object(objID));
 }
 
 //--------------------------------------------------------------
@@ -98,35 +92,49 @@ void Object::pointReleased(int pointX, int pointY, int pointID) {
 }
 
 //--------------------------------------------------------------
-void Object::copyTo(Object * object) const {
+void Object::copyTo(ObjectRef object) const {
     *object = *this;
 }
 
-void Object::copyFrom(const Object * object) {
+void Object::copyFrom(const ObjectRef & object) {
     *this = *object;
 }
 
 //--------------------------------------------------------------
-void Object::addChild(Object * child) {
-    if(child->parent != NULL) {
+void Object::addChild(const ObjectRef & child) {
+    if(child->parent) {
         child->parent->removeChild(child);
     }
     children.push_back(child);
 	child->parent = this;
 }
 
-void Object::addChildAt(Object * child, int index) {
+void Object::addChildAt(const ObjectRef & child, int index) {
 	if(index < 0 || index > children.size() - 1) {
 		return;
     }
-    if(child->parent != NULL) {
+    if(child->parent) {
         child->parent->removeChild(child);
     }
 	children.insert(children.begin() + index, child);
 	child->parent = this;
 }
 
-bool Object::removeChild(Object * child) {
+void Object::setChildIndex(const ObjectRef & child, int index) {
+	if(index < 0 || index > children.size() - 1) {
+		return;
+    }
+
+	for(int i=0; i<children.size(); i++) {
+		if(children[i] == child) {
+			children.erase(children.begin() + i);
+			children.insert(children.begin() + index, child);
+			return;
+		}
+	}
+}
+
+bool Object::removeChild(const ObjectRef & child) {
 	for(int i=0; i<children.size(); i++) {
 		if(children[i] == child) {
 			child->parent = NULL;
@@ -151,41 +159,60 @@ bool Object::removeSelf() {
     if(parent == NULL) {
         return false;
     }
-    return parent->removeChild(this);
+    return parent->removeChild(ObjectRef(this));
 }
 
 void Object::removeAllChildren() {
     for(int i=0; i<children.size(); i++) {
-        Object * child= children[ i ];
+        ObjectRef child= children[i];
         child->parent = NULL;
         children.erase(children.begin() + i--);
     }
 }
 
-bool Object::replaceChild(Object * childOld, Object * childNew) {
+bool Object::replaceChild(const ObjectRef & childOld, const ObjectRef & childNew) {
     if(childOld == NULL || childNew == NULL) {
         return false;
     }
     for(int i=0; i<children.size(); i++) {
         if(children[i] == childOld) {
-            children[i] = childNew;
+            removeChildAt(i);
+            addChildAt(childNew, i);
             return true;
         }
     }
     return false;
 }
 
-bool Object::replaceChild(std::string childID, Object * childNew) {
-    Object * childOld = getChildByID(childID);
+bool Object::replaceChild(std::string childID, const ObjectRef & childNew) {
+    const ObjectRef & childOld = getChildByID(childID);
     return replaceChild(childOld, childNew);
 }
 
-bool Object::replaceChildAt(int index, Object * childNew) {
-    Object * childOld = getChildAt(index);
+bool Object::replaceChildAt(int index, const ObjectRef & childNew) {
+    const ObjectRef & childOld = getChildAt(index);
     return replaceChild(childOld, childNew);
 }
 
-bool Object::contains(const Object * child) const {
+//--------------------------------------------------------------
+ObjectRef Object::getChildAt(int index) {
+	return children[index];
+}
+
+ObjectRef Object::getChildByID(std::string objectID) {
+	for(int i=0; i<children.size(); i++) {
+		if(children[i]->objectID == objectID) {
+			return children[i];
+		}
+	}
+    return ObjectRef();
+}
+
+Object * Object::getParent() {
+    return parent;
+}
+
+bool Object::contains(const ObjectRef & child) const {
 	for(int i=0; i<children.size(); i++) {
 		if(children[i] == child) {
 			return true;
@@ -194,41 +221,7 @@ bool Object::contains(const Object * child) const {
 	return false;
 }
 
-Object * Object::getChildAt(int index) const {
-	if(index < 0 || index > children.size() - 1) {
-		return NULL;
-    }
-	return children[index];
-}
-
-Object * Object::getChildByID(std::string objectID) const {
-	for(int i=0; i<children.size(); i++) {
-		if(children[i]->objectID == objectID) {
-			return children[i];
-		}
-	}
-	return NULL;
-}
-
-Object * Object::getParent() const {
-    return parent;
-}
-
-void Object::setChildIndex(Object * child, int index) {
-	if(index < 0 || index > children.size() - 1) {
-		return;
-    }
-
-	for(int i=0; i<children.size(); i++) {
-		if(children[i] == child) {
-			children.erase(children.begin() + i);
-			children.insert(children.begin() + index, child);
-			return;
-		}
-	}
-}
-
-int Object::getChildIndex(const Object * child) const {
+int Object::getChildIndex(const ObjectRef & child) const {
 	for(int i=0; i<children.size(); i++) {
 		if(children[i] == child) {
 			return i;
@@ -241,9 +234,9 @@ int Object::numChildren() const {
 	return children.size();
 }
 
-Object * Object::findObjectByID(std::string objectID, Object * object) {
+ObjectRef Object::findObjectByID(std::string objectID, const ObjectRef & object) {
     for(int i=0; i<object->children.size(); i++) {
-        Object * child = object->children[i];
+        ObjectRef child = object->children[i];
         if(child->getObjectID() == objectID) {
             return child;
         }
@@ -252,7 +245,7 @@ Object * Object::findObjectByID(std::string objectID, Object * object) {
             return child;
         }
     }
-    return NULL;
+    return ObjectRef();
 }
 
 

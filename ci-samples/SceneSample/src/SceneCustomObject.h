@@ -9,7 +9,11 @@ class SceneCustomObject : public coc::scene::Object {
 public:
 
     SceneCustomObject(std::string objID="") : coc::scene::Object(objID) {
-        //
+        std::cout << "SceneCustomObject constructor" << std::endl;
+    }
+    
+    ~SceneCustomObject() {
+        std::cout << "SceneCustomObject destructor" << std::endl;
     }
     
     void draw() const override {

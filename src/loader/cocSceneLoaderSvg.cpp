@@ -25,9 +25,5 @@ LoaderSvg::~LoaderSvg() {
     //
 }
 
-void LoaderSvg::load(Object * object, std::string svgPath) {
-    // override.
-}
-
 };
 };

@@ -25,6 +25,8 @@ public:
     Texture(std::string objID="");
     ~Texture();
     
+    static ObjectRef create(std::string objID="");
+    
     std::string assetID;
 };
 

@@ -16,6 +16,7 @@
 namespace coc {
 namespace scene {
 
+//--------------------------------------------------------------
 Shape::Shape(std::string objID) :
     coc::scene::Object(objID),
     colorFill(1.0, 1.0, 1.0, 1.0),
@@ -26,6 +27,11 @@ Shape::Shape(std::string objID) :
 
 Shape::~Shape() {
     //
+}
+
+//--------------------------------------------------------------
+ObjectRef Shape::create(std::string objID) {
+    return ObjectRef(new Shape(objID));
 }
 
 };

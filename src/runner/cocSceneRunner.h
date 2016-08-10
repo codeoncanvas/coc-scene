@@ -13,10 +13,11 @@
 
 #pragma once
 
+#include "cocSceneObject.h"
+
 namespace coc {
 namespace scene {
 
-class Object;
 class Renderer;
 class Solver;
 
@@ -27,13 +28,13 @@ public:
     Runner();
     ~Runner();
     
-    void setup(Object * obj);
+    void setup(const ObjectRef & object);
     void update();
     void draw() const;
     
 private:
 
-    coc::scene::Object * object;
+    coc::scene::ObjectRef object;
     coc::scene::Solver * solver;
     coc::scene::Renderer * renderer;
 };

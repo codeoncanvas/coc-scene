@@ -32,8 +32,8 @@ Runner::~Runner() {
 }
 
 //--------------------------------------------------------------
-void Runner::setup(Object * obj) {
-    object = obj;
+void Runner::setup(const ObjectRef & objectRef) {
+    object = objectRef;
     solver = getSolver();
     renderer = getRenderer();
 }
