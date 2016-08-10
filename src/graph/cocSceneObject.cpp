@@ -73,6 +73,31 @@ void Object::draw() const {
 }
 
 //--------------------------------------------------------------
+void Object::pointMoved(int pointX, int pointY, int pointID) {
+    for(int i=0; i<children.size(); i++) {
+        children[i]->pointMoved(pointX, pointY, pointID);
+    }
+}
+
+void Object::pointPressed(int pointX, int pointY, int pointID) {
+    for(int i=0; i<children.size(); i++) {
+        children[i]->pointPressed(pointX, pointY, pointID);
+    }
+}
+
+void Object::pointDragged(int pointX, int pointY, int pointID) {
+    for(int i=0; i<children.size(); i++) {
+        children[i]->pointDragged(pointX, pointY, pointID);
+    }
+}
+
+void Object::pointReleased(int pointX, int pointY, int pointID) {
+    for(int i=0; i<children.size(); i++) {
+        children[i]->pointReleased(pointX, pointY, pointID);
+    }
+}
+
+//--------------------------------------------------------------
 void Object::copyTo(Object * object) const {
     *object = *this;
 }

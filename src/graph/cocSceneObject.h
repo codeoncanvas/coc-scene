@@ -55,10 +55,10 @@ public:
     virtual void update();
     virtual void draw() const;
 
-	virtual void pointMoved(int x, int y, int mouseID) {};
-	virtual void pointDragged(int x, int y, int mouseID) {};
-	virtual void pointPressed(int x, int y, int mouseID) {};
-	virtual void pointReleased(int x, int y, int mouseID) {};
+	virtual void pointMoved(int pointX, int pointY, int pointID=0);
+    virtual void pointPressed(int pointX, int pointY, int pointID=0);
+	virtual void pointDragged(int pointX, int pointY, int pointID=0);
+	virtual void pointReleased(int pointX, int pointY, int pointID=0);
     
     virtual void copyTo(Object * object) const;
     virtual void copyFrom(const Object * object);
