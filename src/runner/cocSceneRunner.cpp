@@ -12,8 +12,6 @@
  **/
 
 #include "cocSceneRunner.h"
-#include "cocSceneObject.h"
-#include "cocSceneSolver.h"
 #include "cocSceneRendererCI.h"
 #include "cocSceneRendererOF.h"
 
@@ -22,8 +20,6 @@ namespace scene {
 
 //--------------------------------------------------------------
 Runner::Runner() {
-    object = NULL;
-    solver = NULL;
     renderer = NULL;
 }
 
@@ -34,18 +30,25 @@ Runner::~Runner() {
 //--------------------------------------------------------------
 void Runner::setup(const ObjectRef & objectRef) {
     object = objectRef;
-    solver = getSolver();
-    renderer = getRenderer();
+
+    solver = Solver::create();
+
+#if defined( COC_OF )
+    renderer = RendererOF::create();
+#elif defined( COC_CI )
+    renderer = RendererCI::create();
+#endif
+    
 }
 
 //--------------------------------------------------------------
 void Runner::update() {
-    solver->update(*object);
+    solver->update(object);
 }
 
 //--------------------------------------------------------------
 void Runner::draw() const {
-    renderer->draw(*object);
+    renderer->draw(object);
 }
 
 };

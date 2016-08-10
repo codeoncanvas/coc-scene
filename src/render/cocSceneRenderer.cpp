@@ -38,36 +38,36 @@ void Renderer::popModelMatrix() const {
     // override.
 }
 
-void Renderer::draw(const coc::scene::Object & object) const {
+void Renderer::draw(const coc::scene::ObjectRef & object) const {
 
     bool bDraw = true;
-    bDraw = bDraw && (object.visible);
-    bDraw = bDraw && (object.alpha > 0.0);
+    bDraw = bDraw && (object->visible);
+    bDraw = bDraw && (object->alpha > 0.0);
     if(!bDraw) {
         return;
     }
 
-    pushModelMatrix(object.modelMatrixConcatenated);
+    pushModelMatrix(object->modelMatrixConcatenated);
 
-    if(object.objectType == coc::scene::ObjectTypeBase) {
+    if(object->objectType == coc::scene::ObjectTypeBase) {
     
         // base object has nothing to draw.
     
-    } else if(object.objectType == coc::scene::ObjectTypeShape) {
+    } else if(object->objectType == coc::scene::ObjectTypeShape) {
     
-        drawShape((const coc::scene::Shape &)object);
+        drawShape(std::static_pointer_cast<Shape>(object));
     
-    } else if(object.objectType == coc::scene::ObjectTypeTexture) {
+    } else if(object->objectType == coc::scene::ObjectTypeTexture) {
     
-        drawTexture((const coc::scene::Texture &)object);
+        drawTexture(std::static_pointer_cast<Texture>(object));
     }
     
-    object.draw(); // custom drawing by either a custom subclass or object delegate.
+    object->draw(); // custom drawing by either a custom subclass or object delegate.
     
     popModelMatrix();
     
-    for(int i=0; i<object.children.size(); i++) {
-        draw(*object.children[i]);
+    for(int i=0; i<object->children.size(); i++) {
+        draw(object->children[i]);
     }
 }
 

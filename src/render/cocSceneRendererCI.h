@@ -20,6 +20,9 @@
 namespace coc {
 namespace scene {
 
+class RendererCI;
+typedef std::shared_ptr<RendererCI> RendererCiRef;
+
 class RendererCI : public coc::scene::Renderer {
 
 public:
@@ -27,15 +30,17 @@ public:
     RendererCI();
     ~RendererCI();
     
+    static RendererCiRef create();
+    
     void setup() override;
     
     void pushModelMatrix(const glm::mat4 & matrix) const override;
     void popModelMatrix() const override;
     
-    void drawShape(const coc::scene::Shape & shape) const override;
-    void drawShapeRect(const coc::scene::Shape & shape) const override;
-    void drawShapeCircle(const coc::scene::Shape & shape) const override;
-    void drawTexture(const coc::scene::Texture & texture) const override;
+    void drawShape(const coc::scene::ShapeRef & shape) const override;
+    void drawShapeRect(const coc::scene::ShapeRef & shape) const override;
+    void drawShapeCircle(const coc::scene::ShapeRef & shape) const override;
+    void drawTexture(const coc::scene::TextureRef & texture) const override;
 };
 };
 };

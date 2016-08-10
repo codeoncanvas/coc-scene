@@ -30,6 +30,10 @@ RendererCI::~RendererCI() {
     //
 }
 
+RendererCiRef RendererCI::create() {
+    return RendererCiRef(new RendererCI());
+}
+
 void RendererCI::setup() {
     
     //
@@ -44,38 +48,38 @@ void RendererCI::popModelMatrix() const {
     ci::gl::popModelMatrix();
 }
 
-void RendererCI::drawShape(const coc::scene::Shape & shape) const {
+void RendererCI::drawShape(const coc::scene::ShapeRef & shape) const {
 
     drawShapeRect(shape);
 }
 
-void RendererCI::drawShapeRect(const coc::scene::Shape & shape) const {
+void RendererCI::drawShapeRect(const coc::scene::ShapeRef & shape) const {
     
-    ci::Rectf rect(0.0, 0.0, shape.width, shape.height);
+    ci::Rectf rect(0.0, 0.0, shape->width, shape->height);
     
-    if(shape.colorFill.a > 0.0) {
-        ci::gl::ScopedColor color(shape.colorFill);
+    if(shape->colorFill.a > 0.0) {
+        ci::gl::ScopedColor color(shape->colorFill);
         ci::gl::drawSolidRect(rect);
     }
     
-    if(shape.colorStroke.a > 0.0) {
-        ci::gl::ScopedColor color(shape.colorStroke);
+    if(shape->colorStroke.a > 0.0) {
+        ci::gl::ScopedColor color(shape->colorStroke);
         ci::gl::drawStrokedRect(rect);
     }
 }
 
-void RendererCI::drawShapeCircle(const coc::scene::Shape & shape) const {
+void RendererCI::drawShapeCircle(const coc::scene::ShapeRef & shape) const {
     //
 }
 
-void RendererCI::drawTexture(const coc::scene::Texture & texture) const {
+void RendererCI::drawTexture(const coc::scene::TextureRef & texture) const {
     
     AssetsCI * assets = (AssetsCI *)getAssets();
-    ci::gl::TextureRef textureRef = assets->getTextureRef(texture.assetID);
+    ci::gl::TextureRef textureRef = assets->getTextureRef(texture->assetID);
     if(textureRef == NULL) {
         return;
     }
-    ci::gl::draw(textureRef, ci::Rectf(0, 0, texture.width, texture.height));
+    ci::gl::draw(textureRef, ci::Rectf(0, 0, texture->width, texture->height));
 }
 
 };

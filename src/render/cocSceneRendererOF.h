@@ -20,6 +20,9 @@
 namespace coc {
 namespace scene {
 
+class RendererOF;
+typedef std::shared_ptr<RendererOF> RendererOfRef;
+
 class RendererOF : public coc::scene::Renderer {
 
 public:
@@ -27,8 +30,10 @@ public:
     RendererOF();
     ~RendererOF();
     
+    static RendererOfRef create();
+    
     void setup() override;
-    void draw(const coc::scene::Object & object) const override;
+    void draw(const coc::scene::ObjectRef & object) const override;
     
 };
 };

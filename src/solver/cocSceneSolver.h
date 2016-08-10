@@ -13,10 +13,13 @@
 
 #pragma once
 
+#include "cocSceneObject.h"
+
 namespace coc {
 namespace scene {
 
-class Object;
+class Solver;
+typedef std::shared_ptr<Solver> SolverRef;
 
 class Solver {
 
@@ -25,11 +28,13 @@ public:
     Solver();
     ~Solver();
     
-    virtual void update(coc::scene::Object & object);
+    static SolverRef create();
+    
+    virtual void update(const coc::scene::ObjectRef & object);
     
 protected:
     
-    void updateObject(coc::scene::Object & object);
+    void updateObject(const coc::scene::ObjectRef & object);
     
     bool bModelMatrixConcatenatedChanged;
     

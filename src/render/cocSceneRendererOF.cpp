@@ -26,11 +26,15 @@ RendererOF::~RendererOF() {
     //
 }
 
+RendererOfRef RendererOF::create() {
+    return RendererOfRef(new RendererOF());
+}
+
 void RendererOF::setup() {
     //
 }
 
-void RendererOF::draw(const coc::scene::Object & object) const {
+void RendererOF::draw(const coc::scene::ObjectRef & object) const {
     //
 }
 

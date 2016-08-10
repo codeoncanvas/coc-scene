@@ -14,6 +14,8 @@
 #pragma once
 
 #include "cocSceneObject.h"
+#include "cocSceneSolver.h"
+#include "cocSceneRenderer.h"
 
 namespace coc {
 namespace scene {
@@ -35,8 +37,8 @@ public:
 private:
 
     coc::scene::ObjectRef object;
-    coc::scene::Solver * solver;
-    coc::scene::Renderer * renderer;
+    coc::scene::SolverRef solver;
+    coc::scene::RendererRef renderer;
 };
 
 };
