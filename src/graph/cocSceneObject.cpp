@@ -94,10 +94,26 @@ void Object::pointReleased(int pointX, int pointY, int pointID) {
 //--------------------------------------------------------------
 void Object::copyTo(ObjectRef object) const {
     *object = *this;
+
+    // object properties have been copied over,
+    // but the object children are still pointing to the old parent.
+    // need to update to point to new parent.
+    
+    for(int i=0; i<object->children.size(); i++) {
+        object->children[i]->parent = object.get();
+    }
 }
 
 void Object::copyFrom(const ObjectRef & object) {
     *this = *object;
+    
+    // object properties have been copied over,
+    // but the object children are still pointing to the old parent.
+    // need to update to point to new parent.
+    
+    for(int i=0; i<children.size(); i++) {
+        children[i]->parent = this;
+    }
 }
 
 //--------------------------------------------------------------
