@@ -72,7 +72,6 @@ public:
     void setChildIndex(const ObjectRef & child, int index);
     bool removeChild(const ObjectRef & child);
     bool removeChildAt(int index);
-    bool removeSelf();
     void removeAllChildren();
     bool replaceChild(const ObjectRef & childOld, const ObjectRef & childNew);
     bool replaceChild(std::string childID, const ObjectRef & childNew);
@@ -80,12 +79,11 @@ public:
     
     ObjectRef getChildAt(int index);
     ObjectRef getChildByID(std::string objectID);
+    ObjectRef findObjectByID(std::string objectID, Object * object=NULL);
     Object * getParent();
     bool contains(const ObjectRef & child) const;
     int getChildIndex(const ObjectRef & child) const;
     int numChildren() const;
-    
-    static ObjectRef findObjectByID(std::string objectID, const ObjectRef & object);
     
     std::string getObjectID() const { return objectID; }
     unsigned int getObjectType() const { return objectType; }

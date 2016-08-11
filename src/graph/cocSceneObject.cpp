@@ -171,13 +171,6 @@ bool Object::removeChildAt(int index) {
 	return true;
 }
 
-bool Object::removeSelf() {
-    if(parent == NULL) {
-        return false;
-    }
-    return parent->removeChild(ObjectRef(this));
-}
-
 void Object::removeAllChildren() {
     for(int i=0; i<children.size(); i++) {
         ObjectRef child= children[i];
@@ -224,6 +217,26 @@ ObjectRef Object::getChildByID(std::string objectID) {
     return ObjectRef();
 }
 
+ObjectRef Object::findObjectByID(std::string objectID, Object * object) {
+    if(object == NULL) {
+        object = this;
+    }
+    for(int i=0; i<object->children.size(); i++) {
+        ObjectRef child = object->children[i];
+        if(child == nullptr) {
+            continue;
+        }
+        if(child->getObjectID() == objectID) {
+            return child;
+        }
+        child = findObjectByID(objectID, child.get());
+        if(child) {
+            return child;
+        }
+    }
+    return ObjectRef();
+}
+
 Object * Object::getParent() {
     return parent;
 }
@@ -249,21 +262,6 @@ int Object::getChildIndex(const ObjectRef & child) const {
 int Object::numChildren() const {
 	return children.size();
 }
-
-ObjectRef Object::findObjectByID(std::string objectID, const ObjectRef & object) {
-    for(int i=0; i<object->children.size(); i++) {
-        ObjectRef child = object->children[i];
-        if(child->getObjectID() == objectID) {
-            return child;
-        }
-        child = findObjectByID(objectID, child);
-        if(child != NULL) {
-            return child;
-        }
-    }
-    return ObjectRef();
-}
-
 
 };
 };
