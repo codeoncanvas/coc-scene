@@ -185,8 +185,7 @@ bool Object::replaceChild(const ObjectRef & childOld, const ObjectRef & childNew
     }
     for(int i=0; i<children.size(); i++) {
         if(children[i] == childOld) {
-            removeChildAt(i);
-            addChildAt(childNew, i);
+            children[i] = childNew;
             return true;
         }
     }

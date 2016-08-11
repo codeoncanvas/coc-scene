@@ -29,7 +29,7 @@ public:
     LoaderSvg();
     ~LoaderSvg();
     
-    virtual ObjectRef load(std::string svgPath) {} // override.
+    virtual ObjectRef load(std::string svgPath) { return ObjectRef(); } // override.
     
 };
 
