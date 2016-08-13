@@ -26,18 +26,6 @@ Renderer::~Renderer() {
     //
 }
 
-void Renderer::setup() {
-
-}
-
-void Renderer::pushModelMatrix(const glm::mat4 & matrix) const {
-    // override.
-}
-
-void Renderer::popModelMatrix() const {
-    // override.
-}
-
 void Renderer::draw(const coc::scene::ObjectRef & object) const {
 
     bool bDraw = true;
@@ -66,8 +54,26 @@ void Renderer::draw(const coc::scene::ObjectRef & object) const {
     
     popModelMatrix();
     
-    for(int i=0; i<object->children.size(); i++) {
-        draw(object->children[i]);
+    int numOfChildren = object->children.size();
+    for(int i=0; i<numOfChildren; i++) {
+        const coc::scene::ObjectRef & child = object->children[i];
+        
+        bool bMask = true;
+        bMask = bMask && (child->mask != NULL); // has mask
+        bMask = bMask && (i < numOfChildren-1); // there is a child above it, which could be the mask.
+        if(bMask) {
+            const coc::scene::ObjectRef & mask = object->children[i+1];
+            bMask = bMask && (child->mask == mask.get());
+            if(bMask) {
+            
+                // TODO: make masks work.
+                
+                i++; // skip ahead mask object.
+                continue;
+            }
+        }
+        
+        draw(child);
     }
 }
 
