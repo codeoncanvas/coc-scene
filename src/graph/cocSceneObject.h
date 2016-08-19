@@ -69,6 +69,8 @@ public:
     
     void addChild(const ObjectRef & child);
     void addChildAt(const ObjectRef & child, int index);
+    void addChildAbove(const ObjectRef & child, const ObjectRef & childRef);
+    void addChildBelow(const ObjectRef & child, const ObjectRef & childRef);
     void setChildIndex(const ObjectRef & child, int index);
     bool removeChild(const ObjectRef & child);
     bool removeChildAt(int index);
@@ -112,6 +114,7 @@ protected:
     glm::mat4 modelMatrixConcatenated;
     
     Object * parent;
+    Object * mask; // TODO: still needs work. 
     std::vector<ObjectRef> children;
     
 };

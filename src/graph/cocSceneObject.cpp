@@ -18,21 +18,22 @@ namespace scene {
 
 //--------------------------------------------------------------
 Object::Object(std::string objID) :
-    objectID(objID),
-    objectType(coc::scene::ObjectTypeBase),
-    x(0.0f),
-    y(0.0f),
-    width(0.0f),
-    height(0.0f),
-    scale(1.0f),
-    rotation(0.0f),
-    transformationPointX(0.0f),
-    transformationPointY(0.0f),
-    alpha(1.0f),
-    visible(true),
-    color(1.0f, 1.0f, 1.0f, 1.0f),
-    delegate(NULL),
-    parent(NULL) {
+objectID(objID),
+objectType(coc::scene::ObjectTypeBase),
+x(0.0f),
+y(0.0f),
+width(0.0f),
+height(0.0f),
+scale(1.0f),
+rotation(0.0f),
+transformationPointX(0.0f),
+transformationPointY(0.0f),
+alpha(1.0f),
+visible(true),
+color(1.0f, 1.0f, 1.0f, 1.0f),
+delegate(NULL),
+parent(NULL),
+mask(NULL) {
     
     //
 }
@@ -134,6 +135,22 @@ void Object::addChildAt(const ObjectRef & child, int index) {
     }
 	children.insert(children.begin() + index, child);
 	child->parent = this;
+}
+
+void Object::addChildAbove(const ObjectRef & child, const ObjectRef & childRef) {
+    for(int i=0; i<children.size(); i++) {
+        if(children[i] == childRef) {
+            children.insert(children.begin()+i+1, child);
+        }
+    }
+}
+
+void Object::addChildBelow(const ObjectRef & child, const ObjectRef & childRef) {
+    for(int i=0; i<children.size(); i++) {
+        if(children[i] == childRef) {
+            children.insert(children.begin()+i, child);
+        }
+    }
 }
 
 void Object::setChildIndex(const ObjectRef & child, int index) {

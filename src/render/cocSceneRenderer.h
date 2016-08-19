@@ -35,10 +35,10 @@ public:
     Renderer();
     ~Renderer();
     
-    virtual void setup();
+    virtual void setup() {}
     
-    virtual void pushModelMatrix(const glm::mat4 & matrix) const;
-    virtual void popModelMatrix() const;
+    virtual void pushModelMatrix(const glm::mat4 & matrix) const {}
+    virtual void popModelMatrix() const {}
     
     virtual void draw(const coc::scene::ObjectRef & object) const;
     
