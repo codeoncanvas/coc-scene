@@ -57,7 +57,7 @@ public:
     
     virtual void setup();
     virtual void update();
-    virtual void draw() const;
+    virtual void draw();
 
 	virtual void pointMoved(int pointX, int pointY, int pointID=0);
     virtual void pointPressed(int pointX, int pointY, int pointID=0);

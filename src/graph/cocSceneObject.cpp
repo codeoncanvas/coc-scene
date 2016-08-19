@@ -60,7 +60,7 @@ void Object::update() {
     }
 }
 
-void Object::draw() const {
+void Object::draw() {
     if(delegate != NULL) {
         delegate->draw(*this);
     }
