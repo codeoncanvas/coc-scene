@@ -36,7 +36,7 @@ ShapeRef Shape::create(std::string objID) {
 
 void Shape::drawSelf() {
 
-#ifdef COC_CI
+#if defined( COC_CI )
     ci::Rectf rect(0.0, 0.0, width, height);
     
     if(colorFill.a > 0.0) {

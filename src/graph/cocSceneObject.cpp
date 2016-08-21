@@ -87,14 +87,14 @@ void Object::drawChild(const ObjectRef & child) {
 }
 
 void Object::pushModelMatrix(const glm::mat4 & matrix) const {
-#ifdef COC_CI
+#if defined( COC_CI )
     ci::gl::pushModelMatrix();
     ci::gl::multModelMatrix(matrix);
 #endif
 }
 
 void Object::popModelMatrix() const {
-#ifdef COC_CI
+#if defined( COC_CI )
     ci::gl::popModelMatrix();
 #endif
 }

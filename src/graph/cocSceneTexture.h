@@ -33,10 +33,6 @@ public:
     virtual void drawSelf() override;
     
     std::string assetID;
-    
-#ifdef COC_CI
-    ci::gl::TextureRef textureRef;
-#endif
 
 };
 

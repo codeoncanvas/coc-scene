@@ -12,6 +12,8 @@
  **/
 
 #include "cocSceneTexture.h"
+#include "cocAssetsCI.h"
+#include "cocAssetsOF.h"
 
 namespace coc {
 namespace scene {
@@ -32,7 +34,10 @@ TextureRef Texture::create(std::string objID) {
 
 void Texture::drawSelf() {
 
-#ifdef COC_CI
+    coc::Assets * assets = coc::scene::getAssets();
+
+#if defined( COC_CI )
+    ci::gl::TextureRef textureRef = ((coc::AssetsCI *)assets)->getTextureRef(assetID);
     if(textureRef == NULL) {
         return;
     }
