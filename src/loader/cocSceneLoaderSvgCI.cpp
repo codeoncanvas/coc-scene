@@ -14,6 +14,7 @@
 #if defined( COC_CI )
 
 #include "cocSceneLoaderSvgCI.h"
+#include "cocSceneObject.h"
 #include "cocSceneShape.h"
 #include "cocSceneTexture.h"
 #include "cocAssets.h" // coc-assets >> https://github.com/codeoncanvas/coc-assets
@@ -194,7 +195,7 @@ void LoaderSvgCI::parseGroupItem(ObjectRef & object, const ci::XmlTree & xml) {
     
     if(tag == "g") {
 
-        ObjectRef child(new Object);
+        ObjectRef child = Object::create();
         if(object == nullptr) { // no parent, this is the root.
             object = child;
         } else  {
@@ -226,7 +227,7 @@ void LoaderSvgCI::parseGroupItem(ObjectRef & object, const ci::XmlTree & xml) {
         
         } else {
 
-            ObjectRef child(new Shape);
+            ObjectRef child = Shape::create();
             object->addChild(child);
             
             pushStyle();
@@ -269,7 +270,7 @@ void LoaderSvgCI::parseGroupItem(ObjectRef & object, const ci::XmlTree & xml) {
         
         } else {
 
-            ObjectRef child(new Texture());
+            ObjectRef child = Texture::create();
             object->addChild(child);
             
             pushStyle();

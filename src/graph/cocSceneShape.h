@@ -30,6 +30,8 @@ public:
     
     static ShapeRef create(std::string objID="");
     
+    virtual void drawSelf() override;
+    
     glm::vec4 colorFill;
     glm::vec4 colorStroke;
 };

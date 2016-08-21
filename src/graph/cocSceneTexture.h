@@ -30,7 +30,14 @@ public:
     
     static TextureRef create(std::string objID="");
     
+    virtual void drawSelf() override;
+    
     std::string assetID;
+    
+#ifdef COC_CI
+    ci::gl::TextureRef textureRef;
+#endif
+
 };
 
 };

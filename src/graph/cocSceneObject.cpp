@@ -31,7 +31,6 @@ transformationPointY(0.0f),
 alpha(1.0f),
 visible(true),
 color(1.0f, 1.0f, 1.0f, 1.0f),
-delegate(NULL),
 parent(NULL),
 mask(NULL) {
     
@@ -50,21 +49,54 @@ ObjectRef Object::create(std::string objID) {
 
 //--------------------------------------------------------------
 void Object::setup() {
-    if(delegate != NULL) {
-        delegate->setup(*this);
-    }
+    //
 }
 
+//--------------------------------------------------------------
 void Object::update() {
-    if(delegate != NULL) {
-        delegate->update(*this);
+    //
+}
+
+//--------------------------------------------------------------
+void Object::draw() {
+    pushModelMatrix(modelMatrixConcatenated);
+    drawSelf();
+    popModelMatrix();
+    
+    drawChildren();
+}
+
+void Object::drawSelf() {
+    // override.
+}
+
+void Object::drawChildren() {
+    for(int i=0; i<children.size(); i++) {
+        drawChild(children[i]);
     }
 }
 
-void Object::draw() {
-    if(delegate != NULL) {
-        delegate->draw(*this);
+void Object::drawChild(const ObjectRef & child) {
+    bool bDraw = true;
+    bDraw = bDraw && (child->visible);
+    bDraw = bDraw && (child->alpha > 0.0);
+    if(!bDraw) {
+        return;
     }
+    child->draw();
+}
+
+void Object::pushModelMatrix(const glm::mat4 & matrix) const {
+#ifdef COC_CI
+    ci::gl::pushModelMatrix();
+    ci::gl::multModelMatrix(matrix);
+#endif
+}
+
+void Object::popModelMatrix() const {
+#ifdef COC_CI
+    ci::gl::popModelMatrix();
+#endif
 }
 
 //--------------------------------------------------------------

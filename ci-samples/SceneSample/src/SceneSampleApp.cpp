@@ -4,7 +4,6 @@
 
 #include "cocScene.h"
 #include "SceneCustomObject.h"
-#include "SceneDelegateObject.h"
 
 using namespace ci;
 using namespace ci::app;
@@ -17,19 +16,18 @@ class SceneSampleApp : public App {
 	void update() override;
 	void draw() override;
     
-    Runner sceneRunner;
+    SolverRef sceneSolver;
     ObjectRef sceneRoot;
     ObjectRef svg;
     ShapeRef rect0;
     ShapeRef rect1;
-    SceneDelegateObject rect1Delegate;
     SceneCustomObject * customObj;
 };
 
 void SceneSampleApp::setup() {
 
+    sceneSolver = coc::scene::Solver::create();
     sceneRoot = Object::create("sceneRoot");
-    sceneRunner.setup(sceneRoot);
     
     svg = LoaderSvgCI::loadSvg(getAssetPath("svg/coc_scene_svg_02.svg").string());
     sceneRoot->addChild(svg);
@@ -51,7 +49,6 @@ void SceneSampleApp::setup() {
     rect1->width = 50;
     rect1->height = 50;
     rect1->colorFill = glm::vec4(1.0, 0.0, 0.0, 1.0);
-    rect1->delegate = &rect1Delegate;
     rect0->addChild(rect1);
     
     customObj = new SceneCustomObject("circle");
@@ -63,15 +60,16 @@ void SceneSampleApp::setup() {
 void SceneSampleApp::update() {
     
     rect0->rotation = rect0->rotation + 0.01;
+    rect1->rotation = rect1->rotation + 0.01;
     
-    sceneRunner.update();
+    sceneSolver->update(sceneRoot);
 }
 
 void SceneSampleApp::draw() {
 
     gl::clear(Color(0, 0, 0));
     
-    sceneRunner.draw();
+    sceneRoot->draw();
 }
 
 CINDER_APP( SceneSampleApp, RendererGl )

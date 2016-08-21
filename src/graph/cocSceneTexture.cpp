@@ -30,5 +30,15 @@ TextureRef Texture::create(std::string objID) {
     return TextureRef(new Texture(objID));
 }
 
+void Texture::drawSelf() {
+
+#ifdef COC_CI
+    if(textureRef == NULL) {
+        return;
+    }
+    ci::gl::draw(textureRef, ci::Rectf(0, 0, width, height));
+#endif
+}
+
 };
 };

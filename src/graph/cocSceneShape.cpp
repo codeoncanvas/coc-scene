@@ -34,5 +34,23 @@ ShapeRef Shape::create(std::string objID) {
     return ShapeRef(new Shape(objID));
 }
 
+void Shape::drawSelf() {
+
+#ifdef COC_CI
+    ci::Rectf rect(0.0, 0.0, width, height);
+    
+    if(colorFill.a > 0.0) {
+        ci::gl::ScopedColor color(colorFill);
+        ci::gl::drawSolidRect(rect);
+    }
+    
+    if(colorStroke.a > 0.0) {
+        ci::gl::ScopedColor color(colorStroke);
+        ci::gl::drawStrokedRect(rect);
+    }
+#endif
+
+}
+
 };
 };

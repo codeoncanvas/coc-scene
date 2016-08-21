@@ -27,15 +27,6 @@ enum ObjectType {
 
 //--------------------------------------------------------------
 class Object;
-
-class ObjectDelegate {
-public:
-    virtual void setup(Object & object) {};
-    virtual void update(Object & object) {};
-    virtual void draw(const Object & object) const {};
-};
-
-//--------------------------------------------------------------
 typedef std::shared_ptr<Object> ObjectRef;
 
 class Object {
@@ -103,9 +94,14 @@ public:
     
     glm::vec4 color;
     
-    ObjectDelegate * delegate;
-    
 protected:
+
+    virtual void drawSelf();
+    virtual void drawChildren();
+    virtual void drawChild(const ObjectRef & child);
+    
+    virtual void pushModelMatrix(const glm::mat4 & matrix) const;
+    virtual void popModelMatrix() const;
 
     std::string objectID;
     unsigned int objectType;
