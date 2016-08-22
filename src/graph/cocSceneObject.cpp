@@ -310,5 +310,24 @@ int Object::numChildren() const {
 	return children.size();
 }
 
+coc::Rect Object::getBounds()
+{
+	coc::Rect bounds;
+	bounds.setX(x);
+	bounds.setY(y);
+	bounds.setW(width);
+	bounds.setH(height);
+	return bounds;
+
+}
+
+void Object::setBounds( coc::Rect &bounds )
+{
+	x = bounds.getX();
+	y = bounds.getY();
+	width = bounds.getW();
+	height = bounds.getH();
+}
+
 };
 };

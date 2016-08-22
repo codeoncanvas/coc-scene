@@ -93,6 +93,9 @@ public:
     coc::Value<bool> visible;
     
     glm::vec4 color;
+
+	coc::Rect getBounds();
+	void setBounds( coc::Rect & bounds );
     
 protected:
 
