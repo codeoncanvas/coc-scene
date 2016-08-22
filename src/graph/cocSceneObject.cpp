@@ -59,7 +59,7 @@ void Object::update() {
 
 //--------------------------------------------------------------
 void Object::draw() {
-    pushModelMatrix(modelMatrix);
+    pushModelMatrix(modelMatrixConcatenated);
     drawSelf();
     drawChildren();
     popModelMatrix();
@@ -88,7 +88,7 @@ void Object::drawChild(const ObjectRef & child) {
 void Object::pushModelMatrix(const glm::mat4 & matrix) const {
 #if defined( COC_CI )
     ci::gl::pushModelMatrix();
-    ci::gl::multModelMatrix(matrix);
+    ci::gl::setModelMatrix(matrix);
 #endif
 }
 
