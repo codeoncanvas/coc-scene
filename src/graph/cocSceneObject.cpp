@@ -59,11 +59,10 @@ void Object::update() {
 
 //--------------------------------------------------------------
 void Object::draw() {
-    pushModelMatrix(modelMatrixConcatenated);
+    pushModelMatrix(modelMatrix);
     drawSelf();
-    popModelMatrix();
-    
     drawChildren();
+    popModelMatrix();
 }
 
 void Object::drawSelf() {
