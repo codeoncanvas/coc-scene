@@ -96,6 +96,8 @@ public:
 
 	coc::Rect getBounds();
 	void setBounds( coc::Rect & bounds );
+
+	glm::mat4 & getMatrix() { return modelMatrixConcatenated; }
     
 protected:
 
