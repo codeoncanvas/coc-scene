@@ -37,6 +37,7 @@ protected:
     void updateObject(const coc::scene::ObjectRef & object);
     
     bool bModelMatrixConcatenatedChanged;
+    bool bColorConcatenatedChanged;
     
 };
 };

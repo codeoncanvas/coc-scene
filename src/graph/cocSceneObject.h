@@ -98,7 +98,7 @@ public:
     coc::Value<float> alpha;
     coc::Value<bool> visible;
     
-    glm::vec4 color;
+    glm::vec3 color;
     
 protected:
 
@@ -108,12 +108,18 @@ protected:
     
     virtual void pushModelMatrix(const glm::mat4 & matrix) const;
     virtual void popModelMatrix() const;
+    
+    virtual void pushColor(const glm::vec4 & color) const;
+    virtual void popColor() const;
 
     std::string objectID;
     unsigned int objectType;
     
     glm::mat4 modelMatrix;
     glm::mat4 modelMatrixConcatenated;
+    
+    glm::vec4 colorWithAlpha;
+    glm::vec4 colorWithAlphaConcatenated;
     
     Object * parent;
     Object * mask; // TODO: still needs work. 

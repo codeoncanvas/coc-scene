@@ -40,16 +40,18 @@ void Shape::drawSelf() {
     ci::Rectf rect(0.0, 0.0, width, height);
     
     if(colorFill.a > 0.0) {
-        ci::gl::ScopedColor color(colorFill);
+        pushColor(colorFill * colorWithAlphaConcatenated);
         ci::gl::drawSolidRect(rect);
+        popColor();
     }
     
     if(colorStroke.a > 0.0) {
-        ci::gl::ScopedColor color(colorStroke);
+        pushColor(colorStroke * colorWithAlphaConcatenated);
         ci::gl::drawStrokedRect(rect);
+        popColor();
     }
 #endif
-
+    
 }
 
 };

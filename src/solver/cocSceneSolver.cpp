@@ -17,8 +17,10 @@
 namespace coc {
 namespace scene {
 
-Solver::Solver() {
-    bModelMatrixConcatenatedChanged = false;
+Solver::Solver():
+bModelMatrixConcatenatedChanged(false),
+bColorConcatenatedChanged(false) {
+    //
 }
 
 Solver::~Solver() {
@@ -32,6 +34,7 @@ SolverRef Solver::create() {
 void Solver::update(const coc::scene::ObjectRef & object) {
 
     bModelMatrixConcatenatedChanged = false;
+    bColorConcatenatedChanged = false;
     
     updateObject(object);
 }
@@ -74,6 +77,26 @@ void Solver::updateObject(const coc::scene::ObjectRef & object) {
             object->modelMatrixConcatenated = object->modelMatrix;
         } else {
             object->modelMatrixConcatenated = object->parent->modelMatrixConcatenated * object->modelMatrix;
+        }
+    }
+    
+    bool bColorChanged = false;
+    bColorChanged = bColorChanged || (object->colorWithAlpha.r != object->color.r);
+    bColorChanged = bColorChanged || (object->colorWithAlpha.g != object->color.g);
+    bColorChanged = bColorChanged || (object->colorWithAlpha.b != object->color.b);
+    bColorChanged = bColorChanged || (object->colorWithAlpha.a != object->alpha);
+    if(bColorChanged) {
+    
+        object->colorWithAlpha = glm::vec4(object->color, object->alpha);
+    }
+    
+    bColorConcatenatedChanged = bColorConcatenatedChanged || bColorChanged;
+    if(bColorConcatenatedChanged) {
+    
+        if(object->parent == NULL) {
+            object->colorWithAlphaConcatenated = object->colorWithAlpha;
+        } else {
+            object->colorWithAlphaConcatenated = object->parent->colorWithAlphaConcatenated * object->colorWithAlpha;
         }
     }
     

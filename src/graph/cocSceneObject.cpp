@@ -30,7 +30,9 @@ transformationPointX(0.0f),
 transformationPointY(0.0f),
 alpha(1.0f),
 visible(true),
-color(1.0f, 1.0f, 1.0f, 1.0f),
+color(1.0f, 1.0f, 1.0f),
+colorWithAlpha(1.0f, 1.0f, 1.0f, 1.0f),
+colorWithAlphaConcatenated(1.0f, 1.0f, 1.0f, 1.0f),
 parent(NULL),
 mask(NULL) {
     
@@ -60,9 +62,13 @@ void Object::update() {
 //--------------------------------------------------------------
 void Object::draw() {
     pushModelMatrix(modelMatrixConcatenated);
+    pushColor(colorWithAlphaConcatenated);
+    
     drawSelf();
     drawChildren();
+    
     popModelMatrix();
+    popColor();
 }
 
 void Object::drawSelf() {
@@ -95,6 +101,18 @@ void Object::pushModelMatrix(const glm::mat4 & matrix) const {
 void Object::popModelMatrix() const {
 #if defined( COC_CI )
     ci::gl::popModelMatrix();
+#endif
+}
+
+void Object::pushColor(const glm::vec4 & color) const {
+#if defined( COC_CI )
+    ci::gl::color(ci::ColorA(color));
+#endif
+}
+
+void Object::popColor() const {
+#if defined( COC_CI )
+    ci::gl::color(1.0, 1.0, 1.0, 1.0);
 #endif
 }
 
