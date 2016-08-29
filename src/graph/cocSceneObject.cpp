@@ -310,6 +310,7 @@ int Object::numChildren() const {
 	return children.size();
 }
 
+//--------------------------------------------------------------
 coc::Rect Object::getBounds()
 {
 	coc::Rect bounds;

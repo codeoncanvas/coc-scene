@@ -80,6 +80,12 @@ public:
     
     std::string getObjectID() const { return objectID; }
     unsigned int getObjectType() const { return objectType; }
+    
+	coc::Rect getBounds();
+	void setBounds( coc::Rect & bounds );
+
+    const glm::mat4 & getModelMatrix() const { return modelMatrix; }
+	const glm::mat4 & getModelMatrixConcatenated() const { return modelMatrixConcatenated; }
 
     coc::Value<float> x;
     coc::Value<float> y;
@@ -93,11 +99,6 @@ public:
     coc::Value<bool> visible;
     
     glm::vec4 color;
-
-	coc::Rect getBounds();
-	void setBounds( coc::Rect & bounds );
-
-	glm::mat4 & getMatrix() { return modelMatrixConcatenated; }
     
 protected:
 
