@@ -14,6 +14,8 @@
 #pragma once
 
 #include "cocCore.h"
+#include "cinder/app/App.h"
+#include "cinder/gl/gl.h"
 
 namespace  coc {
 class Assets;
