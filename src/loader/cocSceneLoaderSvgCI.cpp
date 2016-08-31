@@ -167,10 +167,10 @@ ObjectRef LoaderSvgCI::load(std::string svgPath) {
 		parseGroup(objRef, xmlRoot);
     }
     
-    for(int i=0; i<assetPaths.size(); i++) {
-        const std::string & assetPath = assetPaths[i];
-        std::string assetPathAbs = svgFolder + "/" + assetPath;
-        coc::scene::getAssets()->addAssetAndLoad(assetPathAbs, AssetTypeTexture, assetPath);
+    for(int i=0; i<assets.size(); i++) {
+        const Asset & asset = assets[i];
+        std::string assetPathAbs = svgFolder + "/" + asset.assetPath;
+        coc::scene::getAssets()->addAssetAndLoad(assetPathAbs, AssetTypeTexture, asset.assetID);
     }
     
     return objRef;
@@ -440,9 +440,11 @@ void LoaderSvgCI::parseImage(ObjectRef & object, const ci::XmlTree & xml) {
         return;
     }
     
-    ((Texture *)object.get())->assetID = assetPath;
+    ((Texture *)object.get())->assetID = object->objectID;
     
-    assetPaths.push_back(assetPath);
+    assets.push_back(Asset());
+    assets.back().assetID = object->objectID;
+    assets.back().assetPath = assetPath;
 }
 
 void LoaderSvgCI::parseLinearGradient(ObjectRef & object, const ci::XmlTree & xml) {

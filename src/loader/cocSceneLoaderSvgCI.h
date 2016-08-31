@@ -32,6 +32,11 @@ class LoaderSvgCI : public LoaderSvg {
 
 public:
 
+    struct Asset {
+        std::string assetID;
+        std::string assetPath;
+    };
+
     LoaderSvgCI();
     ~LoaderSvgCI();
     
@@ -71,7 +76,7 @@ public:
     std::vector<LoaderSvgStyle *> styleStack;
     
     std::string svgFolder;
-    std::vector<std::string> assetPaths;
+    std::vector<Asset> assets;
 };
 
 };
