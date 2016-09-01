@@ -35,9 +35,6 @@ friend class LoaderSvg;
 friend class LoaderSvgCI;
 friend class LoaderSvgOF;
 friend class Solver;
-friend class Renderer;
-friend class RendererCI;
-friend class RendererOF;
 
 public:
 
