@@ -97,6 +97,7 @@ public:
     coc::Value<float> transformationPointY;
     coc::Value<float> alpha;
     coc::Value<bool> visible;
+    bool userInteractionEnabled;
     
     glm::vec3 color;
     

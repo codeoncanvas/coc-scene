@@ -30,6 +30,7 @@ transformationPointX(0.0f),
 transformationPointY(0.0f),
 alpha(1.0f),
 visible(true),
+userInteractionEnabled(true),
 color(1.0f, 1.0f, 1.0f),
 colorWithAlpha(1.0f, 1.0f, 1.0f, 1.0f),
 colorWithAlphaConcatenated(1.0f, 1.0f, 1.0f, 1.0f),
@@ -119,24 +120,36 @@ void Object::popColor() const {
 //--------------------------------------------------------------
 void Object::pointMoved(int pointX, int pointY, int pointID) {
     for(int i=0; i<children.size(); i++) {
+        if(children[i]->userInteractionEnabled == false) {
+            continue;
+        }
         children[i]->pointMoved(pointX, pointY, pointID);
     }
 }
 
 void Object::pointPressed(int pointX, int pointY, int pointID) {
     for(int i=0; i<children.size(); i++) {
+        if(children[i]->userInteractionEnabled == false) {
+            continue;
+        }
         children[i]->pointPressed(pointX, pointY, pointID);
     }
 }
 
 void Object::pointDragged(int pointX, int pointY, int pointID) {
     for(int i=0; i<children.size(); i++) {
+        if(children[i]->userInteractionEnabled == false) {
+            continue;
+        }
         children[i]->pointDragged(pointX, pointY, pointID);
     }
 }
 
 void Object::pointReleased(int pointX, int pointY, int pointID) {
     for(int i=0; i<children.size(); i++) {
+        if(children[i]->userInteractionEnabled == false) {
+            continue;
+        }
         children[i]->pointReleased(pointX, pointY, pointID);
     }
 }
