@@ -18,6 +18,7 @@ namespace coc {
 namespace scene {
 
 Solver::Solver():
+bUpdateOnEveryFrame(true),
 bModelMatrixConcatenatedChanged(false),
 bColorConcatenatedChanged(false) {
     //
@@ -53,10 +54,14 @@ void Solver::updateObject(const coc::scene::ObjectRef & object) {
     object->visible.update();
     
     bool bModelMatrixChanged = false;
-    bModelMatrixChanged = bModelMatrixChanged || object->x.hasChanged();
-    bModelMatrixChanged = bModelMatrixChanged || object->y.hasChanged();
-    bModelMatrixChanged = bModelMatrixChanged || object->scale.hasChanged();
-    bModelMatrixChanged = bModelMatrixChanged || object->rotation.hasChanged();
+    if(bUpdateOnEveryFrame) {
+        bModelMatrixChanged = true;
+    } else {
+        bModelMatrixChanged = bModelMatrixChanged || object->x.hasChanged();
+        bModelMatrixChanged = bModelMatrixChanged || object->y.hasChanged();
+        bModelMatrixChanged = bModelMatrixChanged || object->scale.hasChanged();
+        bModelMatrixChanged = bModelMatrixChanged || object->rotation.hasChanged();
+    }
     if(bModelMatrixChanged == true) {
     
         glm::vec3 position(object->x, object->y, 0.0);
@@ -81,10 +86,14 @@ void Solver::updateObject(const coc::scene::ObjectRef & object) {
     }
     
     bool bColorChanged = false;
-    bColorChanged = bColorChanged || (object->colorWithAlpha.r != object->color.r);
-    bColorChanged = bColorChanged || (object->colorWithAlpha.g != object->color.g);
-    bColorChanged = bColorChanged || (object->colorWithAlpha.b != object->color.b);
-    bColorChanged = bColorChanged || (object->colorWithAlpha.a != object->alpha);
+    if(bUpdateOnEveryFrame) {
+        bColorChanged = true;
+    } else {
+        bColorChanged = bColorChanged || (object->colorWithAlpha.r != object->color.r);
+        bColorChanged = bColorChanged || (object->colorWithAlpha.g != object->color.g);
+        bColorChanged = bColorChanged || (object->colorWithAlpha.b != object->color.b);
+        bColorChanged = bColorChanged || (object->colorWithAlpha.a != object->alpha);
+    }
     if(bColorChanged) {
     
         object->colorWithAlpha = glm::vec4(object->color, object->alpha);
