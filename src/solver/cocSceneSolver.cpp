@@ -19,7 +19,7 @@ namespace scene {
 
 Solver::Solver():
 bUpdateOnEveryFrame(true),
-bModelMatrixConcatenatedChanged(false),
+bModelMatrixAbsoluteChanged(false),
 bColorConcatenatedChanged(false) {
     //
 }
@@ -34,7 +34,7 @@ SolverRef Solver::create() {
 
 void Solver::update(const coc::scene::ObjectRef & object) {
 
-    bModelMatrixConcatenatedChanged = false;
+    bModelMatrixAbsoluteChanged = false;
     bColorConcatenatedChanged = false;
     
     updateObject(object);
@@ -53,35 +53,35 @@ void Solver::updateObject(const coc::scene::ObjectRef & object) {
     object->alpha.update();
     object->visible.update();
     
-    bool bModelMatrixChanged = false;
+    bool bModelMatrixRelativeChanged = false;
     if(bUpdateOnEveryFrame) {
-        bModelMatrixChanged = true;
+        bModelMatrixRelativeChanged = true;
     } else {
-        bModelMatrixChanged = bModelMatrixChanged || object->x.hasChanged();
-        bModelMatrixChanged = bModelMatrixChanged || object->y.hasChanged();
-        bModelMatrixChanged = bModelMatrixChanged || object->scale.hasChanged();
-        bModelMatrixChanged = bModelMatrixChanged || object->rotation.hasChanged();
+        bModelMatrixRelativeChanged = bModelMatrixRelativeChanged || object->x.hasChanged();
+        bModelMatrixRelativeChanged = bModelMatrixRelativeChanged || object->y.hasChanged();
+        bModelMatrixRelativeChanged = bModelMatrixRelativeChanged || object->scale.hasChanged();
+        bModelMatrixRelativeChanged = bModelMatrixRelativeChanged || object->rotation.hasChanged();
     }
-    if(bModelMatrixChanged == true) {
+    if(bModelMatrixRelativeChanged == true) {
     
         glm::vec3 position(object->x, object->y, 0.0);
         glm::vec3 transformationPoint(object->transformationPointX, object->transformationPointY, 0.0);
         glm::vec3 rotationAxis(0, 0, 1);
         glm::vec3 scale(object->scale, object->scale, 1.0);
     
-        object->modelMatrix = glm::translate(position);
-        object->modelMatrix = object->modelMatrix * glm::rotate((float)object->rotation, rotationAxis);
-        object->modelMatrix = object->modelMatrix * glm::scale(scale);
-        object->modelMatrix = object->modelMatrix * glm::translate(-transformationPoint);
+        object->modelMatrixRelative = glm::translate(position);
+        object->modelMatrixRelative = object->modelMatrixRelative * glm::rotate((float)object->rotation, rotationAxis);
+        object->modelMatrixRelative = object->modelMatrixRelative * glm::scale(scale);
+        object->modelMatrixRelative = object->modelMatrixRelative * glm::translate(-transformationPoint);
     }
     
-    bModelMatrixConcatenatedChanged = bModelMatrixConcatenatedChanged || bModelMatrixChanged;
-    if(bModelMatrixConcatenatedChanged) {
+    bModelMatrixAbsoluteChanged = bModelMatrixAbsoluteChanged || bModelMatrixRelativeChanged;
+    if(bModelMatrixAbsoluteChanged) {
     
         if(object->parent == NULL) {
-            object->modelMatrixConcatenated = object->modelMatrix;
+            object->modelMatrixAbsolute = object->modelMatrixRelative;
         } else {
-            object->modelMatrixConcatenated = object->parent->modelMatrixConcatenated * object->modelMatrix;
+            object->modelMatrixAbsolute = object->parent->modelMatrixAbsolute * object->modelMatrixRelative;
         }
     }
     

@@ -81,8 +81,8 @@ public:
 	coc::Rect getBounds();
 	void setBounds( coc::Rect & bounds );
 
-    const glm::mat4 & getModelMatrix() const { return modelMatrix; }
-	const glm::mat4 & getModelMatrixConcatenated() const { return modelMatrixConcatenated; }
+    const glm::mat4 & getModelMatrixRelative() const { return modelMatrixRelative; }
+	const glm::mat4 & getModelMatrixAbsolute() const { return modelMatrixAbsolute; }
 
     coc::Value<float> x;
     coc::Value<float> y;
@@ -113,8 +113,8 @@ protected:
     std::string objectID;
     unsigned int objectType;
     
-    glm::mat4 modelMatrix;
-    glm::mat4 modelMatrixConcatenated;
+    glm::mat4 modelMatrixRelative;
+    glm::mat4 modelMatrixAbsolute;
     
     glm::vec4 colorWithAlpha;
     glm::vec4 colorWithAlphaConcatenated;
