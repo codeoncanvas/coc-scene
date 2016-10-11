@@ -36,14 +36,28 @@ TextureRef Texture::create(std::string objID) {
 }
 
 //--------------------------------------------------------------
-void Texture::copyTo(TextureRef object) const {
+void Texture::copyTo(TextureRef & object) const {
+    copyTo(object.get());
+}
+
+void Texture::copyTo(Texture * object) const {
     *object = *this;
     Object::copyTo(object);
 }
 
 void Texture::copyFrom(const TextureRef & object) {
+    copyFrom(object.get());
+}
+
+void Texture::copyFrom(const Texture * object) {
     *this = *object;
     Object::copyFrom(object);
+}
+
+TextureRef Texture::clone() const {
+    TextureRef object = Texture::create();
+    object->copyFrom(this);
+    return object;
 }
 
 //--------------------------------------------------------------

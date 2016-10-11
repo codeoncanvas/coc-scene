@@ -35,14 +35,28 @@ ShapeRef Shape::create(std::string objID) {
 }
 
 //--------------------------------------------------------------
-void Shape::copyTo(ShapeRef object) const {
+void Shape::copyTo(ShapeRef & object) const {
+    copyTo(object);
+}
+
+void Shape::copyTo(Shape * object) const {
     *object = *this;
     Object::copyTo(object);
 }
 
 void Shape::copyFrom(const ShapeRef & object) {
+    copyFrom(object.get());
+}
+
+void Shape::copyFrom(const Shape * object) {
     *this = *object;
     Object::copyFrom(object);
+}
+
+ShapeRef Shape::clone() const {
+    ShapeRef object = Shape::create();
+    object->copyFrom(this);
+    return object;
 }
 
 //--------------------------------------------------------------

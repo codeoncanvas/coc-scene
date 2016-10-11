@@ -246,7 +246,11 @@ void Object::pointReleased(int pointX, int pointY, int pointID) {
 }
 
 //--------------------------------------------------------------
-void Object::copyTo(ObjectRef object) const {
+void Object::copyTo(ObjectRef & object) const {
+    copyTo(object.get());
+}
+
+void Object::copyTo(Object * object) const {
     *object = *this;
 
     // object properties have been copied over,
@@ -254,11 +258,15 @@ void Object::copyTo(ObjectRef object) const {
     // need to update to point to new parent.
     
     for(int i=0; i<object->children.size(); i++) {
-        object->children[i]->parent = object.get();
+        object->children[i]->parent = object;
     }
 }
 
 void Object::copyFrom(const ObjectRef & object) {
+    copyFrom(object.get());
+}
+
+void Object::copyFrom(const Object * object) {
     *this = *object;
     
     // object properties have been copied over,
@@ -268,6 +276,12 @@ void Object::copyFrom(const ObjectRef & object) {
     for(int i=0; i<children.size(); i++) {
         children[i]->parent = this;
     }
+}
+
+ObjectRef Object::clone() const {
+    ObjectRef object = Object::create();
+    object->copyFrom(this);
+    return object;
 }
 
 //--------------------------------------------------------------

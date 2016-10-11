@@ -51,8 +51,11 @@ public:
 	virtual void pointDragged(int pointX, int pointY, int pointID=0);
 	virtual void pointReleased(int pointX, int pointY, int pointID=0);
     
-    virtual void copyTo(ObjectRef object) const;
+    virtual void copyTo(ObjectRef & object) const;
+    virtual void copyTo(Object * object) const;
     virtual void copyFrom(const ObjectRef & object);
+    virtual void copyFrom(const Object * object);
+    ObjectRef clone() const;
     
     void addChild(const ObjectRef & child);
     void addChildAt(const ObjectRef & child, int index);
