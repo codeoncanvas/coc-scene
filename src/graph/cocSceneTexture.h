@@ -32,12 +32,12 @@ public:
     
     virtual void copyTo(TextureRef object) const;
     virtual void copyFrom(const TextureRef & object);
+    
+    std::string assetID;
 
 protected:
     
     virtual void drawSelf() override;
-    
-    std::string assetID;
 
 };
 

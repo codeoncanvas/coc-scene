@@ -16,7 +16,6 @@ class SceneSampleApp : public App {
 	void update() override;
 	void draw() override;
     
-    SolverRef sceneSolver;
     ObjectRef sceneRoot;
     ObjectRef svg;
     ShapeRef rect0;
@@ -26,7 +25,6 @@ class SceneSampleApp : public App {
 
 void SceneSampleApp::setup() {
 
-    sceneSolver = coc::scene::Solver::create();
     sceneRoot = Object::create("sceneRoot");
     
     svg = LoaderSvgCI::loadSvg(getAssetPath("svg/coc_scene_svg_02.svg").string());
@@ -62,7 +60,7 @@ void SceneSampleApp::update() {
     rect0->rotation = rect0->rotation + 0.01;
     rect1->rotation = rect1->rotation + 0.01;
     
-    sceneSolver->update(sceneRoot);
+    sceneRoot->update();
 }
 
 void SceneSampleApp::draw() {

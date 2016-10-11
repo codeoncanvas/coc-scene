@@ -33,12 +33,12 @@ public:
     virtual void copyTo(ShapeRef object) const;
     virtual void copyFrom(const ShapeRef & object);
     
+    glm::vec4 colorFill;
+    glm::vec4 colorStroke;
+    
 protected:
     
     virtual void drawSelf() override;
-    
-    glm::vec4 colorFill;
-    glm::vec4 colorStroke;
 };
 
 };

@@ -32,7 +32,6 @@
 		6768FBA31D0946E10032B3A8 /* cocRect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6768FB9C1D0946E10032B3A8 /* cocRect.cpp */; };
 		6768FBA41D0946E10032B3A8 /* cocValue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6768FB9E1D0946E10032B3A8 /* cocValue.cpp */; };
 		679A3BBA1D2CCC8800DC9EB7 /* cocSceneGlobals.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 679A3BB31D2CCC8800DC9EB7 /* cocSceneGlobals.cpp */; };
-		679A3BCE1D2D00FF00DC9EB7 /* cocSceneSolver.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 679A3BCC1D2D00FF00DC9EB7 /* cocSceneSolver.cpp */; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 		973B17863DC74086B1D4656E /* CinderApp.icns in Resources */ = {isa = PBXBuildFile; fileRef = 19DF45ADF6B84B918ABDD056 /* CinderApp.icns */; };
 		F6D353C4CCC7460BA4E9F31D /* SceneSampleApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5134E4955FB74FDF950B311C /* SceneSampleApp.cpp */; };
@@ -88,8 +87,6 @@
 		6768FB9F1D0946E10032B3A8 /* cocValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cocValue.h; sourceTree = "<group>"; };
 		679A3BB31D2CCC8800DC9EB7 /* cocSceneGlobals.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = cocSceneGlobals.cpp; sourceTree = "<group>"; };
 		679A3BB41D2CCC8800DC9EB7 /* cocSceneGlobals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cocSceneGlobals.h; sourceTree = "<group>"; };
-		679A3BCC1D2D00FF00DC9EB7 /* cocSceneSolver.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = cocSceneSolver.cpp; sourceTree = "<group>"; };
-		679A3BCD1D2D00FF00DC9EB7 /* cocSceneSolver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cocSceneSolver.h; sourceTree = "<group>"; };
 		8C977DAC0F754F20A56C68F6 /* Resources.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Resources.h; path = ../include/Resources.h; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* SceneSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SceneSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B33247013A9F4C71843F5E4F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -286,15 +283,6 @@
 			path = src;
 			sourceTree = "<group>";
 		};
-		679A3BCB1D2CF5E100DC9EB7 /* solver */ = {
-			isa = PBXGroup;
-			children = (
-				679A3BCD1D2D00FF00DC9EB7 /* cocSceneSolver.h */,
-				679A3BCC1D2D00FF00DC9EB7 /* cocSceneSolver.cpp */,
-			);
-			path = solver;
-			sourceTree = "<group>";
-		};
 		98BAEB09C6734A5980CC5F07 /* src */ = {
 			isa = PBXGroup;
 			children = (
@@ -303,7 +291,6 @@
 				679A3BB31D2CCC8800DC9EB7 /* cocSceneGlobals.cpp */,
 				675C76E11D2FF3A1004D5AC5 /* graph */,
 				672351571D2F508800BC2BCA /* loader */,
-				679A3BCB1D2CF5E100DC9EB7 /* solver */,
 			);
 			path = src;
 			sourceTree = "<group>";
@@ -394,7 +381,6 @@
 				6723515A1D2F50C100BC2BCA /* cocSceneLoaderSvg.cpp in Sources */,
 				6768FBA21D0946E10032B3A8 /* cocRandom.cpp in Sources */,
 				6768FBA11D0946E10032B3A8 /* cocMath.cpp in Sources */,
-				679A3BCE1D2D00FF00DC9EB7 /* cocSceneSolver.cpp in Sources */,
 				675C76E91D2FF3A1004D5AC5 /* cocSceneShape.cpp in Sources */,
 				675C76EA1D2FF3A1004D5AC5 /* cocSceneTexture.cpp in Sources */,
 			);
