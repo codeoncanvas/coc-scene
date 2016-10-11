@@ -35,6 +35,18 @@ TextureRef Texture::create(std::string objID) {
     return TextureRef(new Texture(objID));
 }
 
+//--------------------------------------------------------------
+void Texture::copyTo(TextureRef object) const {
+    *object = *this;
+    Object::copyTo(object);
+}
+
+void Texture::copyFrom(const TextureRef & object) {
+    *this = *object;
+    Object::copyFrom(object);
+}
+
+//--------------------------------------------------------------
 void Texture::drawSelf() {
 
     coc::Assets * assets = coc::scene::getAssets();

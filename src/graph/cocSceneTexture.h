@@ -30,6 +30,11 @@ public:
     
     static TextureRef create(std::string objID="");
     
+    virtual void copyTo(TextureRef object) const;
+    virtual void copyFrom(const TextureRef & object);
+
+protected:
+    
     virtual void drawSelf() override;
     
     std::string assetID;

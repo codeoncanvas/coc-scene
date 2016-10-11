@@ -34,6 +34,18 @@ ShapeRef Shape::create(std::string objID) {
     return ShapeRef(new Shape(objID));
 }
 
+//--------------------------------------------------------------
+void Shape::copyTo(ShapeRef object) const {
+    *object = *this;
+    Object::copyTo(object);
+}
+
+void Shape::copyFrom(const ShapeRef & object) {
+    *this = *object;
+    Object::copyFrom(object);
+}
+
+//--------------------------------------------------------------
 void Shape::drawSelf() {
 
 #if defined( COC_CI )

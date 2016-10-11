@@ -30,6 +30,11 @@ public:
     
     static ShapeRef create(std::string objID="");
     
+    virtual void copyTo(ShapeRef object) const;
+    virtual void copyFrom(const ShapeRef & object);
+    
+protected:
+    
     virtual void drawSelf() override;
     
     glm::vec4 colorFill;
