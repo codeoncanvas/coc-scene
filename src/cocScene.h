@@ -19,7 +19,6 @@
 
 #include "cocSceneLoaderSvgCI.h"
 #include "cocSceneLoaderSvgOF.h"
-#include "cocSceneSolver.h"
 
 #include "cocAssetsCI.h" // coc-assets >> https://github.com/codeoncanvas/coc-assets
 #include "cocAssetsOF.h" // coc-assets >> https://github.com/codeoncanvas/coc-assets

@@ -31,12 +31,15 @@ transformationPointY(0.0f),
 alpha(1.0f),
 visible(true),
 userInteractionEnabled(true),
+bModelMatrixChanged(false),
+bModelMatrixAbsoluteChanged(false),
 color(1.0f, 1.0f, 1.0f),
 colorWithAlpha(1.0f, 1.0f, 1.0f, 1.0f),
-colorWithAlphaConcatenated(1.0f, 1.0f, 1.0f, 1.0f),
+colorWithAlphaAbsolute(1.0f, 1.0f, 1.0f, 1.0f),
+bColorChanged(false),
+bColorAbsoluteChanged(false),
 parent(NULL),
 mask(NULL) {
-    
     //
 }
 
@@ -57,13 +60,101 @@ void Object::setup() {
 
 //--------------------------------------------------------------
 void Object::update() {
-    //
+    updateSelf();
+    updateChildren();
+}
+
+void Object::updateSelf() {
+
+    //----------------------------------------------------------
+    x.update();
+    y.update();
+    width.update();
+    height.update();
+    scale.update();
+    rotation.update();
+    alpha.update();
+    visible.update();
+    
+    bool bUpdateOnEveryFrame = true;
+    
+    //----------------------------------------------------------
+    bool bModelMatrixChanged = false;
+    if(bUpdateOnEveryFrame) {
+        bModelMatrixChanged = true;
+    } else {
+        bModelMatrixChanged = bModelMatrixChanged || x.hasChanged();
+        bModelMatrixChanged = bModelMatrixChanged || y.hasChanged();
+        bModelMatrixChanged = bModelMatrixChanged || scale.hasChanged();
+        bModelMatrixChanged = bModelMatrixChanged || rotation.hasChanged();
+    }
+    if(bModelMatrixChanged == true) {
+    
+        glm::vec3 position(x, y, 0);
+        glm::vec3 transformationPoint(transformationPointX, transformationPointY, 0);
+        glm::vec3 rotationAxis(0, 0, 1);
+        glm::vec3 scaleVec(scale, scale, 1);
+    
+        modelMatrixRelative = glm::translate(position);
+        modelMatrixRelative = modelMatrixRelative * glm::rotate((float)rotation, rotationAxis);
+        modelMatrixRelative = modelMatrixRelative * glm::scale(scaleVec);
+        modelMatrixRelative = modelMatrixRelative * glm::translate(-transformationPoint);
+    }
+    
+    bModelMatrixAbsoluteChanged = bModelMatrixChanged;
+    if(parent) {
+        bModelMatrixAbsoluteChanged = bModelMatrixAbsoluteChanged || parent->bModelMatrixAbsoluteChanged;
+    }
+    if(bModelMatrixAbsoluteChanged) {
+        if(parent) {
+            modelMatrixAbsolute = parent->modelMatrixAbsolute * modelMatrixRelative;
+        } else {
+            modelMatrixAbsolute = modelMatrixRelative;
+        }
+    }
+
+    //----------------------------------------------------------
+    bool bColorChanged = false;
+    if(bUpdateOnEveryFrame) {
+        bColorChanged = true;
+    } else {
+        bColorChanged = bColorChanged || (colorWithAlpha.r != color.r);
+        bColorChanged = bColorChanged || (colorWithAlpha.g != color.g);
+        bColorChanged = bColorChanged || (colorWithAlpha.b != color.b);
+        bColorChanged = bColorChanged || (colorWithAlpha.a != alpha);
+    }
+    if(bColorChanged) {
+    
+        colorWithAlpha = glm::vec4(color, alpha);
+    }
+    
+    bColorAbsoluteChanged = bColorChanged;
+    if(parent) {
+        bColorAbsoluteChanged = bColorAbsoluteChanged || parent->bColorAbsoluteChanged;
+    }
+    if(bColorAbsoluteChanged) {
+        if(parent) {
+            colorWithAlphaAbsolute = parent->colorWithAlphaAbsolute * colorWithAlpha;
+        } else {
+            colorWithAlphaAbsolute = colorWithAlpha;
+        }
+    }
+}
+
+void Object::updateChildren() {
+    for(int i=0; i<children.size(); i++) {
+        updateChild(children[i]);
+    }
+}
+
+void Object::updateChild(const ObjectRef & child) {
+    child->update();
 }
 
 //--------------------------------------------------------------
 void Object::draw() {
     pushModelMatrix(modelMatrixRelative);
-    pushColor(colorWithAlphaConcatenated);
+    pushColor(colorWithAlphaAbsolute);
     
     drawSelf();
     drawChildren();

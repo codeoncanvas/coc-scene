@@ -34,7 +34,6 @@ class Object {
 friend class LoaderSvg;
 friend class LoaderSvgCI;
 friend class LoaderSvgOF;
-friend class Solver;
 
 public:
 
@@ -100,6 +99,10 @@ public:
     
 protected:
 
+    virtual void updateSelf();
+    virtual void updateChildren();
+    virtual void updateChild(const ObjectRef & child);
+
     virtual void drawSelf();
     virtual void drawChildren();
     virtual void drawChild(const ObjectRef & child);
@@ -115,9 +118,13 @@ protected:
     
     glm::mat4 modelMatrixRelative;
     glm::mat4 modelMatrixAbsolute;
+    bool bModelMatrixChanged;
+    bool bModelMatrixAbsoluteChanged;
     
     glm::vec4 colorWithAlpha;
-    glm::vec4 colorWithAlphaConcatenated;
+    glm::vec4 colorWithAlphaAbsolute;
+    bool bColorChanged;
+    bool bColorAbsoluteChanged;
     
     Object * parent;
     Object * mask; // TODO: still needs work. 

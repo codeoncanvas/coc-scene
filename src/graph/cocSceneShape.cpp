@@ -18,10 +18,10 @@ namespace scene {
 
 //--------------------------------------------------------------
 Shape::Shape(std::string objID) :
-    coc::scene::Object(objID),
-    colorFill(1.0, 1.0, 1.0, 1.0),
-    colorStroke(1.0, 1.0, 1.0, 0.0) {
-    
+coc::scene::Object(objID),
+colorFill(1.0f, 1.0f, 1.0f, 1.0f),
+colorStroke(1.0f, 1.0f, 1.0f, 0.0f) {
+
     objectType = coc::scene::ObjectTypeShape;
 }
 
@@ -40,13 +40,13 @@ void Shape::drawSelf() {
     ci::Rectf rect(0.0, 0.0, width, height);
     
     if(colorFill.a > 0.0) {
-        pushColor(colorFill * colorWithAlphaConcatenated);
+        pushColor(colorFill * colorWithAlphaAbsolute);
         ci::gl::drawSolidRect(rect);
         popColor();
     }
     
     if(colorStroke.a > 0.0) {
-        pushColor(colorStroke * colorWithAlphaConcatenated);
+        pushColor(colorStroke * colorWithAlphaAbsolute);
         ci::gl::drawStrokedRect(rect);
         popColor();
     }
