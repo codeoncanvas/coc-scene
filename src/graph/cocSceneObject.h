@@ -51,11 +51,8 @@ public:
 	virtual void pointDragged(int pointX, int pointY, int pointID=0);
 	virtual void pointReleased(int pointX, int pointY, int pointID=0);
     
-    virtual void copyTo(ObjectRef & object) const;
-    virtual void copyTo(Object * object) const;
+    virtual void copyTo(ObjectRef object) const;
     virtual void copyFrom(const ObjectRef & object);
-    virtual void copyFrom(const Object * object);
-    ObjectRef clone() const;
     
     void addChild(const ObjectRef & child);
     void addChildAt(const ObjectRef & child, int index);
@@ -68,11 +65,12 @@ public:
     bool replaceChild(const ObjectRef & childOld, const ObjectRef & childNew);
     bool replaceChild(std::string childID, const ObjectRef & childNew);
     bool replaceChildAt(int index, const ObjectRef & childNew);
-    
-    ObjectRef getChildAt(int index);
-    ObjectRef getChildByID(std::string objectID);
+
+    std::vector<ObjectRef> & getChildren();
+    ObjectRef getChildAt(int index) const;
+    ObjectRef getChildByID(std::string objectID) const;
     ObjectRef findObjectByID(std::string objectID, Object * object=NULL);
-    Object * getParent();
+    Object * getParent() const;
     bool contains(const ObjectRef & child) const;
     int getChildIndex(const ObjectRef & child) const;
     int numChildren() const;

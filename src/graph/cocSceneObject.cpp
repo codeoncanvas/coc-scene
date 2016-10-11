@@ -246,11 +246,7 @@ void Object::pointReleased(int pointX, int pointY, int pointID) {
 }
 
 //--------------------------------------------------------------
-void Object::copyTo(ObjectRef & object) const {
-    copyTo(object.get());
-}
-
-void Object::copyTo(Object * object) const {
+void Object::copyTo(ObjectRef object) const {
     *object = *this;
 
     // object properties have been copied over,
@@ -258,15 +254,11 @@ void Object::copyTo(Object * object) const {
     // need to update to point to new parent.
     
     for(int i=0; i<object->children.size(); i++) {
-        object->children[i]->parent = object;
+        object->children[i]->parent = object.get();
     }
 }
 
 void Object::copyFrom(const ObjectRef & object) {
-    copyFrom(object.get());
-}
-
-void Object::copyFrom(const Object * object) {
     *this = *object;
     
     // object properties have been copied over,
@@ -276,12 +268,6 @@ void Object::copyFrom(const Object * object) {
     for(int i=0; i<children.size(); i++) {
         children[i]->parent = this;
     }
-}
-
-ObjectRef Object::clone() const {
-    ObjectRef object = Object::create();
-    object->copyFrom(this);
-    return object;
 }
 
 //--------------------------------------------------------------
@@ -387,11 +373,15 @@ bool Object::replaceChildAt(int index, const ObjectRef & childNew) {
 }
 
 //--------------------------------------------------------------
-ObjectRef Object::getChildAt(int index) {
+std::vector<ObjectRef> & Object::getChildren() {
+    return children;
+}
+
+ObjectRef Object::getChildAt(int index) const {
 	return children[index];
 }
 
-ObjectRef Object::getChildByID(std::string objectID) {
+ObjectRef Object::getChildByID(std::string objectID) const {
 	for(int i=0; i<children.size(); i++) {
 		if(children[i]->objectID == objectID) {
 			return children[i];
@@ -420,7 +410,7 @@ ObjectRef Object::findObjectByID(std::string objectID, Object * object) {
     return ObjectRef();
 }
 
-Object * Object::getParent() {
+Object * Object::getParent() const {
     return parent;
 }
 

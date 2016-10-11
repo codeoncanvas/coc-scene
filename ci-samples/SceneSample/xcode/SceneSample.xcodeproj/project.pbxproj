@@ -17,6 +17,7 @@
 		00B9955A1B128DF400A5C623 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00B995581B128DF400A5C623 /* IOKit.framework */; };
 		00B9955B1B128DF400A5C623 /* IOSurface.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00B995591B128DF400A5C623 /* IOSurface.framework */; };
 		5323E6B20EAFCA74003A9687 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5323E6B10EAFCA74003A9687 /* CoreVideo.framework */; };
+		6715F7291DAC86C500BC6F51 /* cocScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6715F7281DAC86C500BC6F51 /* cocScene.cpp */; };
 		6723515A1D2F50C100BC2BCA /* cocSceneLoaderSvg.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 672351581D2F50C100BC2BCA /* cocSceneLoaderSvg.cpp */; };
 		672351601D2F7C1C00BC2BCA /* cocSceneLoaderSvgCI.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6723515E1D2F7C1C00BC2BCA /* cocSceneLoaderSvgCI.cpp */; };
 		672351631D2F7CDF00BC2BCA /* cocSceneLoaderSvgOF.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 672351611D2F7CDF00BC2BCA /* cocSceneLoaderSvgOF.cpp */; };
@@ -54,6 +55,7 @@
 		41BBB000C94444E6871CB627 /* SceneSample_Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = "\"\""; path = SceneSample_Prefix.pch; sourceTree = "<group>"; };
 		5134E4955FB74FDF950B311C /* SceneSampleApp.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.cpp; name = SceneSampleApp.cpp; path = ../src/SceneSampleApp.cpp; sourceTree = "<group>"; };
 		5323E6B10EAFCA74003A9687 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = /System/Library/Frameworks/CoreVideo.framework; sourceTree = "<absolute>"; };
+		6715F7281DAC86C500BC6F51 /* cocScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = cocScene.cpp; sourceTree = "<group>"; };
 		672351581D2F50C100BC2BCA /* cocSceneLoaderSvg.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = cocSceneLoaderSvg.cpp; sourceTree = "<group>"; };
 		672351591D2F50C100BC2BCA /* cocSceneLoaderSvg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cocSceneLoaderSvg.h; sourceTree = "<group>"; };
 		6723515C1D2F56AD00BC2BCA /* SceneCustomObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SceneCustomObject.h; path = ../src/SceneCustomObject.h; sourceTree = "<group>"; };
@@ -286,9 +288,10 @@
 		98BAEB09C6734A5980CC5F07 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				6715F7281DAC86C500BC6F51 /* cocScene.cpp */,
 				675C76EF1D2FF45C004D5AC5 /* cocScene.h */,
-				679A3BB41D2CCC8800DC9EB7 /* cocSceneGlobals.h */,
 				679A3BB31D2CCC8800DC9EB7 /* cocSceneGlobals.cpp */,
+				679A3BB41D2CCC8800DC9EB7 /* cocSceneGlobals.h */,
 				675C76E11D2FF3A1004D5AC5 /* graph */,
 				672351571D2F508800BC2BCA /* loader */,
 			);
@@ -377,6 +380,7 @@
 				672351601D2F7C1C00BC2BCA /* cocSceneLoaderSvgCI.cpp in Sources */,
 				67407C8F1D38CA6300DC3B01 /* cocAssetsCI.cpp in Sources */,
 				679A3BBA1D2CCC8800DC9EB7 /* cocSceneGlobals.cpp in Sources */,
+				6715F7291DAC86C500BC6F51 /* cocScene.cpp in Sources */,
 				F6D353C4CCC7460BA4E9F31D /* SceneSampleApp.cpp in Sources */,
 				6723515A1D2F50C100BC2BCA /* cocSceneLoaderSvg.cpp in Sources */,
 				6768FBA21D0946E10032B3A8 /* cocRandom.cpp in Sources */,

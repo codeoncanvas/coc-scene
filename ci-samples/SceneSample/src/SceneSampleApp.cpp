@@ -17,18 +17,21 @@ class SceneSampleApp : public App {
 	void draw() override;
     
     ObjectRef sceneRoot;
-    ObjectRef svg;
     ShapeRef rect0;
     ShapeRef rect1;
-    SceneCustomObject * customObj;
 };
 
 void SceneSampleApp::setup() {
 
     sceneRoot = Object::create("sceneRoot");
     
-    svg = LoaderSvgCI::loadSvg(getAssetPath("svg/coc_scene_svg_02.svg").string());
+    ObjectRef svg = LoaderSvgCI::loadSvg(getAssetPath("svg/coc_scene_svg_02.svg").string());
     sceneRoot->addChild(svg);
+    
+    ObjectRef svgClone = coc::scene::Clone(svg); // deep clone of object and its children.
+    svgClone->x = 300;
+    svgClone->y = 100;
+    sceneRoot->addChild(svgClone);
 
     rect0 = Shape::create("rect0");
     rect0->x = getWindowWidth() * 0.5;
@@ -49,6 +52,7 @@ void SceneSampleApp::setup() {
     rect1->colorFill = glm::vec4(1.0, 0.0, 0.0, 1.0);
     rect0->addChild(rect1);
     
+    SceneCustomObject * customObj;
     customObj = new SceneCustomObject("circle");
     customObj->x = getWindowWidth() * 0.5;
     customObj->y = getWindowHeight() * 0.5;

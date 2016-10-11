@@ -30,11 +30,8 @@ public:
     
     static ShapeRef create(std::string objID="");
     
-    virtual void copyTo(ShapeRef & object) const;
-    virtual void copyTo(Shape * object) const;
+    virtual void copyTo(ShapeRef object) const;
     virtual void copyFrom(const ShapeRef & object);
-    virtual void copyFrom(const Shape * object);
-    ShapeRef clone() const;
     
     glm::vec4 colorFill;
     glm::vec4 colorStroke;

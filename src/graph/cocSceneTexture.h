@@ -30,11 +30,8 @@ public:
     
     static TextureRef create(std::string objID="");
     
-    virtual void copyTo(TextureRef & object) const;
-    virtual void copyTo(Texture * object) const;
+    virtual void copyTo(TextureRef object) const;
     virtual void copyFrom(const TextureRef & object);
-    virtual void copyFrom(const Texture * object);
-    TextureRef clone() const;
     
     std::string assetID;
 

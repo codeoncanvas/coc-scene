@@ -26,7 +26,7 @@
 namespace coc {
 namespace scene {
 
-ObjectRef deepCopy(const ObjectRef & object);
+ObjectRef Clone(const ObjectRef & object);
 
 };
 };
