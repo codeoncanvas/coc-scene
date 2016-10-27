@@ -65,7 +65,6 @@ def main(argv):
                             if 'id' in node.attrib:
                                 if 'fill' in node.attrib:
                                     root = ET.SubElement(top, 'g')
-                                    print node.attrib
                                     for key, value in node.attrib.iteritems():
                                         root.set(key, value)
 
