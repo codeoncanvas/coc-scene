@@ -54,7 +54,7 @@ def usage():
 
 def main(argv):
     try:
-        opts, args = getopt.getopt(argv, "fi:")
+        opts, args = getopt.getopt(argv, "f:i:")
     except getopt.GetoptError:
         usage()
         sys.exit(2)
