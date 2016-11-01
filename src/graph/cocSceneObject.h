@@ -54,17 +54,17 @@ public:
     virtual void copyTo(ObjectRef object) const;
     virtual void copyFrom(const ObjectRef & object);
     
-    void addChild(const ObjectRef & child);
-    void addChildAt(const ObjectRef & child, int index);
-    void addChildAbove(const ObjectRef & child, const ObjectRef & childRef);
-    void addChildBelow(const ObjectRef & child, const ObjectRef & childRef);
-    void setChildIndex(const ObjectRef & child, int index);
-    bool removeChild(const ObjectRef & child);
-    bool removeChildAt(int index);
-    void removeAllChildren();
-    bool replaceChild(const ObjectRef & childOld, const ObjectRef & childNew);
-    bool replaceChild(std::string childID, const ObjectRef & childNew);
-    bool replaceChildAt(int index, const ObjectRef & childNew);
+    virtual void addChild(const ObjectRef & child);
+    virtual void addChildAt(const ObjectRef & child, int index);
+    virtual void addChildAbove(const ObjectRef & child, const ObjectRef & childRef);
+    virtual void addChildBelow(const ObjectRef & child, const ObjectRef & childRef);
+    virtual void setChildIndex(const ObjectRef & child, int index);
+    virtual bool removeChild(const ObjectRef & child);
+    virtual bool removeChildAt(int index);
+    virtual void removeAllChildren();
+    virtual bool replaceChild(const ObjectRef & childOld, const ObjectRef & childNew);
+    virtual bool replaceChild(std::string childID, const ObjectRef & childNew);
+    virtual bool replaceChildAt(int index, const ObjectRef & childNew);
 
     std::vector<ObjectRef> & getChildren();
     ObjectRef getChildAt(int index) const;
