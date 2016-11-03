@@ -24,12 +24,33 @@ def processFile(filePath):
                     root = ET.SubElement(top, 'g')
                     for key, value in node.attrib.iteritems():
                         root.set(key, value)
+        if node.tag.endswith('}g'):
+            if 'id' in node.attrib:
+                if 'fill' not in node.attrib:
+                    if "/" not in node.attrib.get('id'):
+                        if 'transform' not in node.attrib:
+                            root = ET.SubElement(root, 'g')
+                            for key, value in node.attrib.iteritems():
+                                root.set(key, value)
+                        else:
+                            imageGroup = ET.SubElement(root, 'g')
+                            for key, value in node.attrib.iteritems():
+                                imageGroup.set(key, value)
         if node.tag.endswith('image'):
+            parent = parent_map[node]
+            parentID = parent.attrib.get('id')
+            grandParent = parent_map[parent]
+            grandParentID = grandParent.attrib.get('id')
             if 'id' in node.attrib:
                 filename = node.attrib.get('id') + '.png';
                 node.set(imageLink, filename)
+                if parentID == root.attrib.get('id'):
+                    root.append(node)
+                elif parentID == imageGroup.attrib.get('id'):
+                    imageGroup.append(node)
+                elif grandParentID == imageGroup.attrib.get('id'):
+                    imageGroup.append(node)
             else:
-                parent = parent_map[node]
                 filename = parent.attrib.get('id') + '.png'
                 transformAttribute = parent.attrib.get('transform')[10:-1]
                 values = transformAttribute.split(', ', 1)
@@ -37,8 +58,10 @@ def processFile(filePath):
                 node.set('y', values[1])
                 node.set('id', parent.attrib.get('id'))
                 node.set(imageLink, filename)
-                parent.set('id', 'delete');
-            root.append(node)
+                if grandParentID == root.attrib.get('id'):
+                    root.append(node)
+                elif grandParentID == imageGroup.attrib.get('id'):
+                    imageGroup.append(node)
     ET.ElementTree(top).write(filePath, encoding='UTF-8', xml_declaration=True)
     print ("Processed " + filePath)
 
