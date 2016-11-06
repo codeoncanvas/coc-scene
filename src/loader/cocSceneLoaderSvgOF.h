@@ -29,7 +29,7 @@ public:
     LoaderSvgOF();
     ~LoaderSvgOF();
     
-    void load(Object * object, std::string svgPath) override;
+    ObjectRef load(std::string svgPath) override;
     
 };
 };

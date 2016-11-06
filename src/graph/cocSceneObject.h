@@ -27,62 +27,62 @@ enum ObjectType {
 
 //--------------------------------------------------------------
 class Object;
+typedef std::shared_ptr<Object> ObjectRef;
 
-class ObjectDelegate {
-public:
-    virtual void setup(Object & object) {};
-    virtual void update(Object & object) {};
-    virtual void draw(const Object & object) const {};
-};
-
-//--------------------------------------------------------------
 class Object {
 
 friend class LoaderSvg;
 friend class LoaderSvgCI;
 friend class LoaderSvgOF;
-friend class Solver;
-friend class Renderer;
-friend class RendererCI;
-friend class RendererOF;
 
 public:
 
     Object(std::string objID="");
     ~Object();
     
+    static ObjectRef create(std::string objID="");
+    
     virtual void setup();
     virtual void update();
-    virtual void draw() const;
+    virtual void draw();
 
-	virtual void pointMoved(int x, int y, int mouseID) {};
-	virtual void pointDragged(int x, int y, int mouseID) {};
-	virtual void pointPressed(int x, int y, int mouseID) {};
-	virtual void pointReleased(int x, int y, int mouseID) {};
+	virtual void pointMoved(int pointX, int pointY, int pointID=0);
+    virtual void pointPressed(int pointX, int pointY, int pointID=0);
+	virtual void pointDragged(int pointX, int pointY, int pointID=0);
+	virtual void pointReleased(int pointX, int pointY, int pointID=0);
     
-    virtual void copyTo(Object * object) const;
-    virtual void copyFrom(const Object * object);
+    virtual void copyTo(ObjectRef object) const;
+    virtual void copyFrom(const ObjectRef & object);
     
-    void addChild(Object * child);
-    void addChildAt(Object * child, int index);
-    bool removeChild(Object * child);
-    bool removeChildAt(int index);
-    bool removeSelf();
-    void removeAllChildren();
-    bool replaceChild(Object * childOld, Object * childNew);
-    bool replaceChild(std::string childID, Object * childNew);
-    bool replaceChildAt(int index, Object * childNew);
-    bool contains(const Object * child) const;
-    Object * getChildAt(int index) const;
-    Object * getChildByID(std::string objectID) const;
-    Object * getParent();
-    void setChildIndex(Object * child, int index);
-    int getChildIndex(const Object * child) const;
+    virtual void addChild(const ObjectRef & child);
+    virtual void addChildAt(const ObjectRef & child, int index);
+    virtual void addChildAbove(const ObjectRef & child, const ObjectRef & childRef);
+    virtual void addChildBelow(const ObjectRef & child, const ObjectRef & childRef);
+    virtual void setChildIndex(const ObjectRef & child, int index);
+    virtual bool removeChild(const ObjectRef & child);
+    virtual bool removeChildAt(int index);
+    virtual void removeAllChildren();
+    virtual bool replaceChild(const ObjectRef & childOld, const ObjectRef & childNew);
+    virtual bool replaceChild(std::string childID, const ObjectRef & childNew);
+    virtual bool replaceChildAt(int index, const ObjectRef & childNew);
+
+    std::vector<ObjectRef> & getChildren();
+    ObjectRef getChildAt(int index) const;
+    ObjectRef getChildByID(std::string objectID) const;
+    ObjectRef findObjectByID(std::string objectID, Object * object=NULL);
+    Object * getParent() const;
+    bool contains(const ObjectRef & child) const;
+    int getChildIndex(const ObjectRef & child) const;
     int numChildren() const;
     
     std::string getObjectID() const { return objectID; }
     unsigned int getObjectType() const { return objectType; }
-    bool isMananged() const { return bManaged; }
+    
+	coc::Rect getBounds();
+	void setBounds( coc::Rect & bounds );
+
+    const glm::mat4 & getModelMatrixRelative() const { return modelMatrixRelative; }
+	const glm::mat4 & getModelMatrixAbsolute() const { return modelMatrixAbsolute; }
 
     coc::Value<float> x;
     coc::Value<float> y;
@@ -94,22 +94,42 @@ public:
     coc::Value<float> transformationPointY;
     coc::Value<float> alpha;
     coc::Value<bool> visible;
+    bool userInteractionEnabled;
     
-    glm::vec4 color;
-    
-    ObjectDelegate * delegate;
+    glm::vec3 color;
     
 protected:
 
+    virtual void updateSelf();
+    virtual void updateChildren();
+    virtual void updateChild(const ObjectRef & child);
+
+    virtual void drawSelf();
+    virtual void drawChildren();
+    virtual void drawChild(const ObjectRef & child);
+    
+    virtual void pushModelMatrix(const glm::mat4 & matrix) const;
+    virtual void popModelMatrix() const;
+    
+    virtual void pushColor(const glm::vec4 & color) const;
+    virtual void popColor() const;
+
     std::string objectID;
     unsigned int objectType;
-    bool bManaged;
     
-    glm::mat4 modelMatrix;
-    glm::mat4 modelMatrixConcatenated;
+    glm::mat4 modelMatrixRelative;
+    glm::mat4 modelMatrixAbsolute;
+    bool bModelMatrixChanged;
+    bool bModelMatrixAbsoluteChanged;
     
-    coc::scene::Object * parent;
-    std::vector<coc::scene::Object *> children;
+    glm::vec4 colorWithAlpha;
+    glm::vec4 colorWithAlphaAbsolute;
+    bool bColorChanged;
+    bool bColorAbsoluteChanged;
+    
+    Object * parent;
+    Object * mask; // TODO: still needs work. 
+    std::vector<ObjectRef> children;
     
 };
 };

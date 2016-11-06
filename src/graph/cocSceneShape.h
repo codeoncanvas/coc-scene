@@ -18,6 +18,9 @@
 namespace coc {
 namespace scene {
 
+class Shape;
+typedef std::shared_ptr<Shape> ShapeRef;
+
 class Shape : public coc::scene::Object {
 
 public:
@@ -25,8 +28,17 @@ public:
     Shape(std::string objID="");
     ~Shape();
     
+    static ShapeRef create(std::string objID="");
+    
+    virtual void copyTo(ShapeRef object) const;
+    virtual void copyFrom(const ShapeRef & object);
+    
     glm::vec4 colorFill;
     glm::vec4 colorStroke;
+    
+protected:
+    
+    virtual void drawSelf() override;
 };
 
 };

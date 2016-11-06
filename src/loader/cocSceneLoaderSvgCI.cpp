@@ -14,6 +14,7 @@
 #if defined( COC_CI )
 
 #include "cocSceneLoaderSvgCI.h"
+#include "cocSceneObject.h"
 #include "cocSceneShape.h"
 #include "cocSceneTexture.h"
 #include "cocAssets.h" // coc-assets >> https://github.com/codeoncanvas/coc-assets
@@ -144,7 +145,14 @@ LoaderSvgCI::~LoaderSvgCI() {
     //
 }
 
-void LoaderSvgCI::load(Object * object, std::string svgPath) {
+ObjectRef LoaderSvgCI::loadSvg(std::string svgPath) {
+    LoaderSvgCI loader;
+    return loader.load(svgPath);
+}
+
+ObjectRef LoaderSvgCI::load(std::string svgPath) {
+
+    ObjectRef objRef;
 
     fs::path path(svgPath);
     svgFolder = path.remove_filename().string();
@@ -154,19 +162,21 @@ void LoaderSvgCI::load(Object * object, std::string svgPath) {
     const XmlTree & xmlRoot( xml.getChild( "svg" ) );
     
 	if(xmlRoot.hasChild("switch")) {
-		parseGroup(object, xmlRoot.getChild("switch"));
+		parseGroup(objRef, xmlRoot.getChild("switch"));
     } else {
-		parseGroup(object, xmlRoot);
+		parseGroup(objRef, xmlRoot);
     }
     
-    for(int i=0; i<assetPaths.size(); i++) {
-        const std::string & assetPath = assetPaths[i];
-        std::string assetPathAbs = svgFolder + "/" + assetPath;
-        coc::scene::getAssets()->addAssetAndLoad(assetPathAbs, AssetTypeTexture, assetPath);
+    for(int i=0; i<assets.size(); i++) {
+        const Asset & asset = assets[i];
+        std::string assetPathAbs = svgFolder + "/" + asset.assetPath;
+        coc::scene::getAssets()->addAssetAndLoad(assetPathAbs, AssetTypeTexture, asset.assetID);
     }
+    
+    return objRef;
 }
 
-void LoaderSvgCI::parseGroup(Object * object, const XmlTree & xml) {
+void LoaderSvgCI::parseGroup(ObjectRef & object, const XmlTree & xml) {
 
 	for(XmlTree::ConstIter treeIt = xml.begin(); treeIt != xml.end(); ++treeIt) {
     
@@ -174,7 +184,7 @@ void LoaderSvgCI::parseGroup(Object * object, const XmlTree & xml) {
 	}
 }
 
-void LoaderSvgCI::parseGroupItem(Object * object, const ci::XmlTree & xml) {
+void LoaderSvgCI::parseGroupItem(ObjectRef & object, const ci::XmlTree & xml) {
 
     std::string tag = xml.getTag();
     
@@ -185,9 +195,12 @@ void LoaderSvgCI::parseGroupItem(Object * object, const ci::XmlTree & xml) {
     
     if(tag == "g") {
 
-        Object * child = new Object();
-        child->bManaged = true;
-        object->addChild(child);
+        ObjectRef child = Object::create();
+        if(object == nullptr) { // no parent, this is the root.
+            object = child;
+        } else  {
+            object->addChild(child);
+        }
 
         pushStyle();
 
@@ -214,8 +227,7 @@ void LoaderSvgCI::parseGroupItem(Object * object, const ci::XmlTree & xml) {
         
         } else {
 
-            Shape * child = new Shape();
-            child->bManaged = true;
+            ObjectRef child = Shape::create();
             object->addChild(child);
             
             pushStyle();
@@ -258,8 +270,7 @@ void LoaderSvgCI::parseGroupItem(Object * object, const ci::XmlTree & xml) {
         
         } else {
 
-            Texture * child = new Texture();
-            child->bManaged = true;
+            ObjectRef child = Texture::create();
             object->addChild(child);
             
             pushStyle();
@@ -284,7 +295,7 @@ void LoaderSvgCI::parseGroupItem(Object * object, const ci::XmlTree & xml) {
     }
 }
 
-void LoaderSvgCI::parseNode(Object * object, const ci::XmlTree & xml) {
+void LoaderSvgCI::parseNode(ObjectRef & object, const ci::XmlTree & xml) {
 
     std::string objID = xml["id"];
     
@@ -325,7 +336,7 @@ void LoaderSvgCI::parseNode(Object * object, const ci::XmlTree & xml) {
     
     if(object->objectType == ObjectTypeShape) {
 
-        Shape * shape = (Shape *)object;
+        Shape * shape = (Shape *)object.get();
         shape->colorFill = glm::vec4(1.0, 1.0, 1.0, 0.0); // alpha 0 by default.
         shape->colorStroke = glm::vec4(1.0, 1.0, 1.0, 0.0); // alpha 0 by default.
 
@@ -348,11 +359,11 @@ void LoaderSvgCI::parseNode(Object * object, const ci::XmlTree & xml) {
     }
 }
 
-void LoaderSvgCI::parseDefs(Object * object, const ci::XmlTree & xml) {
+void LoaderSvgCI::parseDefs(ObjectRef & object, const ci::XmlTree & xml) {
     //
 }
 
-void LoaderSvgCI::parseUse(Object * object, const ci::XmlTree & xml) {
+void LoaderSvgCI::parseUse(ObjectRef & object, const ci::XmlTree & xml) {
 
 	if(xml.hasAttribute( "xlink:href") == false) {
         return;
@@ -371,7 +382,7 @@ void LoaderSvgCI::parseUse(Object * object, const ci::XmlTree & xml) {
     parseGroupItem(object, xmlDef);
 }
 
-void LoaderSvgCI::parseRect(Object * object, const ci::XmlTree & xml) {
+void LoaderSvgCI::parseRect(ObjectRef & object, const ci::XmlTree & xml) {
 
     float x = xml.getAttributeValue<float>("x", 0);
     float y = xml.getAttributeValue<float>("y", 0);
@@ -384,31 +395,31 @@ void LoaderSvgCI::parseRect(Object * object, const ci::XmlTree & xml) {
     object->height = height;
 }
 
-void LoaderSvgCI::parsePath(Object * object, const ci::XmlTree & xml) {
+void LoaderSvgCI::parsePath(ObjectRef & object, const ci::XmlTree & xml) {
     //
 }
 
-void LoaderSvgCI::parsePolygon(Object * object, const ci::XmlTree & xml) {
+void LoaderSvgCI::parsePolygon(ObjectRef & object, const ci::XmlTree & xml) {
     //
 }
 
-void LoaderSvgCI::parsePolyline(Object * object, const ci::XmlTree & xml) {
+void LoaderSvgCI::parsePolyline(ObjectRef & object, const ci::XmlTree & xml) {
     //
 }
 
-void LoaderSvgCI::parseLine(Object * object, const ci::XmlTree & xml) {
+void LoaderSvgCI::parseLine(ObjectRef & object, const ci::XmlTree & xml) {
     //
 }
 
-void LoaderSvgCI::parseCircle(Object * object, const ci::XmlTree & xml) {
+void LoaderSvgCI::parseCircle(ObjectRef & object, const ci::XmlTree & xml) {
     //
 }
 
-void LoaderSvgCI::parseEllipse(Object * object, const ci::XmlTree & xml) {
+void LoaderSvgCI::parseEllipse(ObjectRef & object, const ci::XmlTree & xml) {
     //
 }
 
-void LoaderSvgCI::parseImage(Texture * object, const ci::XmlTree & xml) {
+void LoaderSvgCI::parseImage(ObjectRef & object, const ci::XmlTree & xml) {
 
     float x = xml.getAttributeValue<float>("x", 0);
     float y = xml.getAttributeValue<float>("y", 0);
@@ -429,20 +440,22 @@ void LoaderSvgCI::parseImage(Texture * object, const ci::XmlTree & xml) {
         return;
     }
     
-    object->assetID = assetPath;
+    ((Texture *)object.get())->assetID = object->objectID;
     
-    assetPaths.push_back(assetPath);
+    assets.push_back(Asset());
+    assets.back().assetID = object->objectID;
+    assets.back().assetPath = assetPath;
 }
 
-void LoaderSvgCI::parseLinearGradient(Object * object, const ci::XmlTree & xml) {
+void LoaderSvgCI::parseLinearGradient(ObjectRef & object, const ci::XmlTree & xml) {
     //
 }
 
-void LoaderSvgCI::parseRadialGradient(Object * object, const ci::XmlTree & xml) {
+void LoaderSvgCI::parseRadialGradient(ObjectRef & object, const ci::XmlTree & xml) {
     //
 }
 
-void LoaderSvgCI::parseText(Object * object, const ci::XmlTree & xml) {
+void LoaderSvgCI::parseText(ObjectRef & object, const ci::XmlTree & xml) {
     //
 }
 

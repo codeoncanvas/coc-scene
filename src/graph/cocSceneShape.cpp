@@ -16,16 +16,54 @@
 namespace coc {
 namespace scene {
 
+//--------------------------------------------------------------
 Shape::Shape(std::string objID) :
-    coc::scene::Object(objID),
-    colorFill(1.0, 1.0, 1.0, 1.0),
-    colorStroke(1.0, 1.0, 1.0, 0.0) {
-    
+coc::scene::Object(objID),
+colorFill(1.0f, 1.0f, 1.0f, 1.0f),
+colorStroke(1.0f, 1.0f, 1.0f, 0.0f) {
+
     objectType = coc::scene::ObjectTypeShape;
 }
 
 Shape::~Shape() {
     //
+}
+
+//--------------------------------------------------------------
+ShapeRef Shape::create(std::string objID) {
+    return ShapeRef(new Shape(objID));
+}
+
+//--------------------------------------------------------------
+void Shape::copyTo(ShapeRef object) const {
+    *object = *this;
+    Object::copyTo(object);
+}
+
+void Shape::copyFrom(const ShapeRef & object) {
+    *this = *object;
+    Object::copyFrom(object);
+}
+
+//--------------------------------------------------------------
+void Shape::drawSelf() {
+
+#if defined( COC_CI )
+    ci::Rectf rect(0.0, 0.0, width, height);
+    
+    if(colorFill.a > 0.0) {
+        pushColor(colorFill * colorWithAlphaAbsolute);
+        ci::gl::drawSolidRect(rect);
+        popColor();
+    }
+    
+    if(colorStroke.a > 0.0) {
+        pushColor(colorStroke * colorWithAlphaAbsolute);
+        ci::gl::drawStrokedRect(rect);
+        popColor();
+    }
+#endif
+    
 }
 
 };

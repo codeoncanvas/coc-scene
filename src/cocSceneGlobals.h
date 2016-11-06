@@ -15,6 +15,11 @@
 
 #include "cocCore.h"
 
+#ifdef COC_CI
+#include "cinder/app/App.h"
+#include "cinder/gl/gl.h"
+#endif
+
 namespace  coc {
 class Assets;
 }
@@ -22,13 +27,8 @@ class Assets;
 namespace coc {
 namespace scene {
 
-class Solver;
-class Renderer;
-
 void setAssets(coc::Assets * assets);
 coc::Assets * getAssets();
-coc::scene::Solver * getSolver();
-coc::scene::Renderer * getRenderer();
 
 };
 };

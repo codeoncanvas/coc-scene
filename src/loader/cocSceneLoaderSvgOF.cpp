@@ -27,7 +27,7 @@ LoaderSvgOF::~LoaderSvgOF() {
     //
 }
 
-void LoaderSvgOF::load(Object * object, std::string svgPath) {
+ObjectRef LoaderSvgOF::load(std::string svgPath) {
 
     //
 }
