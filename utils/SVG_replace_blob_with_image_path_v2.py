@@ -3,33 +3,37 @@
 import sys, os, glob, getopt
 import xml.etree.ElementTree as ET
 
+def getPosition(node, parent):
+    position = -1
+    for item in parent.iter():
+        if item.attrib.get('id') == node.attrib.get('id'):
+            break
+        else:
+            position = position + 1
+    return position
+
 def processFile(filePath):
     # Image tag attribute to replace
     imageTag = "{http://www.w3.org/2000/svg}image"
     imageLink = "{http://www.w3.org/1999/xlink}href"
 
+    # Read the input tree
     tree = ET.parse(filePath)
     root = tree.getroot()
+
+    # Create a parent dictionary for use, we need this for slices
     parent_map = dict((c, p) for p in tree.getiterator() for c in p)
 
-    # Create output xmltree
-    top = ET.Element('svg')
-    for key, value in root.attrib.iteritems():
-        top.set(key, value)
-
     for node in tree.iter():
-        if node.tag.endswith('}g'):
-            if 'id' in node.attrib:
-                if 'fill' in node.attrib:
-                    root = ET.SubElement(top, 'g')
-                    for key, value in node.attrib.iteritems():
-                        root.set(key, value)
         if node.tag.endswith('image'):
+            parent = parent_map[node]
+            parentID = parent.attrib.get('id')
+            grandParent = parent_map[parent]
+            grandParentID = grandParent.attrib.get('id')
             if 'id' in node.attrib:
                 filename = node.attrib.get('id') + '.png';
                 node.set(imageLink, filename)
             else:
-                parent = parent_map[node]
                 filename = parent.attrib.get('id') + '.png'
                 transformAttribute = parent.attrib.get('transform')[10:-1]
                 values = transformAttribute.split(', ', 1)
@@ -37,15 +41,16 @@ def processFile(filePath):
                 node.set('y', values[1])
                 node.set('id', parent.attrib.get('id'))
                 node.set(imageLink, filename)
-                parent.set('id', 'delete');
-            root.append(node)
-    ET.ElementTree(top).write(filePath, encoding='UTF-8', xml_declaration=True)
+                nodeIndex = getPosition(parent, grandParent)
+                grandParent.insert(nodeIndex,node)
+                grandParent.remove(parent)
+    tree.write(filePath, encoding='UTF-8', xml_declaration=True)
     print ("Processed " + filePath)
 
 def usage():
     print("\n")
-    print("This is the 2nd version of the script. This will modify the SVG file to have one parent group with all the images.")
-    print("Specifically for use with Waterfall assets.")
+    print("Script accommodates slices and image groups.")
+    print("Built for Waterfall assets, but should work everywhere.")
     print("\n")
     print("Usage information:")
     print("process_svg.py -i <path/to/directory>")
