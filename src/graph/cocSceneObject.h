@@ -83,6 +83,9 @@ public:
 
     const glm::mat4 & getModelMatrixRelative() const { return modelMatrixRelative; }
 	const glm::mat4 & getModelMatrixAbsolute() const { return modelMatrixAbsolute; }
+    
+    glm::vec2 localToScreen(const glm::vec2 & point) const;
+    glm::vec2 screenToLocal(const glm::vec2 & point) const;
 
     coc::Value<float> x;
     coc::Value<float> y;

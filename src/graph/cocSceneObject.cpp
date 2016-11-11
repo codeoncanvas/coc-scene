@@ -433,27 +433,37 @@ int Object::getChildIndex(const ObjectRef & child) const {
 }
 
 int Object::numChildren() const {
-	return children.size();
+	return (int)children.size();
 }
 
 //--------------------------------------------------------------
-coc::Rect Object::getBounds()
-{
+coc::Rect Object::getBounds() {
 	coc::Rect bounds;
 	bounds.setX(x);
 	bounds.setY(y);
 	bounds.setW(width);
 	bounds.setH(height);
 	return bounds;
-
 }
 
-void Object::setBounds( coc::Rect &bounds )
-{
+void Object::setBounds(coc::Rect & bounds) {
 	x = bounds.getX();
 	y = bounds.getY();
 	width = bounds.getW();
 	height = bounds.getH();
+}
+
+//--------------------------------------------------------------
+glm::vec2 Object::localToScreen(const glm::vec2 & point) const {
+    glm::vec4 point4(point.x, point.y, 0, 1);
+    point4 = modelMatrixAbsolute * point4;
+    return glm::vec2(point4.x, point4.y);
+}
+
+glm::vec2 Object::screenToLocal(const glm::vec2 & point) const {
+    glm::vec4 point4(point.x, point.y, 0, 1);
+    point4 = glm::inverse(modelMatrixAbsolute) * point4;
+    return glm::vec2(point4.x, point4.y);
 }
 
 };
