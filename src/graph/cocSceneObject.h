@@ -83,6 +83,9 @@ public:
 
     const glm::mat4 & getModelMatrixRelative() const { return modelMatrixRelative; }
 	const glm::mat4 & getModelMatrixAbsolute() const { return modelMatrixAbsolute; }
+
+    const glm::vec4 & getColorRelative() const { return colorWithAlpha; }
+	const glm::vec4 & getColorAbsolute() const { return colorWithAlphaAbsolute; }
     
     glm::vec2 localToScreen(const glm::vec2 & point) const;
     glm::vec2 screenToLocal(const glm::vec2 & point) const;
