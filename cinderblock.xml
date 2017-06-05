@@ -16,6 +16,10 @@
 
 	<headerPattern>src/*.h</headerPattern>
 	<sourcePattern>src/*.cpp</sourcePattern>
+	<headerPattern>src/graph/*.h</headerPattern>
+	<sourcePattern>src/graph/*.cpp</sourcePattern>
+	<headerPattern>src/loader/*.h</headerPattern>
+	<sourcePattern>src/loader/*.cpp</sourcePattern>
 
 	<platform os="msw">
 		<includePath system="false">src</includePath>
