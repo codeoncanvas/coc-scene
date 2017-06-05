@@ -11,9 +11,17 @@
 	version=""
 	library=""
 	>
-	
+	<supports os="macosx" />
+    <supports os="msw" />
+
 	<headerPattern>src/*.h</headerPattern>
 	<sourcePattern>src/*.cpp</sourcePattern>
+
+	<platform os="msw">
+		<includePath system="false">src</includePath>
+		<includePath system="false">src/graph</includePath>
+		<includePath system="false">src/loader</includePath>
+	</platform>
 
 </block>
 </cinder>
