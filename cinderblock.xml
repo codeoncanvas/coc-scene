@@ -2,7 +2,7 @@
 <cinder>
 <block
 	name="CoC-Scene"
-	id=""
+	id="cc.codeoncanvas.scene"
 	author=""
 	summary=""
 	license=""
