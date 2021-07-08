@@ -35,8 +35,11 @@ def processFile(filePath):
                 node.set(imageLink, filename)
             else:
                 filename = parent.attrib.get('id') + '.png'
-                transformAttribute = parent.attrib.get('transform')[10:-1]
-                values = transformAttribute.split(', ', 1)
+                if 'transform' in node.attrib:
+                    transformAttribute = parent.attrib.get('transform')[10:-1]
+                    values = transformAttribute.split(', ', 1)
+                else:
+                    values = [0,0]
                 node.set('x', values[0])
                 node.set('y', values[1])
                 node.set('id', parent.attrib.get('id'))
