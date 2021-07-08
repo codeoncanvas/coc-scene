@@ -1,0 +1,155 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav</Extensions>
+    </Filter>
+    <Filter Include="Blocks">
+      <UniqueIdentifier>{8EE9AB86-5DE5-4515-B592-D766D56A5574}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Blocks\CoC-Scene">
+      <UniqueIdentifier>{20A7B5E6-1303-494C-9E0A-0D7A5F9ACC43}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Blocks\CoC-Scene\src">
+      <UniqueIdentifier>{F36881E1-9E4F-4C11-8623-00BFC19BCBBF}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Blocks\CoC-Core">
+      <UniqueIdentifier>{16a1e7c3-06fc-4b19-a036-866731b36bab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Blocks\CoC-Core\src">
+      <UniqueIdentifier>{294e586f-6e42-4167-bdcb-d990eb926aac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Blocks\CoC-Assets">
+      <UniqueIdentifier>{aa979099-3eac-4b0a-8921-9e3e5dc77fde}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Blocks\CoC-Assets\src">
+      <UniqueIdentifier>{695206b3-ed44-4ec7-8a65-e8016330cbf1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Blocks\CoC-Scene\src\graph">
+      <UniqueIdentifier>{eac963a5-c44e-4017-806d-ab721cdcc3cd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Blocks\CoC-Scene\src\loader">
+      <UniqueIdentifier>{ef426cf9-0bc1-4774-9c66-b60c83ee0c0b}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\src\SceneSampleApp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\SceneSampleApp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClInclude Include="..\include\Resources.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\cocScene.h">
+      <Filter>Blocks\CoC-Scene\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\cocSceneGlobals.h">
+      <Filter>Blocks\CoC-Scene\src</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\..\src\cocScene.cpp">
+      <Filter>Blocks\CoC-Scene\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\cocSceneGlobals.cpp">
+      <Filter>Blocks\CoC-Scene\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\coc-core\src\cocCore.cpp">
+      <Filter>Blocks\CoC-Core\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\coc-core\src\cocMath.cpp">
+      <Filter>Blocks\CoC-Core\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\coc-core\src\cocRandom.cpp">
+      <Filter>Blocks\CoC-Core\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\coc-core\src\cocRect.cpp">
+      <Filter>Blocks\CoC-Core\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\coc-core\src\cocValue.cpp">
+      <Filter>Blocks\CoC-Core\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\coc-assets\src\cocAssets.cpp">
+      <Filter>Blocks\CoC-Assets\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\coc-assets\src\cocAssetsCI.cpp">
+      <Filter>Blocks\CoC-Assets\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\graph\cocSceneObject.cpp">
+      <Filter>Blocks\CoC-Scene\src\graph</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\graph\cocSceneShape.cpp">
+      <Filter>Blocks\CoC-Scene\src\graph</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\graph\cocSceneTexture.cpp">
+      <Filter>Blocks\CoC-Scene\src\graph</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\loader\cocSceneLoaderSvg.cpp">
+      <Filter>Blocks\CoC-Scene\src\loader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\loader\cocSceneLoaderSvgCI.cpp">
+      <Filter>Blocks\CoC-Scene\src\loader</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\include\Resources.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\coc-core\src\cocConstants.h">
+      <Filter>Blocks\CoC-Core\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\coc-core\src\cocCore.h">
+      <Filter>Blocks\CoC-Core\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\coc-core\src\cocMath.h">
+      <Filter>Blocks\CoC-Core\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\coc-core\src\cocRandom.h">
+      <Filter>Blocks\CoC-Core\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\coc-core\src\cocRect.h">
+      <Filter>Blocks\CoC-Core\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\coc-core\src\cocValue.h">
+      <Filter>Blocks\CoC-Core\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\coc-core\src\cocValuePlatform.h">
+      <Filter>Blocks\CoC-Core\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\coc-assets\src\cocAssets.h">
+      <Filter>Blocks\CoC-Assets\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\coc-assets\src\cocAssetsCI.h">
+      <Filter>Blocks\CoC-Assets\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\graph\cocSceneObject.h">
+      <Filter>Blocks\CoC-Scene\src\graph</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\graph\cocSceneShape.h">
+      <Filter>Blocks\CoC-Scene\src\graph</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\graph\cocSceneTexture.h">
+      <Filter>Blocks\CoC-Scene\src\graph</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\loader\cocSceneLoaderSvg.h">
+      <Filter>Blocks\CoC-Scene\src\loader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\loader\cocSceneLoaderSvgCI.h">
+      <Filter>Blocks\CoC-Scene\src\loader</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Resources.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+</Project>
